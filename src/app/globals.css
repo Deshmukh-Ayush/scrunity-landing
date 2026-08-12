@@ -21,15 +21,3 @@
     --foreground: oklch(0.985 0 0);
     --border: oklch(1 0 0 / 10%);
 }
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-    }
-  body {
-    @apply bg-background text-foreground;
-    }
-  html {
-    @apply font-sans;
-    }
-}

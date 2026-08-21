@@ -1,7 +1,9 @@
+import { Container } from "@/components/container";
+
 export default function Home() {
   return (
     <div>
-      Scrunityyyyy
+      <Container className="min-h-screen">Scrunity</Container>
     </div>
   );
 }

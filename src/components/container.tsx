@@ -9,7 +9,12 @@ export const Container = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className={cn("mx-auto max-w-6xl border-y border-black", className)}>
+    <div
+      className={cn(
+        "mx-auto max-w-7xl border-x border-black bg-gray-100",
+        className,
+      )}
+    >
       {children}
     </div>
   );

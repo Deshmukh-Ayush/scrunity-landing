@@ -5,38 +5,16 @@ import { motion } from "motion/react";
 
 export const Blob: React.FC = () => {
   const getTransition = (delay: number) => ({
-    scale: {
-      type: "spring" as const,
-      stiffness: 900,
-      damping: 80,
-      mass: 10,
-      repeat: Infinity,
-      repeatType: "reverse" as const,
-      delay,
-    },
-    pathLength: {
-      type: "tween" as const,
-      duration: 2,
-      ease: "easeInOut" as const,
-      delay,
-    },
-    opacity: {
-      duration: 0.5,
-      delay,
-    },
+    duration: 1.2, // Fast duration
+    ease: [0.86, 0, 0.07, 1] as [number, number, number, number], // Strict TS typing for the bezier curve
+    repeat: Infinity,
+    repeatType: "reverse" as const,
+    delay,
   });
 
   const animProps = {
-    initial: {
-      scale: 0.94,
-      pathLength: 0,
-      opacity: 0,
-    },
-    animate: {
-      scale: 1.04,
-      pathLength: 1,
-      opacity: 1,
-    },
+    initial: { scale: 1 },
+    animate: { scale: 0.4 },
     style: { transformOrigin: "center" },
   };
 

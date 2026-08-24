@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { Separator } from "../ui/separator";
+import { Blob } from "./blob";
 
 export const Navbar = () => {
   const navItems = [
@@ -87,18 +88,26 @@ const navHoverContainer = () => {
     },
   ];
   return (
-    <div className="shadow-border pointer-events-none invisible absolute top-full left-1/2 z-10 mt-1 h-50 w-110 -translate-x-1/2 rounded-2xl bg-gray-100 p-2 opacity-0 transition-all duration-300 ease-in-out group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100">
+    <motion.div className="shadow-border pointer-events-none invisible absolute top-full left-1/2 z-10 mt-1 h-50 w-110 -translate-x-1/2 rounded-2xl bg-gray-100 p-2 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100">
       <div className="shadow-border flex h-full w-full items-center justify-center rounded-lg bg-white">
-        <div className="h-full w-full"></div>
+        <div className="flex h-full w-full items-center justify-center overflow-visible px-4">
+          <div className="h-40 w-40 rotate-45">
+            <Blob />
+          </div>
+        </div>
         <div className="flex h-full w-full flex-col items-start justify-between px-3 py-3">
           {Items.map(({ label, para, href }) => (
-            <Link key={href} href={href} className="text-sm text-neutral-400">
+            <Link
+              key={href}
+              href={href}
+              className="w-full p-1 text-sm text-neutral-400"
+            >
               <span>{label}</span>
               <p className="text-neutral-700">{para}</p>
             </Link>
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

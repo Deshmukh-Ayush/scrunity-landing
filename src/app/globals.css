@@ -15,13 +15,11 @@
     --background: oklch(1 0 0);
     --foreground: oklch(0.14 0 0);
 
-    /* Subtle border shadow */
     --shadow-border-sm:
         0px 0px 0px 1px rgba(0, 0, 0, 0.06),
         0px 1px 2px -1px rgba(0, 0, 0, 0.06),
         0px 2px 4px 0px rgba(0, 0, 0, 0.04);
 
-    /* Prominent border shadow */
     --shadow-border:
         0px 0px 0px 1px rgba(0, 0, 0, 0.08),
         0px 1px 2px -1px rgba(0, 0, 0, 0.08),

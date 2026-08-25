@@ -5,7 +5,6 @@ export default function Playground() {
   return (
     <div>
       <Navbar />
-
       <div className="flex px-20 py-10">
         <Heading>The game changing revolution</Heading>
       </div>

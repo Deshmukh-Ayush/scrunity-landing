@@ -9,13 +9,32 @@ export const Heading = ({
   className?: string;
 }) => {
   return (
-    <h1
+    <h2
       className={cn(
-        `md:text:[56pxs] text-[36px] font-medium tracking-tight text-neutral-800`,
+        `inline text-[36px] font-medium tracking-tight text-neutral-800 md:text-[56px]`,
         className,
       )}
     >
       {children}
-    </h1>
+    </h2>
+  );
+};
+
+export const Para = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <p
+      className={cn(
+        `text-[16px] font-medium tracking-tight text-neutral-500`,
+        className,
+      )}
+    >
+      {children}
+    </p>
   );
 };

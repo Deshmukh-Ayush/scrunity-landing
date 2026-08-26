@@ -5,7 +5,7 @@ import { Heading, Para } from "@/components/utility/texts";
 export default function Home() {
   return (
     <div className="bg-gray-50">
-      <Container className="min-h-screen overflow-hidden">
+      <Container className="overflow-hidden">
         <div className="flex items-center justify-between px-10 pt-40 pb-10">
           <Heading className="leading-16">
             Save money <br /> and think less{" "}
@@ -25,10 +25,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="pl-10">
-          <Hero />
-        </div>
       </Container>
+      <div className="pl-10">
+        <Hero />
+      </div>
     </div>
   );
 }

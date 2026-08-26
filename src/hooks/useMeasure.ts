@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 
 function useMeasure() {
-  const [element, setElement] = useState(null);
+  const [element, setElement] = useState<HTMLElement | null>(null);
   const [bounds, setBounds] = useState({ width: 0, height: 0 });
 
-  const ref = useCallback((node) => {
+  const ref = useCallback((node: HTMLElement | null) => {
     setElement(node);
   }, []);
 

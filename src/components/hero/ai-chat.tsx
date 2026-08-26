@@ -1,23 +1,21 @@
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import {
-  CheckCircle,
-  CircleNotch,
-  ShieldCheck,
-  TrendUp,
-  WarningCircle,
+  CheckCircleIcon,
+  SpinnerIcon,
+  ShieldCheckIcon,
+  TrendUpIcon,
+  WarningIcon,
 } from "@phosphor-icons/react";
 import type { GenerativeWidget, MessageRole, StepStatus } from "./mock-data";
 
-// --- Context ---
 const MessageContext = createContext<{ role: MessageRole }>({
   role: "assistant",
 });
 const useMessage = () => useContext(MessageContext);
 
-// --- Primitives ---
 export type ChatRootProps = React.HTMLAttributes<HTMLDivElement>;
 export const ChatRoot = ({
   children,
@@ -26,7 +24,7 @@ export const ChatRoot = ({
 }: ChatRootProps) => {
   return (
     <div
-      className={`relative flex h-full w-full flex-col gap-6 overflow-y-auto px-4 py-6 ${className}`}
+      className={`relative flex h-full w-full [scrollbar-width:none] flex-col gap-6 overflow-y-auto px-4 py-6 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${className}`}
       {...props}
     >
       {children}
@@ -34,7 +32,10 @@ export const ChatRoot = ({
   );
 };
 
-export interface ChatMessageProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ChatMessageProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "onDrag" | "onDragStart" | "onDragEnd"
+> {
   role: MessageRole;
 }
 export const ChatMessage = ({
@@ -141,13 +142,13 @@ export const ChatStep = ({
   return (
     <div className={`flex items-center gap-2 ${className}`} {...props}>
       {status === "running" && (
-        <CircleNotch className="h-3 w-3 animate-spin text-blue-500" />
+        <SpinnerIcon className="h-3 w-3 animate-spin text-blue-500" />
       )}
       {status === "completed" && (
-        <CheckCircle className="h-3 w-3 text-emerald-500" weight="fill" />
+        <CheckCircleIcon className="h-3 w-3 text-emerald-500" weight="fill" />
       )}
       {status === "failed" && (
-        <WarningCircle className="h-3 w-3 text-red-500" weight="fill" />
+        <WarningIcon className="h-3 w-3 text-red-500" weight="fill" />
       )}
       {status === "pending" && (
         <span className="h-2 w-2 rounded-full bg-neutral-300" />
@@ -181,7 +182,7 @@ export const ChatGenerativeUI = ({ widget }: { widget: GenerativeWidget }) => {
               {widget.title}
             </span>
             <span className="flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-600">
-              <ShieldCheck className="h-3.5 w-3.5" /> Optimal
+              <ShieldCheckIcon className="h-3.5 w-3.5" /> Optimal
             </span>
           </div>
           <div className="grid grid-cols-2 gap-2 pt-1 font-mono text-xs">
@@ -255,7 +256,7 @@ export const ChatGenerativeUI = ({ widget }: { widget: GenerativeWidget }) => {
               Pipeline Health
             </span>
             <span className="flex items-center gap-1 text-xs font-semibold text-emerald-600">
-              <TrendUp className="h-3.5 w-3.5" /> {widget.wonRate}
+              <TrendUpIcon className="h-3.5 w-3.5" /> {widget.wonRate}
             </span>
           </div>
           <div className="grid grid-cols-2 gap-2 pt-1">

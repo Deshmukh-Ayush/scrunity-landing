@@ -13,13 +13,6 @@ export type GenerativeWidget =
       title: string;
       latencyMs: number;
       p99Ms: number;
-      status: "optimal" | "degraded";
-    }
-  | {
-      type: "approval-card";
-      actionTitle: string;
-      description: string;
-      diffSummary: string;
     }
   | {
       type: "revenue-audit";
@@ -37,16 +30,16 @@ export type Message = {
   isStreaming?: boolean;
 };
 
-export const INITIAL_MESSAGES: Message[] = [
+export type DemoTurn = {
+  prompt: string;
+  steps: AgentStep[];
+  content: string;
+  widget?: GenerativeWidget;
+};
+
+export const CONVERSATION_SCRIPT: DemoTurn[] = [
   {
-    id: "msg-1",
-    role: "user",
-    content:
-      "Hi What's up!! Can you inspect our auth middleware and verify session latency?",
-  },
-  {
-    id: "msg-2",
-    role: "assistant",
+    prompt: "Inspect our auth middleware and verify session latency",
     steps: [
       { id: "s-1", label: "Searching src/middleware.ts", status: "completed" },
       {
@@ -61,66 +54,52 @@ export const INITIAL_MESSAGES: Message[] = [
       },
     ],
     content:
-      "Everything is good! I inspected the auth middleware: token validation is averaging 14ms across edge nodes, which is well within the 50ms budget.",
+      "Everything looks optimal. Edge token validation is averaging 14ms across nodes, comfortably within the 50ms budget.",
     widget: {
       type: "latency-metrics",
       title: "Edge Session Benchmark",
       latencyMs: 14,
       p99Ms: 28,
-      status: "optimal",
-    },
-  },
-];
-
-export const SCENARIO_RESPONSES = [
-  {
-    steps: [
-      {
-        id: "s-a",
-        label: "Parsing AST in src/middleware.ts",
-        status: "completed" as StepStatus,
-      },
-      {
-        id: "s-b",
-        label: "Benchmarking Neon connection pool",
-        status: "completed" as StepStatus,
-      },
-      {
-        id: "s-c",
-        label: "Synthesizing runtime execution plan",
-        status: "completed" as StepStatus,
-      },
-    ],
-    content:
-      "Auth middleware logic is optimized. Connection pooling has 12 available idle clients, and edge cache hit ratio is currently at 94.2%.",
-    widget: {
-      type: "approval-card" as const,
-      actionTitle: "Apply Edge Cache Headers",
-      description:
-        "Update next.config.ts to enforce stale-while-revalidate for auth sessions.",
-      diffSummary: "+ Cache-Control: s-maxage=60, stale-while-revalidate=30",
     },
   },
   {
+    prompt: "Awesome. Now check the deliverable pipeline for pending sign-offs",
     steps: [
       {
-        id: "s-d",
-        label: "Fetching CRM deliverables pipeline",
-        status: "completed" as StepStatus,
+        id: "s-4",
+        label: "Querying CRM deliverable contracts",
+        status: "completed",
       },
       {
-        id: "s-e",
-        label: "Evaluating signed SOW milestones",
-        status: "completed" as StepStatus,
+        id: "s-5",
+        label: "Auditing active SOW milestone statuses",
+        status: "completed",
       },
     ],
     content:
-      "I audited all open projects: 3 client milestones are pending sign-off, while revenue velocity increased by 18% over the last sprint.",
+      "Found 3 pending client deliverables awaiting sign-off. Overall sprint velocity increased by 18%.",
     widget: {
-      type: "revenue-audit" as const,
+      type: "revenue-audit",
       totalPipeline: "$142,000",
       atRisk: "$12,400",
       wonRate: "78.4%",
     },
+  },
+  {
+    prompt: "Draft an update summarizing this for the team Slack",
+    steps: [
+      {
+        id: "s-6",
+        label: "Aggregating performance and milestone logs",
+        status: "completed",
+      },
+      {
+        id: "s-7",
+        label: "Synthesizing executive summary",
+        status: "completed",
+      },
+    ],
+    content:
+      "Here is your team update:\n\n• Auth edge validation: 14ms avg (optimal)\n• Pipeline: $142k total ($12.4k at risk across 3 pending SOW milestones)\n• Sprint velocity: +18% WoW\n\nReady to dispatch whenever you are.",
   },
 ];

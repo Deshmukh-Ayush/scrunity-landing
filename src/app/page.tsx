@@ -8,7 +8,7 @@ export default function Home() {
       <Container className="overflow-hidden">
         <div className="flex items-center justify-between px-10 pt-40 pb-10">
           <Heading className="leading-16">
-            Save money <br /> and think less{" "}
+            Save time <br /> and think less{" "}
           </Heading>
           <div className="flex flex-col items-end justify-between gap-6 py-1">
             <Para className="text-end">

@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext } from "react";
 import { motion } from "motion/react";
+import type { HTMLMotionProps } from "motion/react";
 import {
   CheckCircle,
   CircleNotch,
@@ -34,7 +35,7 @@ export const ChatRoot = React.forwardRef<HTMLDivElement, ChatRootProps>(
 );
 ChatRoot.displayName = "ChatRoot";
 
-export interface ChatMessageProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ChatMessageProps extends HTMLMotionProps<"div"> {
   role: MessageRole;
 }
 

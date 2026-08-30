@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/navbar";
 import { WorkspaceOverviewUI } from "@/components/redesign/workspace-overview-ui";
 import { Heading } from "@/components/utility/texts";
+import { FinancialsResult } from "../../components/redesign/financials-result";
 
 export default function Playground() {
   return (
@@ -9,7 +10,7 @@ export default function Playground() {
         <Heading>The game changing revolution</Heading>
       </div>
 
-      <WorkspaceOverviewUI />
+      <FinancialsResult />
     </div>
   );
 }

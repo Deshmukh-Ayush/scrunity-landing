@@ -332,13 +332,3 @@ const Stat = ({
     <span className="text-[12px] text-neutral-400">{label}</span>
   </div>
 );
-
-/*
- * The source files do not specify the implementation contract for these integrations.
- * They therefore remain intentionally commented out instead of being invented here:
- *
- * // const result = await queryWorkspaceOverview(...);
- * // const router = useRouter();
- * // router.push(`/projects/${projectId}`);
- * // onClick={() => router.push(`/deliverables/${d.id}`)}
- */

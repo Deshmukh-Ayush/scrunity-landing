@@ -14,3 +14,5 @@ export const Container = ({
     </div>
   );
 };
+
+// box-shadow for border-x: shadow-[0px_2px_2px_rgba(0,0,0,0.25)]

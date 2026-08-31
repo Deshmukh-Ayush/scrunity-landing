@@ -169,7 +169,7 @@ export function FinancialsResult({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", duration: 0.4, bounce: 0 }}
-      className="border-border bg-background mx-auto w-3xl overflow-hidden rounded-xl border"
+      className="bg-background mx-auto w-3xl overflow-hidden rounded-xl border border-neutral-100"
     >
       {/* Header */}
       <div className="flex items-center gap-2.5 px-4 py-3">

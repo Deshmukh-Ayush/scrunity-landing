@@ -1,4 +1,10 @@
+"use client";
+
+import { CursorIcon, FilePdfIcon } from "@phosphor-icons/react";
+import { motion } from "motion/react";
+import Image from "next/image";
 import React from "react";
+import Illustration1 from "./illustration1";
 
 export const HowItWorks = () => {
   return (
@@ -10,17 +16,6 @@ export const HowItWorks = () => {
   );
 };
 
-const Illustration1 = () => {
-  return (
-    <div className="h-[200px] w-[373px] rounded-lg border border-gray-200">
-      <div className="flex h-full w-full items-center justify-center p-4">
-        <div className="h-22 w-22 rounded-md border-dashed border-neutral-400">
-          1
-        </div>
-      </div>
-    </div>
-  );
-};
 const Illustration2 = () => {
   return (
     <div className="h-[200px] w-[373px] rounded-lg border border-gray-200"></div>
@@ -30,4 +25,8 @@ const Illustration3 = () => {
   return (
     <div className="h-[200px] w-[373px] rounded-lg border border-gray-200"></div>
   );
+};
+
+export const Skeleton = ({ className }: { className: string }) => {
+  return <div className={`animate-pulse bg-gray-200 ${className}`}></div>;
 };

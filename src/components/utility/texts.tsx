@@ -30,7 +30,7 @@ export const SubHeading = ({
   return (
     <h2
       className={cn(
-        `inline text-[24px] font-medium tracking-tight text-neutral-800 md:text-[28px]`,
+        `inline text-[24px] font-medium tracking-tighter text-neutral-800 md:text-[28px]`,
         className,
       )}
     >

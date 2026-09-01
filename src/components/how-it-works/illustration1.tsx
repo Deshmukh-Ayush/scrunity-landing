@@ -119,6 +119,8 @@ export default function Illustration1() {
         {isDashboard && (
           <motion.div
             layoutId="scr-outer"
+            initial={{ opacity: 0, filter: "blur(14px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
             transition={{ duration: MORPH_S, ease: "easeInOut" }}
             className="mt-10 flex h-full w-70 rounded-lg border border-gray-200"
           >

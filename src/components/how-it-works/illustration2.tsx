@@ -58,87 +58,89 @@ export const Illustration2 = () => {
     activeIndex === TASKS.length - 1 && taskState === "error";
 
   return (
-    <motion.div
-      animate={{ x: isGlobalError ? [-10, 10, -8, 8, -5, 5, 0] : 0 }}
-      transition={{ duration: 0.5 }}
-      className={`relative flex h-[200px] w-[373px] items-center justify-center overflow-hidden rounded-lg border transition-colors duration-500 ${
-        isGlobalError
-          ? "border-red-300 bg-red-50"
-          : "border-gray-200 bg-gray-50/30"
-      }`}
-    >
-      {TASKS.map((task, index) => {
-        const offset = index - activeIndex;
-        const isCompleted = offset < 0;
-        const isActive = offset === 0;
+    <div className="flex h-full w-full items-center justify-center rounded-[10px] border border-gray-200 bg-gray-50 p-[2px]">
+      <motion.div
+        animate={{ x: isGlobalError ? [-10, 10, -8, 8, -5, 5, 0] : 0 }}
+        transition={{ duration: 0.5 }}
+        className={`relative flex h-[200px] w-[373px] items-center justify-center overflow-hidden rounded-lg border transition-colors duration-500 ${
+          isGlobalError
+            ? "border-red-300 bg-red-50"
+            : "border-gray-200 bg-gray-50/30"
+        }`}
+      >
+        {TASKS.map((task, index) => {
+          const offset = index - activeIndex;
+          const isCompleted = offset < 0;
+          const isActive = offset === 0;
 
-        let currentStatus = "loading";
-        if (isCompleted) currentStatus = "success";
-        if (isActive) currentStatus = taskState;
+          let currentStatus = "loading";
+          if (isCompleted) currentStatus = "success";
+          if (isActive) currentStatus = taskState;
 
-        let subtitle = "Checking";
-        if (currentStatus === "success") subtitle = "Within ";
-        if (currentStatus === "error") subtitle = "Out of";
+          let subtitle = "Checking";
+          if (currentStatus === "success") subtitle = "Within ";
+          if (currentStatus === "error") subtitle = "Out of";
 
-        let bgColor = "bg-white";
-        let borderColor = "border-gray-200";
-        let titleColor = "text-neutral-800";
-        let subColor = "text-neutral-400";
+          let bgColor = "bg-white";
+          let borderColor = "border-gray-200";
+          let titleColor = "text-neutral-800";
+          let subColor = "text-neutral-400";
 
-        if (currentStatus === "error") {
-          bgColor = "bg-red-100";
-          borderColor = "border-red-400";
-          titleColor = "text-red-900";
-          subColor = "text-red-600";
-        }
+          if (currentStatus === "error") {
+            bgColor = "bg-red-100";
+            borderColor = "border-red-400";
+            titleColor = "text-red-900";
+            subColor = "text-red-600";
+          }
 
-        if (offset > 3) return null;
+          if (offset > 3) return null;
 
-        let y = offset * 12;
-        let scale = 1 - offset * 0.05;
-        let opacity = 1 - offset * 0.25;
-        let zIndex = 10 - offset;
+          let y = offset * 12;
+          let scale = 1 - offset * 0.05;
+          let opacity = 1 - offset * 0.25;
+          let zIndex = 10 - offset;
 
-        if (isCompleted) {
-          y = -40;
-          scale = 0.95;
-          opacity = 0;
-          zIndex = 10 - offset;
-        }
+          if (isCompleted) {
+            y = -40;
+            scale = 0.95;
+            opacity = 0;
+            zIndex = 10 - offset;
+          }
 
-        return (
-          <motion.div
-            key={task.id}
-            initial={false}
-            animate={{ y, scale, opacity }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            style={{ zIndex }}
-            className={`absolute flex h-10 w-64 items-center rounded-lg border px-2 shadow-sm transition-colors duration-300 ${bgColor} ${borderColor}`}
-          >
-            {/* Icon Container */}
-            <div className="flex h-5 w-5 shrink-0 items-center justify-center">
-              {currentStatus === "success" && <Tick />}
-              {currentStatus === "error" && <Cross />}
-              {currentStatus === "loading" && (
-                <SpinnerIcon className="h-4 w-4 animate-spin text-neutral-700" />
-              )}
-            </div>
+          return (
+            <motion.div
+              key={task.id}
+              initial={false}
+              animate={{ y, scale, opacity }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              style={{ zIndex }}
+              className={`absolute flex h-10 w-64 items-center rounded-lg border px-2 shadow-sm transition-colors duration-300 ${bgColor} ${borderColor}`}
+            >
+              {/* Icon Container */}
+              <div className="flex h-5 w-5 shrink-0 items-center justify-center">
+                {currentStatus === "success" && <Tick />}
+                {currentStatus === "error" && <Cross />}
+                {currentStatus === "loading" && (
+                  <SpinnerIcon className="h-4 w-4 animate-spin text-neutral-700" />
+                )}
+              </div>
 
-            {/* Text Container */}
-            <div className="ml-3 flex flex-col items-start justify-center text-[9px] leading-tight">
-              <p
-                className={`font-medium transition-colors duration-300 ${titleColor}`}
-              >
-                {task.title}
-              </p>
-              <p className={`transition-colors duration-300 ${subColor}`}>
-                <TextMorph>{subtitle}</TextMorph> scope
-              </p>
-            </div>
-          </motion.div>
-        );
-      })}
-    </motion.div>
+              {/* Text Container */}
+              <div className="ml-3 flex flex-col items-start justify-center text-[9px] leading-tight">
+                <p
+                  className={`font-medium transition-colors duration-300 ${titleColor}`}
+                >
+                  {task.title}
+                </p>
+                <p className={`transition-colors duration-300 ${subColor}`}>
+                  <TextMorph>{subtitle}</TextMorph> scope
+                </p>
+              </div>
+            </motion.div>
+          );
+        })}
+      </motion.div>
+    </div>
   );
 };
 

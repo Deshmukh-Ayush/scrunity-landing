@@ -35,15 +35,12 @@ export const HeroSidebar = () => {
   return (
     <aside
       aria-label="Project Sidebar"
-      className="sticky top-0 z-10 hidden h-full w-63 shrink-0 flex-col overflow-hidden border-r border-neutral-200/70 bg-white py-2 select-none md:flex"
+      className="sticky top-0 z-10 hidden h-full w-63 shrink-0 flex-col border-r border-neutral-200 bg-white py-2 select-none md:flex"
     >
       <div className="flex h-full w-full flex-col overflow-hidden">
         {/* Workspace Brand Header */}
         <div className="mx-1 my-1 flex h-14 shrink-0 items-center justify-between gap-2 rounded-md px-4 transition-colors hover:bg-neutral-100/60">
           <div className="flex min-w-0 flex-1 items-center gap-2.5">
-            {/* <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-neutral-900 text-xs font-bold text-white shadow-xs">
-              S
-            </div> */}
             <Image
               src="/logo/scrunity_logo_dark.png"
               alt="logo"

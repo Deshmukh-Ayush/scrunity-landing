@@ -20,6 +20,25 @@ export const Heading = ({
   );
 };
 
+export const SubHeading = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <h2
+      className={cn(
+        `inline text-[24px] font-medium tracking-tight text-neutral-800 md:text-[28px]`,
+        className,
+      )}
+    >
+      {children}
+    </h2>
+  );
+};
+
 export const Para = ({
   children,
   className,

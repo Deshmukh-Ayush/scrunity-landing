@@ -145,7 +145,7 @@ export const ChatRoot = () => {
   }, []);
 
   return (
-    <div className="flex h-full w-full max-w-3xl flex-col justify-between overflow-hidden">
+    <div className="flex h-full w-full max-w-3xl flex-col justify-between">
       {/* Scrollable messages viewport */}
       <Chat.Root ref={containerRef} className="min-h-0 flex-1">
         {messages.map((msg) => (

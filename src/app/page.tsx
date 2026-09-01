@@ -1,7 +1,9 @@
 import { Container } from "@/components/container";
 import { Hero } from "@/components/hero/hero";
+import { HowItWorks } from "@/components/how-it-works";
+import { SubHeadingAnimation } from "@/components/how-it-works/subheading";
 import { Button } from "@/components/utility/button";
-import { Heading, Para } from "@/components/utility/texts";
+import { Heading, Para, SubHeading } from "@/components/utility/texts";
 
 export default function Home() {
   return (
@@ -26,11 +28,16 @@ export default function Home() {
         </div>
       </Container>
 
-      <div className="mt-2 ml-37 overflow-hidden">
+      <div className="ml-35 overflow-hidden rounded-[10px] border border-gray-200 p-2">
         <Hero />
       </div>
-      <Container className="mt-10 min-h-screen border-x border-gray-200 px-10.5">
-        hi
+      <Container className="mt-10 min-h-screen px-10.5 py-20 pb-10">
+        <div className="w-full">
+          <SubHeadingAnimation />
+        </div>
+        <div className="w-full py-10">
+          <HowItWorks />
+        </div>
       </Container>
     </div>
   );

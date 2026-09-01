@@ -4,7 +4,7 @@ import { HeroSidebar } from "./sidebar";
 
 export const Hero = () => {
   return (
-    <div className="shadow-border-sm pointer-events-none relative flex h-screen w-[1436px] overflow-hidden rounded-xl bg-white select-none">
+    <div className="shadow-border-sm pointer-events-none relative flex h-screen w-[1436px] overflow-hidden rounded-[8px] bg-white select-none">
       {/* Static Left Sidebar */}
       <HeroSidebar />
 

@@ -1,4 +1,5 @@
 import { Container } from "@/components/container";
+import { Easy } from "@/components/easy";
 import { Hero } from "@/components/hero/hero";
 import { HowItWorks } from "@/components/how-it-works";
 import { SubHeadingAnimation } from "@/components/how-it-works/subheading";
@@ -37,6 +38,10 @@ export default function Home() {
         </div>
         <div className="w-full py-10">
           <HowItWorks />
+        </div>
+        <div className="w-full py-20">
+          <SubHeading>Scrunity makes it easy.</SubHeading>
+          <Easy />
         </div>
       </Container>
     </div>

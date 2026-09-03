@@ -16,10 +16,10 @@ export const Heading = ({
 
   return (
     <motion.h2
+      ref={ref}
       initial={{ filter: "blur(10px)", opacity: 0 }}
       animate={isInView ? { filter: "blur(0px)", opacity: 1 } : {}}
       transition={{ duration: 0.3, ease: "easeInOut", delay: 0.1 }}
-      ref={ref}
       className={cn(
         `inline text-[36px] font-medium tracking-tight text-neutral-800 md:text-[56px]`,
         className,

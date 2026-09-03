@@ -41,6 +41,11 @@ export default function Home() {
         </div>
         <div className="w-full py-20">
           <SubHeading>Scrunity makes it easy.</SubHeading>
+          <Para className="my-2 w-150">
+            It streamlines the entire contract management process, saving you
+            time and reducing the complexity of handling multiple documents and
+            communications.
+          </Para>
           <Easy />
         </div>
       </Container>

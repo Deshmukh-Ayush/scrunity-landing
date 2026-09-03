@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion, useAnimationFrame } from "framer-motion"; // or "motion/react"
-import React, { useLayoutEffect, useRef, useState } from "react";
+import { motion, useAnimationFrame, useInView } from "framer-motion"; // or "motion/react"
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const ICON_BOX_CLASS =
   "flex items-center justify-center rounded-full border border-[oklch(0.309_0.031_157.2)] bg-[oklch(0.214_0.035_155.483)]";
@@ -15,17 +15,14 @@ const PATH_ORDER = [
   "client",
 ] as const;
 const LEAD_IN_OUT = 100; // px straight run in/out of User and Client
-const AUTOPLAY_MS = 10000; // 10s delay before every repeat
+const AUTOPLAY_MS = 3000; // 5s delay before every repeat
 const DRAW_DURATION = 3000; // ms — total line-draw + reveal sequence time
 const MIN_FLICKER_SECONDS = 0.25; // floor so tightly-packed icons still visibly flicker
 
-// How far (as a fraction of total draw progress) the flicker window reaches
-// before/after the line actually touches the icon — clamped to neighbors below.
 const LEAD_FRACTION = 0.07;
 const TRAIL_FRACTION = 0.07;
 
-// Tubelight stutter: dips back to 0 a couple of times before settling at full.
-const FLICKER_OPACITY = [0, 0.7, 0, 0.8, 0, 1];
+const FLICKER_OPACITY = [0, 0.4, 0, 0.8, 0, 0.2, 0, 0.6, 0, 1];
 const FLICKER_SCALE = [0.8, 0.92, 0.82, 0.97, 0.88, 1];
 const FLICKER_TIMES = [0, 0.15, 0.3, 0.5, 0.7, 1];
 
@@ -41,8 +38,6 @@ const ALIGN_ORDER: Record<IconKey, number> = {
   client: 5,
 };
 
-// Index of each icon's point within the 7-point
-// [start, leadIn, proposal, contract, deliverables, leadOut, end] array.
 const ICON_PT_INDEX: Record<IconKey, number> = {
   user: 0,
   proposal: 2,
@@ -53,18 +48,27 @@ const ICON_PT_INDEX: Record<IconKey, number> = {
 
 const SPRING = { type: "spring" as const, stiffness: 260, damping: 28 };
 
-export const Easy = () => {
+const INITIAL_STAGES: Record<IconKey, Stage> = {
+  user: "pending",
+  contract: "pending",
+  proposal: "pending",
+  deliverables: "pending",
+  client: "pending",
+};
+
+export const Easy = ({ active }: { active?: boolean } = {}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  // Self-managed: plays whenever this section is scrolled into view, and
+  // resets each time it leaves so it replays on the next visit. Pass `active`
+  // from a parent instead if you need this locked in sync with a sibling
+  // "Without Scrutiny" section (e.g. one shared useInView hoisted above both).
+  const inViewSelf = useInView(containerRef, { amount: 0.5, once: false });
+  const inView = active ?? inViewSelf;
+
   const [phase, setPhase] = useState<"reveal" | "loop">("reveal");
   const [aligned, setAligned] = useState(false);
-  const [stages, setStages] = useState<Record<IconKey, Stage>>({
-    user: "pending",
-    contract: "pending",
-    proposal: "pending",
-    deliverables: "pending",
-    client: "pending",
-  });
+  const [stages, setStages] = useState<Record<IconKey, Stage>>(INITIAL_STAGES);
 
-  const containerRef = useRef<HTMLDivElement>(null);
   const nodeRefs = useRef<Record<IconKey, HTMLDivElement | null>>({
     user: null,
     contract: null,
@@ -74,8 +78,6 @@ export const Easy = () => {
   });
   const pathRef = useRef<SVGPathElement>(null);
 
-  // Each icon's [windowStart, windowEnd] as a fraction of total draw progress,
-  // plus the seconds Motion should spend running the flicker keyframes.
   const windowsRef = useRef<Record<
     IconKey,
     { start: number; end: number; seconds: number }
@@ -83,6 +85,7 @@ export const Easy = () => {
   const startTimeRef = useRef<number | null>(null);
   const phaseRef = useRef(phase);
   phaseRef.current = phase;
+  const wasInViewRef = useRef(false);
 
   const setRef = (key: IconKey) => (el: HTMLDivElement | null) => {
     nodeRefs.current[key] = el;
@@ -127,9 +130,7 @@ export const Easy = () => {
     return { pts };
   };
 
-  // Once at mount: figure out the flicker window for each icon —
-  // bounded so it starts a little before arrival and ends a little after,
-  // but never crosses into a neighboring icon's window.
+  // Recompute arrival windows once at mount (geometry doesn't change afterwards).
   useLayoutEffect(() => {
     const result = measure();
     if (!result) return;
@@ -165,14 +166,35 @@ export const Easy = () => {
     windowsRef.current = windows;
   }, []);
 
-  // Autoplay loop — only starts once the reveal sequence has finished
-  useLayoutEffect(() => {
-    if (phase !== "loop") return;
+  // Entering the viewport (re)starts the whole sequence from scratch.
+  // Leaving it just pauses in place — the animation-frame loop below already
+  // guards on `inView`, so nothing updates while offscreen.
+  useEffect(() => {
+    if (inView && !wasInViewRef.current) {
+      setPhase("reveal");
+      setAligned(false);
+      setStages(INITIAL_STAGES);
+      startTimeRef.current = null;
+
+      const path = pathRef.current;
+      if (path) {
+        path.removeAttribute("stroke-dasharray");
+        path.removeAttribute("stroke-dashoffset");
+      }
+    }
+    wasInViewRef.current = inView;
+  }, [inView]);
+
+  // Autoplay loop only runs once the reveal has finished AND the section is visible.
+  useEffect(() => {
+    if (phase !== "loop" || !inView) return;
     const id = setInterval(() => setAligned((a) => !a), AUTOPLAY_MS);
     return () => clearInterval(id);
-  }, [phase]);
+  }, [phase, inView]);
 
   useAnimationFrame((time) => {
+    if (!inView) return;
+
     const path = pathRef.current;
     const result = measure();
     if (!path || !result) return;
@@ -224,64 +246,53 @@ export const Easy = () => {
   });
 
   return (
-    <div className="flex h-full w-full flex-col gap-6">
-      <div
-        ref={containerRef}
-        className="relative flex h-[486px] w-full items-center justify-between gap-10 rounded-lg border border-gray-200 bg-[oklch(0.15_0_0)] p-10 px-10"
-      >
-        {/* Connector line — sits behind the icon boxes */}
-        <svg className="pointer-events-none absolute inset-0 z-0 h-full w-full">
-          <path
-            ref={pathRef}
-            fill="none"
-            stroke="oklch(0.285 0 89.9)"
-            strokeWidth={2}
-            strokeLinecap="round"
-          />
-        </svg>
+    <div
+      ref={containerRef}
+      className="relative flex h-[486px] w-full items-center justify-between gap-10 rounded-lg border border-gray-200 bg-[oklch(0.15_0_0)] p-10 px-10"
+    >
+      {/* Connector line — sits behind the icon boxes */}
+      <svg className="pointer-events-none absolute inset-0 z-0 h-full w-full">
+        <path
+          ref={pathRef}
+          fill="none"
+          stroke="oklch(0.285 0 89.9)"
+          strokeWidth={2}
+          strokeLinecap="round"
+        />
+      </svg>
 
-        <User
-          innerRef={setRef("user")}
-          aligned={aligned}
-          stage={stages.user}
-          seconds={windowsRef.current?.user.seconds ?? MIN_FLICKER_SECONDS}
-        />
-        <Contract
-          innerRef={setRef("contract")}
-          aligned={aligned}
-          stage={stages.contract}
-          seconds={windowsRef.current?.contract.seconds ?? MIN_FLICKER_SECONDS}
-        />
-        <Proposal
-          innerRef={setRef("proposal")}
-          aligned={aligned}
-          stage={stages.proposal}
-          seconds={windowsRef.current?.proposal.seconds ?? MIN_FLICKER_SECONDS}
-        />
-        <Deliverables
-          innerRef={setRef("deliverables")}
-          aligned={aligned}
-          stage={stages.deliverables}
-          seconds={
-            windowsRef.current?.deliverables.seconds ?? MIN_FLICKER_SECONDS
-          }
-        />
-        <Client
-          innerRef={setRef("client")}
-          aligned={aligned}
-          stage={stages.client}
-          seconds={windowsRef.current?.client.seconds ?? MIN_FLICKER_SECONDS}
-        />
-      </div>
-
-      <button
-        type="button"
-        onClick={() => setAligned((a) => !a)}
-        disabled={phase !== "loop"}
-        className="self-start rounded-md border border-neutral-700 px-3 py-1.5 text-sm text-neutral-300 hover:bg-neutral-800 disabled:opacity-40"
-      >
-        Replay
-      </button>
+      <User
+        innerRef={setRef("user")}
+        aligned={aligned}
+        stage={stages.user}
+        seconds={windowsRef.current?.user.seconds ?? MIN_FLICKER_SECONDS}
+      />
+      <Contract
+        innerRef={setRef("contract")}
+        aligned={aligned}
+        stage={stages.contract}
+        seconds={windowsRef.current?.contract.seconds ?? MIN_FLICKER_SECONDS}
+      />
+      <Proposal
+        innerRef={setRef("proposal")}
+        aligned={aligned}
+        stage={stages.proposal}
+        seconds={windowsRef.current?.proposal.seconds ?? MIN_FLICKER_SECONDS}
+      />
+      <Deliverables
+        innerRef={setRef("deliverables")}
+        aligned={aligned}
+        stage={stages.deliverables}
+        seconds={
+          windowsRef.current?.deliverables.seconds ?? MIN_FLICKER_SECONDS
+        }
+      />
+      <Client
+        innerRef={setRef("client")}
+        aligned={aligned}
+        stage={stages.client}
+        seconds={windowsRef.current?.client.seconds ?? MIN_FLICKER_SECONDS}
+      />
     </div>
   );
 };
@@ -300,7 +311,7 @@ const IconBox = ({
 }: {
   children: React.ReactNode;
   className?: string;
-  wrapperClassName?: string; // scattered-state (absolute) positioning only
+  wrapperClassName?: string;
   text?: string;
   innerRef?: (el: HTMLDivElement | null) => void;
   layoutId: IconKey;
@@ -311,7 +322,7 @@ const IconBox = ({
 }) => {
   const revealTransition =
     stage === "flickering"
-      ? { duration: seconds, times: FLICKER_TIMES, ease: "easeInOut" as const }
+      ? { duration: seconds, times: FLICKER_TIMES, ease: "easeOut" as const }
       : { duration: stage === "settled" ? 0.15 : 0 };
 
   return (

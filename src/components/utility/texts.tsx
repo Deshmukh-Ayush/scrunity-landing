@@ -1,5 +1,8 @@
+"use client";
+
 import { cn } from "@/lib/utils";
-import React from "react";
+import { motion, useInView } from "motion/react";
+import React, { useRef } from "react";
 
 export const Heading = ({
   children,
@@ -8,15 +11,22 @@ export const Heading = ({
   children: React.ReactNode;
   className?: string;
 }) => {
+  const ref = useRef<HTMLHeadingElement>(null);
+  const isInView = useInView(ref);
+
   return (
-    <h2
+    <motion.h2
+      initial={{ filter: "blur(10px)", opacity: 0 }}
+      animate={isInView ? { filter: "blur(0px)", opacity: 1 } : {}}
+      transition={{ duration: 0.3, ease: "easeInOut", delay: 0.1 }}
+      ref={ref}
       className={cn(
         `inline text-[36px] font-medium tracking-tight text-neutral-800 md:text-[56px]`,
         className,
       )}
     >
       {children}
-    </h2>
+    </motion.h2>
   );
 };
 
@@ -27,15 +37,21 @@ export const SubHeading = ({
   children: React.ReactNode;
   className?: string;
 }) => {
+  const ref = useRef<HTMLHeadingElement>(null);
+  const isInView = useInView(ref);
   return (
-    <h2
+    <motion.h2
+      initial={{ filter: "blur(10px)", opacity: 0 }}
+      animate={isInView ? { filter: "blur(0px)", opacity: 1 } : {}}
+      transition={{ duration: 0.3, ease: "easeInOut", delay: 0.1 }}
+      ref={ref}
       className={cn(
         `inline text-[24px] font-medium tracking-tighter text-neutral-800 md:text-[28px]`,
         className,
       )}
     >
       {children}
-    </h2>
+    </motion.h2>
   );
 };
 

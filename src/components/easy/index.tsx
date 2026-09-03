@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion, useAnimationFrame, useInView } from "framer-motion"; // or "motion/react"
+import { motion, useAnimationFrame, useInView } from "framer-motion";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const ICON_BOX_CLASS =
@@ -14,10 +14,9 @@ const PATH_ORDER = [
   "deliverables",
   "client",
 ] as const;
-const LEAD_IN_OUT = 100; // px straight run in/out of User and Client
-const AUTOPLAY_MS = 3000; // 5s delay before every repeat
-const DRAW_DURATION = 3000; // ms — total line-draw + reveal sequence time
-const MIN_FLICKER_SECONDS = 0.25; // floor so tightly-packed icons still visibly flicker
+const LEAD_IN_OUT = 100;
+const DRAW_DURATION = 3000;
+const MIN_FLICKER_SECONDS = 0.25;
 
 const LEAD_FRACTION = 0.07;
 const TRAIL_FRACTION = 0.07;
@@ -25,6 +24,20 @@ const TRAIL_FRACTION = 0.07;
 const FLICKER_OPACITY = [0, 0.4, 0, 0.8, 0, 0.2, 0, 0.6, 0, 1];
 const FLICKER_SCALE = [0.8, 0.92, 0.82, 0.97, 0.88, 1];
 const FLICKER_TIMES = [0, 0.15, 0.3, 0.5, 0.7, 1];
+
+const TUBELIGHT_OPACITY = [0, 0.7, 0.05, 0.9, 0.1, 0.4, 0.95, 0.2, 1];
+const TUBELIGHT_GLOW = [
+  "drop-shadow(0 0 0px rgba(255,255,255,0))",
+  "drop-shadow(0 0 6px rgba(255,255,255,0.7))",
+  "drop-shadow(0 0 1px rgba(255,255,255,0.1))",
+  "drop-shadow(0 0 10px rgba(255,255,255,0.9))",
+  "drop-shadow(0 0 1px rgba(255,255,255,0.1))",
+  "drop-shadow(0 0 4px rgba(255,255,255,0.4))",
+  "drop-shadow(0 0 12px rgba(255,255,255,0.85))",
+  "drop-shadow(0 0 2px rgba(255,255,255,0.2))",
+  "drop-shadow(0 0 6px rgba(255,255,255,0.35))",
+];
+const TUBELIGHT_TIMES = [0, 0.1, 0.18, 0.32, 0.45, 0.58, 0.72, 0.85, 1];
 
 type IconKey = (typeof PATH_ORDER)[number];
 type Point = { x: number; y: number };
@@ -58,14 +71,12 @@ const INITIAL_STAGES: Record<IconKey, Stage> = {
 
 export const Easy = ({ active }: { active?: boolean } = {}) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  // Self-managed: plays whenever this section is scrolled into view, and
-  // resets each time it leaves so it replays on the next visit. Pass `active`
-  // from a parent instead if you need this locked in sync with a sibling
-  // "Without Scrutiny" section (e.g. one shared useInView hoisted above both).
   const inViewSelf = useInView(containerRef, { amount: 0.5, once: false });
   const inView = active ?? inViewSelf;
 
-  const [phase, setPhase] = useState<"reveal" | "loop">("reveal");
+  const [phase, setPhase] = useState<"reveal" | "rearranging" | "done">(
+    "reveal",
+  );
   const [aligned, setAligned] = useState(false);
   const [stages, setStages] = useState<Record<IconKey, Stage>>(INITIAL_STAGES);
 
@@ -130,7 +141,6 @@ export const Easy = ({ active }: { active?: boolean } = {}) => {
     return { pts };
   };
 
-  // Recompute arrival windows once at mount (geometry doesn't change afterwards).
   useLayoutEffect(() => {
     const result = measure();
     if (!result) return;
@@ -166,9 +176,6 @@ export const Easy = ({ active }: { active?: boolean } = {}) => {
     windowsRef.current = windows;
   }, []);
 
-  // Entering the viewport (re)starts the whole sequence from scratch.
-  // Leaving it just pauses in place — the animation-frame loop below already
-  // guards on `inView`, so nothing updates while offscreen.
   useEffect(() => {
     if (inView && !wasInViewRef.current) {
       setPhase("reveal");
@@ -185,15 +192,25 @@ export const Easy = ({ active }: { active?: boolean } = {}) => {
     wasInViewRef.current = inView;
   }, [inView]);
 
-  // Autoplay loop only runs once the reveal has finished AND the section is visible.
   useEffect(() => {
-    if (phase !== "loop" || !inView) return;
-    const id = setInterval(() => setAligned((a) => !a), AUTOPLAY_MS);
-    return () => clearInterval(id);
+    if (phase !== "rearranging" || !inView) return;
+
+    const alignTimer = setTimeout(() => {
+      setAligned(true);
+    }, 600);
+
+    const settleTimer = setTimeout(() => {
+      setPhase("done");
+    }, 1800);
+
+    return () => {
+      clearTimeout(alignTimer);
+      clearTimeout(settleTimer);
+    };
   }, [phase, inView]);
 
   useAnimationFrame((time) => {
-    if (!inView) return;
+    if (!inView || phaseRef.current === "done") return;
 
     const path = pathRef.current;
     const result = measure();
@@ -240,7 +257,7 @@ export const Easy = ({ active }: { active?: boolean } = {}) => {
       if (progress >= 1) {
         path.removeAttribute("stroke-dasharray");
         path.removeAttribute("stroke-dashoffset");
-        setPhase("loop");
+        setPhase("rearranging");
       }
     }
   });
@@ -250,7 +267,26 @@ export const Easy = ({ active }: { active?: boolean } = {}) => {
       ref={containerRef}
       className="relative flex h-[486px] w-full items-center justify-between gap-10 rounded-lg border border-gray-200 bg-[oklch(0.15_0_0)] p-10 px-10"
     >
-      {/* Connector line — sits behind the icon boxes */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={
+          phase === "done"
+            ? {
+                opacity: TUBELIGHT_OPACITY,
+                filter: TUBELIGHT_GLOW,
+              }
+            : { opacity: 0, filter: "drop-shadow(0 0 0px transparent)" }
+        }
+        transition={{
+          duration: 0.7,
+          times: TUBELIGHT_TIMES,
+          ease: "easeInOut",
+        }}
+        className="pointer-events-none absolute top-8 right-8 z-20 font-mono text-xs font-medium tracking-widest text-neutral-200 uppercase select-none"
+      >
+        With Scrunity
+      </motion.p>
+
       <svg className="pointer-events-none absolute inset-0 z-0 h-full w-full">
         <path
           ref={pathRef}
@@ -385,39 +421,37 @@ const User = ({
   aligned: boolean;
   stage: Stage;
   seconds: number;
-}) => {
-  return (
-    <IconBox
-      text="You"
-      innerRef={innerRef}
-      layoutId="user"
-      aligned={aligned}
-      stage={stage}
-      seconds={seconds}
-      order={ALIGN_ORDER.user}
+}) => (
+  <IconBox
+    text="You"
+    innerRef={innerRef}
+    layoutId="user"
+    aligned={aligned}
+    stage={stage}
+    seconds={seconds}
+    order={ALIGN_ORDER.user}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={cn(
+        "rounded-full bg-[oklch(0.791_0.209_151.662)] text-[oklch(0.214_0.035_155.483)]",
+        aligned ? "h-12 w-12" : "h-16 w-16",
+      )}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={24}
-        height={24}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={cn(
-          "rounded-full bg-[oklch(0.791_0.209_151.662)] text-[oklch(0.214_0.035_155.483)]",
-          aligned ? "h-12 w-12" : "h-16 w-16",
-        )}
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M9 10a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-        <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
-      </svg>
-    </IconBox>
-  );
-};
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M9 10a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+      <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+    </svg>
+  </IconBox>
+);
 
 const Client = ({
   innerRef,
@@ -429,40 +463,38 @@ const Client = ({
   aligned: boolean;
   stage: Stage;
   seconds: number;
-}) => {
-  return (
-    <IconBox
-      text="Client"
-      innerRef={innerRef}
-      layoutId="client"
-      aligned={aligned}
-      stage={stage}
-      seconds={seconds}
-      order={ALIGN_ORDER.client}
-      className="border-[oklch(0.364_0.078_269.8)] bg-[oklch(0.283_0.091_267.5)]"
+}) => (
+  <IconBox
+    text="Client"
+    innerRef={innerRef}
+    layoutId="client"
+    aligned={aligned}
+    stage={stage}
+    seconds={seconds}
+    order={ALIGN_ORDER.client}
+    className="border-[oklch(0.364_0.078_269.8)] bg-[oklch(0.283_0.091_267.5)]"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={cn(
+        "rounded-full bg-[oklch(0.704_0.159_253.4)] text-[oklch(0.283_0.091_267.5)]",
+        aligned ? "h-12 w-12" : "h-16 w-16",
+      )}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={24}
-        height={24}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={cn(
-          "rounded-full bg-[oklch(0.704_0.159_253.4)] text-[oklch(0.283_0.091_267.5)]",
-          aligned ? "h-12 w-12" : "h-16 w-16",
-        )}
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M9 10a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-        <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
-      </svg>
-    </IconBox>
-  );
-};
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M9 10a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+      <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+    </svg>
+  </IconBox>
+);
 
 const Contract = ({
   innerRef,
@@ -474,37 +506,35 @@ const Contract = ({
   aligned: boolean;
   stage: Stage;
   seconds: number;
-}) => {
-  return (
-    <IconBox
-      text="Contract"
-      innerRef={innerRef}
-      layoutId="contract"
-      aligned={aligned}
-      stage={stage}
-      seconds={seconds}
-      order={ALIGN_ORDER.contract}
-      wrapperClassName="absolute left-70 top-10"
-      className="border-[oklch(0.364_0.078_269.8)] bg-[oklch(0.283_0.091_267.5)]"
+}) => (
+  <IconBox
+    text="Contract"
+    innerRef={innerRef}
+    layoutId="contract"
+    aligned={aligned}
+    stage={stage}
+    seconds={seconds}
+    order={ALIGN_ORDER.contract}
+    wrapperClassName="absolute left-70 top-10"
+    className="border-[oklch(0.364_0.078_269.8)] bg-[oklch(0.283_0.091_267.5)]"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={cn(
+        "bg-[oklch(0.283_0.091_267.5)] text-[oklch(0.704_0.159_253.4)]",
+        aligned ? "h-12 w-12" : "h-16 w-16",
+      )}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={24}
-        height={24}
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className={cn(
-          "bg-[oklch(0.283_0.091_267.5)] text-[oklch(0.704_0.159_253.4)]",
-          aligned ? "h-12 w-12" : "h-16 w-16",
-        )}
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M12 2l.117 .007a1 1 0 0 1 .876 .876l.007 .117v4l.005 .15a2 2 0 0 0 1.838 1.844l.157 .006h4l.117 .007a1 1 0 0 1 .876 .876l.007 .117v9a3 3 0 0 1 -2.824 2.995l-.176 .005h-10a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-14a3 3 0 0 1 2.824 -2.995l.176 -.005zm3 14h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2m0 -4h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2" />
-        <path d="M19 7h-4l-.001 -4.001z" />
-      </svg>
-    </IconBox>
-  );
-};
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 2l.117 .007a1 1 0 0 1 .876 .876l.007 .117v4l.005 .15a2 2 0 0 0 1.838 1.844l.157 .006h4l.117 .007a1 1 0 0 1 .876 .876l.007 .117v9a3 3 0 0 1 -2.824 2.995l-.176 .005h-10a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-14a3 3 0 0 1 2.824 -2.995l.176 -.005zm3 14h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2m0 -4h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2" />
+      <path d="M19 7h-4l-.001 -4.001z" />
+    </svg>
+  </IconBox>
+);
 
 const Proposal = ({
   innerRef,
@@ -514,39 +544,37 @@ const Proposal = ({
 }: {
   innerRef?: (el: HTMLDivElement | null) => void;
   aligned: boolean;
-  stage: Stage;
+  stage: stage;
   seconds: number;
-}) => {
-  return (
-    <IconBox
-      text="Proposal"
-      innerRef={innerRef}
-      layoutId="proposal"
-      aligned={aligned}
-      stage={stage}
-      seconds={seconds}
-      order={ALIGN_ORDER.proposal}
-      wrapperClassName="absolute right-110 bottom-10"
-      className="border-[oklch(0.306_0.026_54.2)] bg-[oklch(0.21_0.032_52.2)]"
+}) => (
+  <IconBox
+    text="Proposal"
+    innerRef={innerRef}
+    layoutId="proposal"
+    aligned={aligned}
+    stage={stage}
+    seconds={seconds}
+    order={ALIGN_ORDER.proposal}
+    wrapperClassName="absolute right-110 bottom-10"
+    className="border-[oklch(0.306_0.026_54.2)] bg-[oklch(0.21_0.032_52.2)]"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={cn(
+        "text-[oklch(0.746_0.18_56.7)]",
+        aligned ? "h-12 w-12" : "h-16 w-16",
+      )}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={24}
-        height={24}
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className={cn(
-          "text-[oklch(0.746_0.18_56.7)]",
-          aligned ? "h-12 w-12" : "h-16 w-16",
-        )}
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M12 2l.117 .007a1 1 0 0 1 .876 .876l.007 .117v4l.005 .15a2 2 0 0 0 1.838 1.844l.157 .006h4l.117 .007a1 1 0 0 1 .876 .876l.007 .117v9a3 3 0 0 1 -2.824 2.995l-.176 .005h-10a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-14a3 3 0 0 1 2.824 -2.995l.176 -.005zm3 14h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2m0 -4h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2" />
-        <path d="M19 7h-4l-.001 -4.001z" />
-      </svg>
-    </IconBox>
-  );
-};
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 2l.117 .007a1 1 0 0 1 .876 .876l.007 .117v4l.005 .15a2 2 0 0 0 1.838 1.844l.157 .006h4l.117 .007a1 1 0 0 1 .876 .876l.007 .117v9a3 3 0 0 1 -2.824 2.995l-.176 .005h-10a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-14a3 3 0 0 1 2.824 -2.995l.176 -.005zm3 14h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2m0 -4h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2" />
+      <path d="M19 7h-4l-.001 -4.001z" />
+    </svg>
+  </IconBox>
+);
 
 const Deliverables = ({
   innerRef,
@@ -558,33 +586,31 @@ const Deliverables = ({
   aligned: boolean;
   stage: Stage;
   seconds: number;
-}) => {
-  return (
-    <IconBox
-      text="Deliverables"
-      innerRef={innerRef}
-      layoutId="deliverables"
-      aligned={aligned}
-      stage={stage}
-      seconds={seconds}
-      order={ALIGN_ORDER.deliverables}
-      wrapperClassName="absolute right-100 top-10"
-      className="border-[oklch(0.232_0.095_28.753)] bg-[oklch(0.232_0.095_28.709)]"
+}) => (
+  <IconBox
+    text="Deliverables"
+    innerRef={innerRef}
+    layoutId="deliverables"
+    aligned={aligned}
+    stage={stage}
+    seconds={seconds}
+    order={ALIGN_ORDER.deliverables}
+    wrapperClassName="absolute right-100 top-10"
+    className="border-[oklch(0.232_0.095_28.753)] bg-[oklch(0.232_0.095_28.709)]"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={cn(
+        "text-[oklch(0.632_0.254_28.753)]",
+        aligned ? "h-12 w-12" : "h-16 w-16",
+      )}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={24}
-        height={24}
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className={cn(
-          "text-[oklch(0.632_0.254_28.753)]",
-          aligned ? "h-12 w-12" : "h-16 w-16",
-        )}
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M21.864 3.549l-6.454 17.868a1.55 1.55 0 0 1 -1.41 .903a1.54 1.54 0 0 1 -1.394 -.874l-2.88 -5.759zm-1.414 -1.414l-12.139 12.138l-5.728 -2.864a1.55 1.55 0 0 1 -.903 -1.409c0 -.606 .353 -1.157 .981 -1.44z" />
-      </svg>
-    </IconBox>
-  );
-};
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M21.864 3.549l-6.454 17.868a1.55 1.55 0 0 1 -1.41 .903a1.54 1.54 0 0 1 -1.394 -.874l-2.88 -5.759zm-1.414 -1.414l-12.139 12.138l-5.728 -2.864a1.55 1.55 0 0 1 -.903 -1.409c0 -.606 .353 -1.157 .981 -1.44z" />
+    </svg>
+  </IconBox>
+);

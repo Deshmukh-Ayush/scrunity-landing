@@ -544,7 +544,7 @@ const Proposal = ({
 }: {
   innerRef?: (el: HTMLDivElement | null) => void;
   aligned: boolean;
-  stage: stage;
+  stage: Stage;
   seconds: number;
 }) => (
   <IconBox

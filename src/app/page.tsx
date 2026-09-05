@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Container } from "@/components/container";
 import { Easy } from "@/components/easy";
 import { Hero } from "@/components/hero/hero";
-import { HowItWorks } from "@/components/how-it-works";
-import { SubHeadingAnimation } from "@/components/how-it-works/subheading";
+import { Features1 } from "@/components/features-one";
+import { SubHeadingAnimation } from "@/components/features-one/subheading";
 import { Button } from "@/components/utility/button";
 import { Heading, Para, SubHeading } from "@/components/utility/texts";
 import { cn } from "@/lib/utils";
+import { Divider } from "@/components/utility/divider";
 
 export const metadata: Metadata = {
   title: "Save Time and Think Less | Scrunity",
@@ -52,15 +53,18 @@ export default function Home() {
           <div className="ml-35 overflow-hidden rounded-[10px] border border-gray-200 p-2">
             <Hero />
           </div>
-          <Container className="mt-10 min-h-screen px-10.5 py-20 pb-10">
+
+          {/* new container */}
+          <Container className="mt-10 min-h-screen border-x border-gray-200 px-10.5 py-20 pb-10">
             <div className="w-full">
               <SubHeadingAnimation />
             </div>
             <div className="w-full py-10">
-              <HowItWorks />
+              <Features1 />
             </div>
-            <Separator />
-            <div className="w-full py-20">
+            <Divider />
+            {/* Makes it easy */}
+            <div className="w-full py-10">
               <SubHeading>Scrunity makes it easy.</SubHeading>
               <Para className="my-2 w-150">
                 It streamlines the entire contract management process, saving
@@ -69,29 +73,18 @@ export default function Home() {
               </Para>
               <Easy />
             </div>
+            <Divider />
+            {/* How it works */}
+            <div className="w-full py-10">
+              <SubHeading>How it works</SubHeading>
+              <Para>
+                Starts with creating project and then sending onboarding link to
+                client
+              </Para>
+            </div>
           </Container>
         </div>
       </div>
     </>
-  );
-}
-
-function Separator({ className }: { className?: string }) {
-  return (
-    <div
-      className={cn(
-        "stripe-divider h-(--separator-height) w-full border-x",
-        className,
-      )}
-    >
-      <div
-        className="bg-background absolute -top-1.25 -left-1.25 z-2 flex size-2.25 border"
-        aria-hidden
-      />
-      <div
-        className="bg-background absolute -top-1.25 -right-1.25 z-2 flex size-2.25 border"
-        aria-hidden
-      />
-    </div>
   );
 }

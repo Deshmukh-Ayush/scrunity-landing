@@ -1,22 +1,13 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-export function Separator({ className }: { className?: string }) {
+export function Divider({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "stripe-divider h-(--separator-height) w-full border-x",
+        "relative left-1/2 h-px w-screen -translate-x-1/2 bg-gray-200",
         className,
       )}
-    >
-      {/* <div
-        className="absolute -top-1.25 -left-1.25 z-2 flex size-2.25 border bg-background"
-        aria-hidden
-      />
-      <div
-        className="absolute -top-1.25 -right-1.25 z-2 flex size-2.25 border bg-background"
-        aria-hidden
-      /> */}
-    </div>
+    />
   );
 }

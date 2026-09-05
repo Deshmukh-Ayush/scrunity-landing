@@ -27,7 +27,7 @@ const steps = [
   },
 ];
 
-export const HowItWorks = () => {
+export const Features1 = () => {
   return (
     <div className="flex h-full w-full items-center justify-between">
       {steps.map(({ Illustration, title, description }) => (

@@ -61,3 +61,81 @@
 .animate-enter-individual-title {
     --delay: 80ms;
 }
+
+
+@utility screen-line-top {
+    @apply relative;
+
+    &:before {
+        content: "";
+        @apply absolute top-0 left-[-100vw] -z-1 h-px w-[200vw] bg-gray-200;
+    }
+}
+
+@utility screen-line-top-* {
+    &:before {
+        background-color: --value(--color-*, [color]);
+    }
+}
+
+@utility screen-line-bottom {
+    @apply relative;
+
+    &:after {
+        content: "";
+        @apply absolute bottom-0 left-[-100vw] -z-1 h-px w-[200vw] bg-gray-200;
+    }
+}
+
+@utility screen-line-bottom-* {
+    &:after {
+        background-color: --value(--color-*, [color]);
+    }
+}
+
+@utility screen-dashed-line-top {
+    @apply screen-line-top;
+
+    &:before {
+        content: "";
+        background-color: inherit;
+        background-image: linear-gradient(to right, #e5e7eb 4px, transparent 2px);
+        background-size: 6px 1px;
+        background-repeat: repeat-x;
+    }
+}
+
+@utility screen-dashed-line-bottom {
+    @apply screen-line-bottom;
+
+    &:after {
+        content: "";
+        background-color: inherit;
+        background-image: linear-gradient(to right, #e5e7eb 4px, transparent 2px);
+        background-size: 6px 1px;
+        background-repeat: repeat-x;
+    }
+}
+
+@utility screen-line-top-none {
+    @apply before:content-none;
+}
+
+@utility screen-line-bottom-none {
+    @apply after:content-none;
+}
+
+@utility diagonal-stripes {
+    --pattern-foreground: color-mix(in oklab, #e5e5e5 56%, transparent);
+    background-image: repeating-linear-gradient(315deg, var(--pattern-foreground) 0, var(--pattern-foreground) 1px, transparent 0, transparent 50%);
+    background-size: 10px 10px;
+}
+
+@utility stripe-divider {
+    @apply relative h-8;
+
+    &:before {
+        content: "";
+        @apply absolute left-[-100vw] -z-1 h-full w-[200vw] diagonal-stripes;
+    }
+}

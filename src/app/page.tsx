@@ -8,6 +8,7 @@ import { Button } from "@/components/utility/button";
 import { Heading, Para, SubHeading } from "@/components/utility/texts";
 import { cn } from "@/lib/utils";
 import { Divider } from "@/components/utility/divider";
+import { HowItWorks } from "@/components/how-it-works";
 
 export const metadata: Metadata = {
   title: "Save Time and Think Less | Scrunity",
@@ -81,6 +82,7 @@ export default function Home() {
                 Starts with creating project and then sending onboarding link to
                 client
               </Para>
+              <HowItWorks />
             </div>
           </Container>
         </div>

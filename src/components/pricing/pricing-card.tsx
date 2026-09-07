@@ -90,11 +90,12 @@ export const PricingCard = ({ plan, className }: PricingCardProps) => {
           <Link href={href} className="block w-full">
             <motion.button
               type="button"
+              aria-label={`${plan.cta} for ${plan.name} plan`}
               whileTap={{ scale: 0.96 }}
               transition={{ type: "spring", duration: 0.3, bounce: 0 }}
               className={cn(
                 /* Optical Alignment: ps-5 pe-4 so text-side is 2px wider than icon-side */
-                "group/btn relative flex w-full cursor-pointer items-center justify-center gap-2 rounded-full py-2.5 ps-5 pe-4 text-xs font-semibold whitespace-nowrap transition-colors duration-150 select-none",
+                "group/btn relative flex w-full cursor-pointer items-center justify-center gap-2 rounded-full py-2.5 ps-5 pe-4 text-xs font-semibold whitespace-nowrap transition-colors duration-150 select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900",
                 isAgency
                   ? "border border-neutral-900 bg-neutral-900 text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.18)] hover:bg-neutral-800 active:bg-neutral-950"
                   : isEnterprise

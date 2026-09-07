@@ -9,6 +9,7 @@ import { Heading, Para, SubHeading } from "@/components/utility/texts";
 import { cn } from "@/lib/utils";
 import { Divider } from "@/components/utility/divider";
 import { HowItWorks } from "@/components/how-it-works";
+import { Pricing } from "@/components/pricing";
 
 export const metadata: Metadata = {
   title: "Save Time and Think Less | Scrunity",
@@ -91,6 +92,7 @@ export default function Home() {
         <div className="w-full py-10">
           <SubHeading>Pricing</SubHeading>
           <Para>Start for free and works for scale too.</Para>
+          <Pricing />
         </div>
       </Container>
     </div>

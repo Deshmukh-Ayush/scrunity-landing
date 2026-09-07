@@ -61,6 +61,16 @@ export default function Home() {
           <Features1 />
         </div>
         <Divider />
+        {/* How it works */}
+        <div className="w-full py-10">
+          <SubHeading>How it works</SubHeading>
+          <Para>
+            Starts with creating project and then sending onboarding link to
+            client
+          </Para>
+          <HowItWorks />
+        </div>
+        <Divider />
         {/* Makes it easy */}
         <div className="w-full py-10">
           <SubHeading>Scrunity makes it easy.</SubHeading>
@@ -72,15 +82,6 @@ export default function Home() {
           <Easy />
         </div>
         <Divider />
-        {/* How it works */}
-        <div className="w-full py-10">
-          <SubHeading>How it works</SubHeading>
-          <Para>
-            Starts with creating project and then sending onboarding link to
-            client
-          </Para>
-          <HowItWorks />
-        </div>
       </Container>
     </div>
   );

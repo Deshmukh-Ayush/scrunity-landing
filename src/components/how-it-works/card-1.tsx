@@ -1,14 +1,15 @@
 "use client";
 
 import { CheckIcon } from "@phosphor-icons/react";
+import { motion } from "motion/react";
 
 export const Card1 = () => {
   return (
     <div className="relative flex h-[200px] w-[373px] items-center justify-center overflow-hidden rounded-lg border border-[#eaeaea] p-[2px]">
       <div className="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] bg-size-[26px_26px]" />
 
-      <div className="z-10 mt-10 h-full w-[173px] rounded-lg border border-[#eaeaea] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.04)]">
-        <div className="flex h-full flex-col p-3">
+      <div className="relative z-10 mt-10 h-full w-[173px] rounded-lg bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.04)]">
+        <div className="relative flex h-full flex-col p-3">
           <div className="flex items-center justify-between gap-2">
             <div className="flex min-w-0 items-center gap-2">
               <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[#171717] text-[9px] font-medium text-white">

@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { Divider } from "@/components/utility/divider";
 import { HowItWorks } from "@/components/how-it-works";
 import { Pricing } from "@/components/pricing";
+import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Save Time and Think Less | Scrunity",
@@ -94,6 +95,9 @@ export default function Home() {
           <Para>Start for free and works for scale too.</Para>
           <Pricing />
         </div>
+        <Divider />
+        {/* footer */}
+        <Footer />
       </Container>
     </div>
   );

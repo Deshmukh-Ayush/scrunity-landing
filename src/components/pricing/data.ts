@@ -1,3 +1,6 @@
+/**
+ * Pricing plan tier definition conforming to Scrunity's scope & collaboration model.
+ */
 export interface PricingPlan {
   id: "freelancer" | "agency" | "enterprise";
   name: string;
@@ -9,6 +12,9 @@ export interface PricingPlan {
   features: string[];
 }
 
+/**
+ * Verified pricing tier configurations for independent pros, teams, and enterprise clients.
+ */
 export const PRICING_DATA: PricingPlan[] = [
   {
     id: "freelancer",

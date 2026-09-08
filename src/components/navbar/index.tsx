@@ -69,7 +69,7 @@ export const Navbar = () => {
       <div className="h-full w-full md:px-20">
         <div className="flex h-full w-full items-center justify-between">
           {/* Logo Section */}
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src="/logo/scrunity_svg.svg"
               alt="Scrunity Logo"
@@ -78,7 +78,7 @@ export const Navbar = () => {
               className="h-auto w-3"
             />
             <span className="text-xl font-semibold">Scrunity</span>
-          </div>
+          </Link>
 
           <div className="flex items-center gap-4">
             {/* big screens */}
@@ -102,13 +102,13 @@ export const Navbar = () => {
                 <Separator orientation="vertical" />
               </div>
               <Link
-                href="/login"
+                href="/join"
                 className="flex items-center justify-center rounded-full px-4 py-1.5 text-[13px] font-medium text-neutral-700 transition-colors duration-200 ease-in-out hover:bg-neutral-200"
               >
                 Log in
               </Link>
               <Link
-                href="/login"
+                href="/join"
                 className="flex items-center justify-center rounded-full bg-neutral-800 px-4 py-1.5 text-[13px] font-medium text-neutral-100"
               >
                 Sign up

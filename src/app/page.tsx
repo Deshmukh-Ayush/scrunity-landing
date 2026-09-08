@@ -31,16 +31,17 @@ export default function Home() {
   return (
     <div className="min-h-screen overflow-x-clip bg-gray-50">
       <Container className="overflow-hidden">
-        <div className="flex items-end justify-between px-10 pt-40 pb-10">
-          <Heading className="leading-16">
+        <div className="flex flex-col items-start justify-between gap-4 px-10 pt-20 pb-10 md:flex-row md:items-end md:gap-6 md:pt-40">
+          <Heading className="leading-none md:leading-16">
             Save time <br /> and think less{" "}
           </Heading>
-          <div className="flex flex-col items-end justify-between gap-6 py-1">
-            <Para className="text-end">
-              Contracts, Deliverables, E-Signatures, Payment Tracking, <br />{" "}
-              Timelines and more. Join the waitlist to get early access.
+          <div className="flex flex-col items-start justify-between gap-6 py-1">
+            <Para className="text-start">
+              Contracts, Deliverables, E-Signatures, Payment Tracking,{" "}
+              <br className="hidden md:inline" /> Timelines and more. Join the
+              waitlist to get early access.
             </Para>
-            <div className="flex items-end justify-center gap-4">
+            <div className="flex flex-wrap items-center justify-start gap-4">
               <button className="cursor-pointer rounded-full px-6 py-2 text-[15px] text-neutral-800">
                 Join Waitlist
               </button>

@@ -9,23 +9,15 @@ import {
   XLogoIcon,
   LinkedinLogoIcon,
 } from "@phosphor-icons/react";
-import {
-  PRODUCT_LINKS,
-  RESOURCE_LINKS,
-  COMPANY_LINKS,
-  LEGAL_LINKS,
-} from "./data";
+import { LEGAL_LINKS } from "./data";
 import { NewsletterCard } from "./newsletter-card";
 
 export const Footer = () => {
   return (
-    <footer className="w-full py-16">
-      {/* Top Grid */}
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
-        {/* Brand & Vision Column (4 cols) */}
-        <div className="flex flex-col justify-between lg:col-span-4">
+    <footer className="w-full pt-16 pb-1">
+      <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+        <div className="flex flex-col justify-between gap-8 md:max-w-sm">
           <div className="space-y-4">
-            {/* Logo Row */}
             <Link
               href="/"
               className="inline-flex items-center gap-2.5 transition-opacity hover:opacity-80"
@@ -42,15 +34,14 @@ export const Footer = () => {
               </span>
             </Link>
 
-            <p className="max-w-sm text-sm leading-relaxed text-neutral-500 text-pretty">
+            <p className="max-w-sm text-sm leading-relaxed text-pretty text-neutral-500">
               The client collaboration and revenue protection workspace for
               modern agencies and freelancers. Contracts, deliverables, and
               milestone payouts without scope creep.
             </p>
           </div>
 
-          {/* System Status Pill (Concentric border radius: 16px outer, 4px pad, 12px inner) */}
-          <div className="mt-8 flex items-center">
+          <div className="flex items-center">
             <div className="inline-flex items-center rounded-full border border-gray-200 bg-gray-100/70 p-0.5 shadow-xs select-none">
               <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
                 <span className="relative flex size-2">
@@ -65,81 +56,17 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Links Navigation (5 cols) */}
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-5">
-          {/* Product */}
-          <div className="space-y-3">
-            <p className="text-xs font-semibold tracking-wider text-neutral-900 uppercase">
-              Product
-            </p>
-            <ul className="space-y-2.5">
-              {PRODUCT_LINKS.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-xs text-neutral-500 transition-colors duration-150 hover:text-neutral-900"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div className="space-y-3">
-            <p className="text-xs font-semibold tracking-wider text-neutral-900 uppercase">
-              Resources
-            </p>
-            <ul className="space-y-2.5">
-              {RESOURCE_LINKS.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-xs text-neutral-500 transition-colors duration-150 hover:text-neutral-900"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div className="space-y-3">
-            <p className="text-xs font-semibold tracking-wider text-neutral-900 uppercase">
-              Company
-            </p>
-            <ul className="space-y-2.5">
-              {COMPANY_LINKS.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-xs text-neutral-500 transition-colors duration-150 hover:text-neutral-900"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Stay Informed Newsletter Card (3 cols) */}
-        <div className="lg:col-span-3">
+        <div className="w-full max-w-[320px] md:ml-auto">
           <NewsletterCard />
         </div>
       </div>
 
-      {/* Bottom Legal & Social Strip */}
-      <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-gray-200/80 pt-8 sm:flex-row">
-        {/* Copyright */}
+      <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-gray-200/80 pt-8 sm:flex-row sm:items-center">
         <p className="text-xs text-neutral-500">
           &copy; {new Date().getFullYear()} Scrunity Inc. All rights reserved.
         </p>
 
-        {/* Legal Links */}
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           {LEGAL_LINKS.map((link) => (
             <Link
               key={link.label}
@@ -151,7 +78,6 @@ export const Footer = () => {
           ))}
         </div>
 
-        {/* Social Icons with Tactile Feedback (0.96 scale on tap) */}
         <div className="flex items-center gap-2">
           <Link
             href="https://x.com/scrunity"

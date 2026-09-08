@@ -73,6 +73,13 @@ export default function Home() {
           <HowItWorks />
         </div>
         <Divider />
+        {/* pricing */}
+        <div className="w-full py-10">
+          <SubHeading>Pricing</SubHeading>
+          <Para>Start for free and works for scale too.</Para>
+          <Pricing />
+        </div>
+        <Divider />
         {/* Makes it easy */}
         <div className="w-full py-10">
           <div className="flex w-full items-end justify-between">
@@ -89,13 +96,7 @@ export default function Home() {
           <Easy />
         </div>
         <Divider />
-        {/* pricing */}
-        <div className="w-full py-10">
-          <SubHeading>Pricing</SubHeading>
-          <Para>Start for free and works for scale too.</Para>
-          <Pricing />
-        </div>
-        <Divider />
+
         {/* footer */}
         <Footer />
       </Container>

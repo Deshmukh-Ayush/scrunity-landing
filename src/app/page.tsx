@@ -6,7 +6,6 @@ import { Features1 } from "@/components/features-one";
 import { SubHeadingAnimation } from "@/components/features-one/subheading";
 import { Button } from "@/components/utility/button";
 import { Heading, Para, SubHeading } from "@/components/utility/texts";
-import { cn } from "@/lib/utils";
 import { Divider } from "@/components/utility/divider";
 import { HowItWorks } from "@/components/how-it-works";
 import { Pricing } from "@/components/pricing";
@@ -48,7 +47,7 @@ export default function Home() {
                   Join Waitlist
                 </Link>
               </button>
-              <Button>Get Early Access</Button>
+              <Button href="/join">Get Early Access</Button>
             </div>
           </div>
         </div>

@@ -83,16 +83,16 @@ export default function Home() {
         <Divider />
         {/* Makes it easy */}
         <div className="w-full py-10">
-          <div className="flex w-full items-end justify-between">
-            <div>
+          <div className="flex w-full flex-col items-start gap-5 md:flex-row md:items-end md:justify-between md:gap-0">
+            <div className="w-full">
               <SubHeading>Scrunity makes it easy.</SubHeading>
-              <Para className="my-2 w-150">
+              <Para className="my-2 w-full md:w-150">
                 It streamlines the entire contract management process, saving
                 you time and reducing the complexity of handling multiple
                 documents and communications.
               </Para>
             </div>
-            <Button className="my-1">Start free trial</Button>
+            <Button className="my-1 shrink-0">Start free trial</Button>
           </div>
           <Easy />
         </div>

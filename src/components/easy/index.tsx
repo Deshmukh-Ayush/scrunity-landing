@@ -265,7 +265,7 @@ export const Easy = ({ active }: { active?: boolean } = {}) => {
   return (
     <div
       ref={containerRef}
-      className="relative flex h-[486px] w-full items-center justify-between gap-10 rounded-lg border border-gray-200 bg-[oklch(0.15_0_0)] p-10 px-10"
+      className="relative flex h-121.5 w-full flex-wrap items-center justify-center gap-2 rounded-lg border border-gray-200 bg-[oklch(0.15_0_0)] p-4 md:flex-nowrap md:justify-between md:gap-10 md:p-10 md:px-10"
     >
       <motion.p
         initial={{ opacity: 0 }}
@@ -282,7 +282,7 @@ export const Easy = ({ active }: { active?: boolean } = {}) => {
           times: TUBELIGHT_TIMES,
           ease: "easeInOut",
         }}
-        className="pointer-events-none absolute top-8 right-8 z-20 font-mono text-xs font-medium tracking-widest text-neutral-200 uppercase select-none"
+        className="pointer-events-none absolute top-5 right-5 z-20 font-mono text-[10px] font-medium tracking-widest text-neutral-200 uppercase select-none md:top-8 md:right-8 md:text-xs"
       >
         With Scrunity
       </motion.p>
@@ -387,7 +387,7 @@ const IconBox = ({
       }}
       style={{ order }}
       className={cn(
-        "relative z-10 flex flex-col items-center justify-center gap-2",
+        "relative z-10 flex flex-col items-center justify-center gap-1 md:gap-2",
         aligned ? "" : wrapperClassName,
       )}
     >
@@ -404,7 +404,7 @@ const IconBox = ({
           {children}
         </div>
       </motion.div>
-      <p className="text-center text-lg tracking-tight text-neutral-200">
+      <p className="text-center text-sm tracking-tight text-neutral-200 md:text-lg">
         {text}
       </p>
     </motion.div>
@@ -515,7 +515,7 @@ const Contract = ({
     stage={stage}
     seconds={seconds}
     order={ALIGN_ORDER.contract}
-    wrapperClassName="absolute left-70 top-10"
+    wrapperClassName="absolute top-18 left-6 md:top-10 md:left-70"
     className="border-[oklch(0.364_0.078_269.8)] bg-[oklch(0.283_0.091_267.5)]"
   >
     <svg
@@ -555,7 +555,7 @@ const Proposal = ({
     stage={stage}
     seconds={seconds}
     order={ALIGN_ORDER.proposal}
-    wrapperClassName="absolute right-110 bottom-10"
+    wrapperClassName="absolute bottom-18 left-6 md:right-110 md:bottom-10 md:left-auto"
     className="border-[oklch(0.306_0.026_54.2)] bg-[oklch(0.21_0.032_52.2)]"
   >
     <svg
@@ -595,7 +595,7 @@ const Deliverables = ({
     stage={stage}
     seconds={seconds}
     order={ALIGN_ORDER.deliverables}
-    wrapperClassName="absolute right-100 top-10"
+    wrapperClassName="absolute top-18 right-6 md:top-10 md:right-100"
     className="border-[oklch(0.232_0.095_28.753)] bg-[oklch(0.232_0.095_28.709)]"
   >
     <svg

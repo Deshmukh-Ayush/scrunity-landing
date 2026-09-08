@@ -32,13 +32,13 @@ export const Card3 = () => {
   };
 
   return (
-    <div className="h-[200px] w-[373px] rounded-lg border border-gray-200 p-[2px]">
+    <div className="h-[200px] w-full rounded-lg border border-gray-200 p-[2px] md:w-[373px]">
       <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-md bg-gray-50">
         <motion.div
           initial="hidden"
           animate="show"
           variants={container}
-          className="shadow-border-sm relative flex w-[268px] flex-col items-center gap-3 rounded-[4px] bg-white px-5 pt-5 pb-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_20px_-12px_rgba(0,0,0,0.15)]"
+          className="shadow-border-sm relative flex w-[calc(100%-24px)] flex-col items-center gap-3 rounded-[4px] bg-white px-5 pt-5 pb-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_20px_-12px_rgba(0,0,0,0.15)] md:w-[268px]"
         >
           {/* Notch: backdrop-colored scallops sitting on the top edge, not a mask on the card itself */}
           <div

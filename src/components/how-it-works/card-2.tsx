@@ -1,7 +1,7 @@
 export const Card2 = () => {
   return (
-    <div className="flex h-[200px] w-[373px] items-center justify-center rounded-lg border border-gray-200 p-[2px]">
-      <div className="card2-inner shadow-border-sm h-[150px] w-[280px] overflow-hidden rounded-md bg-white">
+    <div className="flex h-[200px] w-full items-center justify-center rounded-lg border border-gray-200 p-[2px] md:w-[373px]">
+      <div className="card2-inner shadow-border-sm h-[150px] w-[calc(100%-24px)] overflow-hidden rounded-md bg-white md:w-[280px]">
         <div className="flex h-full w-full flex-col justify-between p-3.5">
           {/* File row */}
           <div

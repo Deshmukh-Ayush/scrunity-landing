@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 
 export const Card1 = () => {
   return (
-    <div className="relative flex h-[200px] w-[373px] items-center justify-center overflow-hidden rounded-lg border border-[#eaeaea] p-[2px]">
+    <div className="relative flex h-[200px] w-full items-center justify-center overflow-hidden rounded-lg border border-[#eaeaea] p-[2px] md:w-[373px]">
       <div className="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] bg-size-[26px_26px]" />
 
       <div className="relative z-10 mt-10 h-full w-[173px] rounded-lg bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.04)]">

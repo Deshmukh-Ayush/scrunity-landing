@@ -51,7 +51,7 @@ export default function Illustration1() {
 
   return (
     <div className="flex h-full w-full items-center justify-center rounded-[10px] border border-gray-200 bg-gray-50 p-[2px]">
-      <div className="h-[200px] w-[373px] rounded-lg border border-gray-200 p-[2px]">
+      <div className="h-[200px] w-full rounded-lg border border-gray-200 p-[2px] md:w-[373px]">
         <div className="relative flex h-full w-full items-center justify-center overflow-hidden p-4">
           {!isDashboard && (
             <>

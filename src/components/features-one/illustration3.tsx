@@ -71,7 +71,7 @@ export const Illustration3 = () => {
 
   return (
     <div className="flex h-full w-full items-center justify-center rounded-[10px] border border-gray-200 bg-gray-50 p-[2px]">
-      <div className="relative flex h-[200px] w-[373px] items-start justify-center overflow-hidden rounded-lg border border-gray-200 bg-gray-50 pt-10">
+      <div className="relative flex h-[200px] w-full items-start justify-center overflow-hidden rounded-lg border border-gray-200 bg-gray-50 pt-10 md:w-[373px]">
         {/* Animated Cursor Wrapper */}
         {/* Centered absolutely exactly where the button rests so x:0, y:0 is a direct hit */}
         <div className="pointer-events-none absolute top-[100px] left-1/2 z-50 -translate-x-1/2 -translate-y-1/2">

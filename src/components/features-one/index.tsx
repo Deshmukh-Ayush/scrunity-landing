@@ -29,9 +29,9 @@ const steps = [
 
 export const Features1 = () => {
   return (
-    <div className="flex h-full w-full items-center justify-between">
+    <div className="flex h-full w-full flex-col items-center gap-8 md:flex-row md:items-center md:justify-between md:gap-0">
       {steps.map(({ Illustration, title, description }) => (
-        <div key={title} className="flex w-[373px] flex-col gap-4">
+        <div key={title} className="flex w-full flex-col gap-4 md:w-[373px]">
           <Illustration />
           <Para className="text-neutral-800">{title}</Para>
           <Para>{description}</Para>

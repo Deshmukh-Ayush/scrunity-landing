@@ -51,7 +51,7 @@ export default function Home() {
         </div>
       </Container>
 
-      <div className="ml-35 overflow-hidden rounded-[10px] border border-gray-200 p-2">
+      <div className="w-full overflow-hidden rounded-[10px] border border-gray-200 p-1.5 sm:p-2 md:ml-35 md:w-auto">
         <Hero />
       </div>
 

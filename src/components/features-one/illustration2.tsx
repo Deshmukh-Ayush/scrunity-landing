@@ -62,7 +62,7 @@ export const Illustration2 = () => {
       <motion.div
         animate={{ x: isGlobalError ? [-10, 10, -8, 8, -5, 5, 0] : 0 }}
         transition={{ duration: 0.5 }}
-        className={`relative flex h-[200px] w-[373px] items-center justify-center overflow-hidden rounded-lg border transition-colors duration-500 ${
+        className={`relative flex h-[200px] w-full items-center justify-center overflow-hidden rounded-lg border transition-colors duration-500 md:w-[373px] ${
           isGlobalError
             ? "border-red-300 bg-red-50"
             : "border-gray-200 bg-gray-50/30"

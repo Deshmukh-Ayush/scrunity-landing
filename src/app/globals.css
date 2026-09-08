@@ -15,6 +15,7 @@
 :root {
     --background: oklch(1 0 0);
     --foreground: oklch(0.14 0 0);
+    --brand: oklch(0.703 0.16 239.5);
 
 
     --shadow-border-sm:

@@ -60,3 +60,8 @@
 .animate-enter-individual-title {
     --delay: 80ms;
 }
+
+::selection {
+    background-color: oklch(0.703 0.16 239.5);
+    color: #f5f5f5;
+}

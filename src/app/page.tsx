@@ -11,6 +11,7 @@ import { Divider } from "@/components/utility/divider";
 import { HowItWorks } from "@/components/how-it-works";
 import { Pricing } from "@/components/pricing";
 import { Footer } from "@/components/footer";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Save Time and Think Less | Scrunity",
@@ -43,7 +44,9 @@ export default function Home() {
             </Para>
             <div className="flex flex-wrap items-center justify-start gap-4">
               <button className="cursor-pointer rounded-full px-6 py-2 text-[15px] text-neutral-800">
-                Join Waitlist
+                <Link href="https://app.scrunity.com/sign-in">
+                  Join Waitlist
+                </Link>
               </button>
               <Button>Get Early Access</Button>
             </div>

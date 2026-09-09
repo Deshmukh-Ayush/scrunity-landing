@@ -1,5 +1,9 @@
 import React from "react";
 
 export const Form = () => {
-  return <div>Form</div>;
+  return (
+  <div className="w-full">
+    
+  </div>
+  );
 };

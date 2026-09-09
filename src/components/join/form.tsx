@@ -107,7 +107,12 @@ export const Form = () => {
               <Field data-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor="companySize">Company size</FieldLabel>
                 <FieldContent>
-                  <Select value={field.value} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value ?? null}
+                    onValueChange={(value) =>
+                      field.onChange(value ?? undefined)
+                    }
+                  >
                     <SelectTrigger
                       id="companySize"
                       aria-invalid={fieldState.invalid}
@@ -134,7 +139,12 @@ export const Form = () => {
               <Field data-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor="role">Your role</FieldLabel>
                 <FieldContent>
-                  <Select value={field.value} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value ?? null}
+                    onValueChange={(value) =>
+                      field.onChange(value ?? undefined)
+                    }
+                  >
                     <SelectTrigger
                       id="role"
                       aria-invalid={fieldState.invalid}

@@ -18,8 +18,6 @@ export const Button = ({
   type,
   ...props
 }: ButtonProps) => {
-  const linkHref = href ?? "#";
-
   return (
     <motion.button
       whileTap={{ scale: 0.9 }}
@@ -31,9 +29,7 @@ export const Button = ({
       )}
       {...props}
     >
-      <Link href={linkHref} passHref>
-        {children}
-      </Link>
+      {href ? <Link href={href}>{children}</Link> : children}
     </motion.button>
   );
 };

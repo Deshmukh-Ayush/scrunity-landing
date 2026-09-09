@@ -5,12 +5,11 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 
-// ---- timing (seconds), mapped to the numbered steps in your sketch ----
-const TOP_TRAVEL = 0.8; // 1,2,3: pulses travel from the cards into the box
-const HOLD_BOX = 1; // 4: pause inside the box
-const BOTTOM_TRAVEL = 0.45; // 5: each pulse travels box -> Clients
-const STAGGER = 0.15; // 5: "one by one" delay between the 3 pulses
-const HOLD_CLIENTS = 1; // 6: pause at Clients, then restart
+const TOP_TRAVEL = 0.8;
+const HOLD_BOX = 1;
+const BOTTOM_TRAVEL = 0.45;
+const STAGGER = 0.15;
+const HOLD_CLIENTS = 1;
 
 const t1 = TOP_TRAVEL;
 const t2 = t1 + HOLD_BOX;
@@ -22,7 +21,7 @@ const frac = (s: number) => s / CYCLE; // seconds -> fraction of the loop
 
 export const Illustration = () => {
   return (
-    <div className="shadow-border relative flex h-170 w-130 flex-col items-center justify-between gap-2 rounded-lg bg-gray-100 p-2">
+    <div className="relative flex h-170 w-130 flex-col items-center justify-between gap-2 rounded-lg p-2">
       <div className="relative z-10 flex w-full justify-between">
         <Titles>Contracts</Titles>
         <Titles>Deliverables</Titles>

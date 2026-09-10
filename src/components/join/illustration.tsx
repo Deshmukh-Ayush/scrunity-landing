@@ -4,6 +4,13 @@ import { cn } from "cn";
 import React from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
+import { PaperPlaneTiltIcon } from "@phosphor-icons/react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  File02Icon,
+  InvoiceIcon,
+  User02Icon,
+} from "@hugeicons/core-free-icons";
 
 const TOP_TRAVEL = 0.8;
 const HOLD_BOX = 1;
@@ -21,16 +28,22 @@ const frac = (s: number) => s / CYCLE; // seconds -> fraction of the loop
 
 export const Illustration = () => {
   return (
-    <div className="relative flex h-170 w-130 flex-col items-center justify-between gap-2 rounded-lg p-2">
+    <div className="relative flex h-170 w-150 flex-col items-center justify-between gap-2 rounded-lg p-10">
       <div className="relative z-10 flex w-full justify-between">
-        <Titles>Contracts</Titles>
-        <Titles>Deliverables</Titles>
-        <Titles>Invoices</Titles>
+        <Titles className="">
+          <HugeiconsIcon icon={File02Icon} /> Contracts{" "}
+        </Titles>
+        <Titles className="">
+          <PaperPlaneTiltIcon /> Deliverables
+        </Titles>
+        <Titles className="">
+          <HugeiconsIcon icon={InvoiceIcon} /> Invoices
+        </Titles>
       </div>
 
       <ConnectorLines />
 
-      <div className="shadow-border-sm relative z-10 flex h-20 w-20 items-center justify-center rounded-lg p-1">
+      {/* <div className="shadow-border-sm relative z-10 flex h-20 w-20 items-center justify-center rounded-lg p-1">
         <Image
           src="/logo/scrunity_svg.svg"
           alt="Scrunity Logo"
@@ -38,10 +51,25 @@ export const Illustration = () => {
           height={100}
           className="h-auto w-8"
         />
+      </div> */}
+      <div className="relative z-20 size-20 overflow-hidden rounded-lg bg-neutral-100 p-px">
+        <div className="relative z-20 flex h-full w-full items-center justify-center rounded-md bg-white">
+          <Image
+            src="/logo/scrunity_svg.svg"
+            alt="Scrunity Logo"
+            width={100}
+            height={100}
+            className="h-auto w-8"
+          />
+        </div>
+        <div className="absolute inset-0 h-full w-full scale-[1.5] animate-spin [background-image:conic-gradient(at_center,transparent,var(--color-blue-500)_20%,transparent_30%)]"></div>
+        <div className="absolute inset-0 h-full w-full scale-[1.5] animate-spin [background-image:conic-gradient(at_center,transparent,var(--color-cyan-500)_20%,transparent_30%)]"></div>
       </div>
 
       <div className="relative z-10">
-        <Titles>Clients</Titles>
+        <Titles>
+          <HugeiconsIcon icon={User02Icon} /> Clients
+        </Titles>
       </div>
     </div>
   );
@@ -57,7 +85,7 @@ export const Titles = ({
   return (
     <p
       className={cn(
-        "shadow-border flex h-10 w-34 items-center justify-center rounded-lg bg-white text-[20px] font-medium tracking-tight text-neutral-800",
+        "shadow-border-sm flex h-10 w-36 items-center justify-center gap-2 rounded-full bg-white text-[16px] font-medium tracking-tight text-neutral-800",
         className,
       )}
     >

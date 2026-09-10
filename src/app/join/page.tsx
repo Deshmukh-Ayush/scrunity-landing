@@ -6,8 +6,8 @@ import { cn } from "cn";
 
 export default function Join() {
   return (
-    <div className="flex min-h-[calc(100svh-72px)] w-full gap-2 p-2 lg:flex-row">
-      <div className="flex w-full items-center justify-center rounded-lg bg-gray-100 px-6 py-12 backdrop-blur-md sm:px-10 lg:w-1/2 lg:px-12 lg:py-16">
+    <div className="flex min-h-[calc(100svh-72px)] w-full gap-2 p-2 md:flex-row">
+      <div className="flex w-full items-center justify-center rounded-lg bg-gray-100 px-6 py-12 backdrop-blur-md sm:px-10 md:w-1/2 md:px-12 md:py-16">
         <div className="flex w-full max-w-2xl flex-col gap-10">
           <div>
             <SubHeading>Get Started</SubHeading>
@@ -21,7 +21,7 @@ export default function Join() {
           </div>
         </div>
       </div>
-      <div className="relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-gray-50 lg:w-1/2">
+      <div className="relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-gray-50 md:w-1/2">
         <VerticalLine className="left-10" />
         <VerticalLine className="left-20" />
         <HorizontalLine className="top-10" />
@@ -31,10 +31,10 @@ export default function Join() {
         <VerticalLine className="left-74 mask-y-from-30% mask-y-to-90%" />
         <HorizontalLine className="top-82 mask-x-from-30% mask-x-to-90%" />
         <HorizontalLine className="top-117 mask-x-from-30% mask-x-to-90%" />
-        {/* <DiagonalLine className="top-80.5" /> */}
-        {/* <DiagonalLine className="top-118.5" /> */}
 
-        <Illustration />
+        <div className="hidden md:block">
+          <Illustration />
+        </div>
       </div>
     </div>
   );

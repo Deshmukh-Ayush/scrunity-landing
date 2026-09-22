@@ -11,6 +11,7 @@ import {
   InvoiceIcon,
   User02Icon,
 } from "@hugeicons/core-free-icons";
+import { GlowEffect } from "./glow-effect";
 
 const TOP_TRAVEL = 0.8;
 const HOLD_BOX = 1;
@@ -52,6 +53,7 @@ export const Illustration = () => {
           className="h-auto w-8"
         />
       </div> */}
+
       <div className="relative z-20 size-20 overflow-hidden rounded-lg bg-neutral-100 p-px">
         <div className="relative z-20 flex h-full w-full items-center justify-center rounded-md bg-white">
           <Image
@@ -85,10 +87,17 @@ export const Titles = ({
   return (
     <p
       className={cn(
-        "shadow-border-sm flex h-10 w-36 items-center justify-center gap-2 rounded-full bg-white text-[16px] font-medium tracking-tight text-neutral-800",
+        "relative flex h-10 w-36 items-center justify-center gap-2 rounded-full text-[16px] font-medium tracking-tight text-neutral-800",
+        "bg-white/40 backdrop-blur-md backdrop-saturate-150",
+        "ring-1 ring-white/60",
+        "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.8),inset_0_-1px_2px_0_rgba(23,23,23,0.06),0_8px_20px_-6px_rgba(23,23,23,0.18)]",
         className,
       )}
     >
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-3 top-0 h-[1px] rounded-full bg-gradient-to-r from-transparent via-white/90 to-transparent"
+      />
       {children}
     </p>
   );

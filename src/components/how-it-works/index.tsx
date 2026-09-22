@@ -2,7 +2,7 @@ import React from "react";
 import { Card1 } from "./card-1";
 import { Card2 } from "./card-2";
 import { Card3 } from "./card-3";
-import { Para } from "../utility/texts";
+import { Para, SubHeading } from "../utility/texts";
 
 const steps = [
   {

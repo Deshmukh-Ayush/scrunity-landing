@@ -6,8 +6,8 @@ import { cn } from "cn";
 
 export default function Join() {
   return (
-    <div className="flex min-h-[calc(100svh-72px)] w-full gap-2 p-2 md:flex-row">
-      <div className="flex w-full items-center justify-center rounded-lg bg-gray-100 px-6 py-12 backdrop-blur-md sm:px-10 md:w-1/2 md:px-12 md:py-16">
+    <div className="flex min-h-[calc(100svh-72px)] w-full gap-2 p-2 lg:flex-row">
+      <div className="flex w-full items-center justify-center rounded-lg bg-gray-100 px-6 py-12 backdrop-blur-md sm:px-10 lg:w-1/2 lg:px-12 lg:py-16">
         <div className="flex w-full max-w-2xl flex-col gap-10">
           <div>
             <SubHeading>Get Started</SubHeading>
@@ -21,7 +21,44 @@ export default function Join() {
           </div>
         </div>
       </div>
-      <div className="relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-gray-50 md:w-1/2">
+      <div className="relative flex w-full items-center justify-center overflow-hidden rounded-lg bg-gray-50 lg:w-1/2">
+        {/* Diary-cover grain, same filter recipe as JpgCardHolder's pocket */}
+        <svg
+          aria-hidden
+          className="pointer-events-none absolute inset-0 size-full"
+        >
+          <defs>
+            <filter
+              id="join-illustration-grain"
+              x="0"
+              y="0"
+              width="100%"
+              height="100%"
+            >
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.7"
+                numOctaves="3"
+                seed="7"
+              />
+              <feDiffuseLighting surfaceScale="0.6" lightingColor="#fff">
+                <feDistantLight azimuth="235" elevation="55" />
+              </feDiffuseLighting>
+              <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -1 0 0 0 1"
+              />
+              <feComposite in="SourceGraphic" operator="in" />
+            </filter>
+          </defs>
+          <rect
+            width="100%"
+            height="100%"
+            filter="url(#join-illustration-grain)"
+            className="fill-foreground opacity-15"
+          />
+        </svg>
+
         <VerticalLine className="left-10" />
         <VerticalLine className="left-20" />
         <HorizontalLine className="top-10" />
@@ -32,49 +69,96 @@ export default function Join() {
         <HorizontalLine className="top-82 mask-x-from-30% mask-x-to-90%" />
         <HorizontalLine className="top-117 mask-x-from-30% mask-x-to-90%" />
 
-        <div className="hidden md:block">
-          <Illustration />
-        </div>
+        <Illustration />
       </div>
     </div>
   );
 }
 
+// Round-capped stitch dashes, matching JpgCardHolder's STITCH_PATH treatment.
 const VerticalLine = ({ className }: { className?: string }) => {
   return (
-    <div
-      className={cn("absolute h-250 w-[1px]", className)}
-      style={{
-        backgroundImage:
-          "repeating-linear-gradient(to bottom, rgba(23,23,23,0.12) 0 8px, transparent 8px 20px)",
-        backgroundRepeat: "repeat-y",
-      }}
-    />
+    <svg
+      aria-hidden
+      className={cn("absolute h-250 w-[1px] overflow-visible", className)}
+    >
+      <line
+        x1="50%"
+        y1="0%"
+        x2="50%"
+        y2="100%"
+        strokeWidth={1.5}
+        className="stroke-foreground/10"
+      />
+      <line
+        x1="50%"
+        y1="0%"
+        x2="50%"
+        y2="100%"
+        strokeWidth={1.5}
+        strokeDasharray="2.5 10.5"
+        strokeLinecap="round"
+        className="stroke-foreground/40"
+      />
+    </svg>
   );
 };
 
 const HorizontalLine = ({ className }: { className?: string }) => {
   return (
-    <div
-      className={cn("absolute h-[1px] w-250", className)}
-      style={{
-        backgroundImage:
-          "repeating-linear-gradient(to right, rgba(23,23,23,0.12) 0 8px, transparent 8px 20px)",
-        backgroundRepeat: "repeat-x",
-      }}
-    />
+    <svg
+      aria-hidden
+      className={cn("absolute h-[1px] w-250 overflow-visible", className)}
+    >
+      <line
+        x1="0%"
+        y1="50%"
+        x2="100%"
+        y2="50%"
+        strokeWidth={1.5}
+        className="stroke-foreground/10"
+      />
+      <line
+        x1="0%"
+        y1="50%"
+        x2="100%"
+        y2="50%"
+        strokeWidth={1.5}
+        strokeDasharray="2.5 10.5"
+        strokeLinecap="round"
+        className="stroke-foreground/40"
+      />
+    </svg>
   );
 };
 
 const DiagonalLine = ({ className }: { className?: string }) => {
   return (
-    <div
-      className={cn("absolute h-[1px] w-250 -rotate-45", className)}
-      style={{
-        backgroundImage:
-          "repeating-linear-gradient(to right, rgba(23,23,23,0.12) 0 8px, transparent 8px 20px)",
-        backgroundRepeat: "repeat-x",
-      }}
-    />
+    <svg
+      aria-hidden
+      className={cn(
+        "absolute h-[1px] w-250 -rotate-45 overflow-visible",
+        className,
+      )}
+    >
+      <line
+        x1="0%"
+        y1="50%"
+        x2="100%"
+        y2="50%"
+        strokeWidth={1.5}
+        className="stroke-foreground/10"
+      />
+      <line
+        x1="0%"
+        y1="50%"
+        x2="100%"
+        y2="50%"
+        strokeWidth={1.5}
+        strokeDasharray="2.5 10.5"
+        strokeLinecap="round"
+        className="stroke-foreground/40"
+      />
+    </svg>
   );
 };

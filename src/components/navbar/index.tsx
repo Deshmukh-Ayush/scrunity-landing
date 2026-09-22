@@ -61,7 +61,7 @@ export const Navbar = () => {
     { label: "Resources", href: "/resources" },
     { label: "Pricing", href: "/pricing" },
     { label: "Blogs", href: "/blogs" },
-    { label: "Contact", href: "/contact" },
+    { label: "Contact", href: "/join" },
   ];
 
   return (

@@ -65,12 +65,15 @@ export default function Home() {
         </div>
         <Divider />
         {/* How it works */}
-        <div className="w-full py-10">
+        <div className="w-full overflow-hidden py-10">
           <SubHeading>How it works</SubHeading>
           <Para>
             Starts with creating project and then sending onboarding link to
             client
           </Para>
+        </div>
+        <Divider />
+        <div className="w-full py-10">
           <HowItWorks />
         </div>
         <Divider />

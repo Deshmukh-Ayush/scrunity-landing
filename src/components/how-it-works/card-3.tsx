@@ -74,24 +74,9 @@ export const Card3 = () => {
   };
 
   return (
-    <div className="relative flex h-[200px] w-full select-none items-center justify-center overflow-hidden rounded-lg border border-[#eaeaea] p-[2px] md:w-[373px]">
+    <div className="relative flex h-[200px] w-full items-center justify-center overflow-hidden rounded-lg border border-[#eaeaea] p-[2px] select-none md:w-[373px]">
       {/* Background Architectural Blueprint Grid */}
       <div className="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] bg-size-[26px_26px]" />
-
-      {/* Atmospheric Ambient Glow Layer */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 h-36 w-48 -translate-x-1/2 -translate-y-1/2 opacity-30 transition-opacity duration-700">
-        <GlowEffect
-          colors={
-            isVerified
-              ? ["#10b981", "#06b6d4", "#3b82f6", "#10b981"]
-              : ["#38bdf8", "#818cf8", "#3b82f6", "#38bdf8"]
-          }
-          mode="breathe"
-          blur="stronger"
-          duration={6}
-          scale={1.2}
-        />
-      </div>
 
       {/* Milestone Invoice Ticket */}
       <motion.div
@@ -125,11 +110,7 @@ export const Card3 = () => {
 
         {/* Milestone Amount */}
         <motion.div
-          animate={
-            isVerified
-              ? { scale: [1, 1.04, 1] }
-              : { scale: 1 }
-          }
+          animate={isVerified ? { scale: [1, 1.04, 1] } : { scale: 1 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="text-[28px] leading-none font-bold tracking-tight text-gray-900"
           style={{ fontVariantNumeric: "tabular-nums" }}
@@ -143,11 +124,7 @@ export const Card3 = () => {
         {/* Payment Verification Status */}
         <div className="flex flex-col items-center gap-1.5">
           <motion.span
-            animate={
-              isVerified
-                ? { scale: [0.95, 1.03, 1] }
-                : { scale: 1 }
-            }
+            animate={isVerified ? { scale: [0.95, 1.03, 1] } : { scale: 1 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
             className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors duration-300 ${
               isVerified

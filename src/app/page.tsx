@@ -73,11 +73,9 @@ export default function Home() {
             Starts with creating project and then sending onboarding link to
             client
           </Para>
-        </div>
-        <Divider />
-        <div className="w-full py-10">
           <HowItWorks />
         </div>
+
         <Divider />
         {/* pricing */}
         <div className="w-full py-10">

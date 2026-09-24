@@ -2,7 +2,7 @@ import React from "react";
 import { Card1 } from "./card-1";
 import { Card2 } from "./card-2";
 import { Card3 } from "./card-3";
-import { Para, SubHeading } from "../utility/texts";
+import { Para } from "../utility/texts";
 
 const steps = [
   {
@@ -27,7 +27,7 @@ const steps = [
 
 export const HowItWorks = () => {
   return (
-    <div className="my-10 flex h-full w-full flex-col items-center gap-8 md:flex-row md:items-center md:justify-between md:gap-0">
+    <div className="my-10 flex h-full w-full items-center gap-8 md:flex-row md:items-center md:justify-between md:gap-0">
       {steps.map(({ Illustration, title, description }) => (
         <div key={title} className="flex w-full flex-col gap-4 md:w-[373px]">
           <Illustration />

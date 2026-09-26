@@ -60,7 +60,7 @@ export const Navbar = () => {
     { label: "Product", href: "/product" },
     { label: "Resources", href: "/resources" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Blogs", href: "/blogs" },
+    { label: "Blogs", href: "/blog" },
     { label: "Contact", href: "/join" },
   ];
 
@@ -111,7 +111,7 @@ export const Navbar = () => {
                 href="/join"
                 className="flex items-center justify-center rounded-full bg-neutral-800 px-4 py-1.5 text-[13px] font-medium text-neutral-100"
               >
-                Get Started
+                Get Early Access
               </Link>
             </div>
 

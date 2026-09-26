@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion, Transition, useInView } from "motion/react";
+import { motion, useInView } from "motion/react";
 import React, { useRef } from "react";
 
 export const Heading = ({
@@ -11,57 +11,15 @@ export const Heading = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  const ref = useRef<HTMLHeadingElement>(null);
-  const isInView = useInView(ref);
-  const text = React.Children.toArray(children)
-    .filter((child) => typeof child === "string")
-    .join("");
-
-  const words = text.split(" ").filter((word) => word.length > 0);
-
-  const transition: Transition = {
-    type: "tween",
-    ease: "easeOut",
-    duration: 0.3,
-  };
-
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const wordVariants = {
-    hidden: {
-      opacity: 0,
-      y: 10,
-      filter: "blur(10px)",
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition,
-    },
-  };
-
   return (
-    <motion.h2
-      ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      transition={{ duration: 0.3, ease: "easeInOut", delay: 0.1 }}
+    <h2
       className={cn(
-        `inline text-[36px] font-medium tracking-tight text-neutral-800 md:text-[56px]`,
+        `text-[36px] font-medium tracking-tight text-neutral-800 md:text-[56px]`,
         className,
       )}
     >
       {children}
-    </motion.h2>
+    </h2>
   );
 };
 

@@ -47,7 +47,7 @@ export default function Home() {
                   Contact Founder
                 </Link>
               </button>
-              <Button href="/join">Get Started</Button>
+              <Button href="/join">Get Early Access</Button>
             </div>
           </div>
         </div>

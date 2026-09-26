@@ -1,9 +1,17 @@
 ---
-title: "Tailwind CSS: A Practical Introduction"
-description: "Learn how Tailwind CSS makes modern interface development faster and more consistent."
+title: "Tailwind CSS: A Practical Introduction to Modern UI Systems"
+description: "Learn how utility-first architecture and concentric design tokens make modern interface development faster, tighter, and remarkably consistent."
+date: "2026-05-18"
+category: "Engineering"
+readTime: "5 min read"
+author: "Ayush Deshmukh"
+authorRole: "Founder & Design Engineer"
+authorAvatar: "A"
+image: "/blog-grad-1.png"
+featured: true
 ---
 
-# Tailwind CSS: A Practical Introduction
+# Tailwind CSS: A Practical Introduction to Modern UI Systems
 
 Building a polished website often means writing many small CSS rules for spacing, colors, typography, borders, responsive layouts, and states. Tailwind CSS takes a different approach. It provides a collection of small, composable utility classes that you combine directly in your markup to create a design.
 
@@ -11,7 +19,7 @@ Instead of defining a custom class in a stylesheet, you can write:
 
 ```html
 <button class="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700">
-	Get started
+  Get started
 </button>
 ```
 
@@ -25,7 +33,24 @@ Another advantage is speed. You can prototype an idea without switching between 
 
 ## Keeping markup readable
 
-Utility-first code can become crowded, especially for complex components. The solution is not to avoid utilities, but to establish useful boundaries. Extract repeated UI into components, group related classes logically, and use shared design tokens in your Tailwind configuration. Component variants can represent common states such as disabled, loading, or selected.
+Utility-first code can become crowded, especially for complex components. The solution is not to avoid utilities, but to establish useful boundaries:
+
+- **Extract repeated UI into components**: Group related classes logically and use shared design tokens.
+- **Enforce concentric border radii**: Outer radius and inner radius must satisfy the mathematical formula `R_inner = R_outer - Padding`.
+- **Component variants**: Use libraries like `cva` or utility classes to represent common states such as disabled, loading, or selected.
+
+```tsx
+const cardVariants = cva(
+  "rounded-[16px] border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200",
+  {
+    variants: {
+      elevated: {
+        true: "hover:-translate-y-1 hover:border-gray-300 hover:shadow-md",
+      },
+    },
+  }
+);
+```
 
 Accessibility should remain a priority. Tailwind can style focus states with classes such as `focus-visible:ring-2`, but it cannot choose meaningful labels, correct heading structures, or sufficient color contrast for you. Treat utilities as tools, not substitutes for sound HTML and inclusive design.
 

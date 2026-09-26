@@ -43,7 +43,7 @@ export default function Home() {
             </Para>
             <div className="flex flex-wrap items-center justify-start gap-4">
               <button className="cursor-pointer rounded-full px-6 py-2 text-[15px] text-neutral-800">
-                <Link href="https://waitlist.scrunity.com">
+                <Link href="mailto:ayushdeshmukh301@gmail.com">
                   Contact Founder
                 </Link>
               </button>

@@ -105,13 +105,13 @@ export const Navbar = () => {
                 href="/join"
                 className="flex items-center justify-center rounded-full px-4 py-1.5 text-[13px] font-medium text-neutral-700 transition-colors duration-200 ease-in-out hover:bg-neutral-200"
               >
-                Log in
+                Contact Sales
               </Link>
               <Link
                 href="/join"
                 className="flex items-center justify-center rounded-full bg-neutral-800 px-4 py-1.5 text-[13px] font-medium text-neutral-100"
               >
-                Sign up
+                Get Started
               </Link>
             </div>
 
@@ -185,7 +185,7 @@ const navHoverContainer = () => {
   const Items = [
     { label: "About", para: "Meet the founder", href: "/about" },
     { label: "Security", para: "Safe, Secure, Private", href: "/security" },
-    { label: "Careers", para: "I'm hiring", href: "/careers" },
+    { label: "Careers", para: "Currently not hiring", href: "/careers" },
   ];
 
   return (

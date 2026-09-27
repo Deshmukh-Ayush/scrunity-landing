@@ -39,67 +39,73 @@ export type DemoTurn = {
 
 export const CONVERSATION_SCRIPT: DemoTurn[] = [
   {
-    prompt: "Inspect our auth middleware and verify session latency",
+    prompt:
+      "Research Acme Studio, draft a client proposal, and prepare the milestone contract",
     steps: [
-      { id: "s-1", label: "Searching src/middleware.ts", status: "completed" },
+      {
+        id: "s-1",
+        label: "Searching web & analyzing Acme Studio company profile",
+        status: "completed",
+      },
       {
         id: "s-2",
-        label: "Executing db:benchmark_session_query",
+        label: "Extracting deliverable scope & milestone timelines",
         status: "completed",
       },
       {
         id: "s-3",
-        label: "Evaluating edge runtime overhead",
+        label: "Generating binding contract with scope boundary guards",
         status: "completed",
       },
     ],
     content:
-      "Everything looks optimal. Edge token validation is averaging 14ms across nodes, comfortably within the 50ms budget.",
-    widget: {
-      type: "latency-metrics",
-      title: "Edge Session Benchmark",
-      latencyMs: 14,
-      p99Ms: 28,
-    },
+      "I've completed the background research on Acme Studio and drafted a 3-phase proposal ($42,000 total). The contract includes defined deliverable milestones, payment terms, and automated scope protection ready for client e-signature.",
   },
   {
-    prompt: "Awesome. Now check the deliverable pipeline for pending sign-offs",
+    prompt:
+      "Check deliverable status for Horizon Corp and generate the milestone invoice",
     steps: [
       {
         id: "s-4",
-        label: "Querying CRM deliverable contracts",
+        label: "Auditing active deliverables against contract SOW",
         status: "completed",
       },
       {
         id: "s-5",
-        label: "Auditing active SOW milestone statuses",
+        label: "Verifying milestone sign-offs & detecting scope changes",
+        status: "completed",
+      },
+      {
+        id: "s-6",
+        label: "Generating itemized milestone invoice for client review",
         status: "completed",
       },
     ],
     content:
-      "Found 3 pending client deliverables awaiting sign-off. Overall sprint velocity increased by 18%.",
+      "All 4 deliverables for Milestone 2 are complete and verified within contract scope. Invoice #INV-1082 ($16,500) has been generated and queued for client approval.",
     widget: {
       type: "revenue-audit",
-      totalPipeline: "$142,000",
-      atRisk: "$12,400",
-      wonRate: "78.4%",
+      totalPipeline: "$148,000",
+      atRisk: "$0 (Scope Safe)",
+      wonRate: "98.4%",
     },
   },
   {
-    prompt: "Draft an update summarizing this for the team Slack",
+    prompt:
+      "Draft a client collaboration update with the invoice and sign-off link",
     steps: [
       {
-        id: "s-6",
-        label: "Aggregating performance and milestone logs",
+        id: "s-7",
+        label: "Aggregating deliverable sign-offs and invoice summary",
         status: "completed",
       },
       {
-        id: "s-7",
-        label: "Synthesizing executive summary",
+        id: "s-8",
+        label: "Formatting client portal message with secure payment link",
         status: "completed",
       },
     ],
     content:
-      "Here is your team update:\n\n• Auth edge validation: 14ms avg (optimal)\n• Pipeline: $142k total ($12.4k at risk across 3 pending SOW milestones)\n• Sprint velocity: +18% WoW\n\nReady to dispatch whenever you are.",
+      "Here is your client collaboration update for Horizon Corp:\n\n• Deliverables: Milestone 2 (Design System & Prototype) approved\n• Contract Status: On track, zero scope creep flagged\n• Invoice: #INV-1082 ($16,500) ready for one-click payment\n• Next Step: Milestone 3 kickoff scheduled for Monday\n\nReady to send through the client portal whenever you are.",
   },
 ];

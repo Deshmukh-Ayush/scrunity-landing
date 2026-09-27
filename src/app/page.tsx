@@ -33,7 +33,7 @@ export default function Home() {
       <Container className="overflow-hidden">
         <div className="flex flex-col items-start justify-between gap-4 px-10 pt-20 pb-10 md:flex-row md:items-end md:gap-6 md:pt-40">
           <Heading className="leading-none md:leading-16">
-            Save time <br /> and think less{" "}
+            Every client <br /> one workspace{" "}
           </Heading>
           <div className="flex flex-col items-start justify-between gap-6 py-1">
             <Para className="text-start">

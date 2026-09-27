@@ -2,27 +2,27 @@
 
 import React from "react";
 import {
-  AppWindowIcon,
-  CreditCardIcon,
-  ScrollIcon,
-  CheckCircleIcon,
-  FilesIcon,
-  NotebookIcon,
   ChatCircleTextIcon,
   PulseIcon,
   GearSixIcon,
   CaretUpDownIcon,
   DotsThreeIcon,
+  SparkleIcon,
+  FolderIcon,
+  ChartLineUpIcon,
+  UsersIcon,
+  UserListIcon,
+  CreditCardIcon,
 } from "@phosphor-icons/react";
 import Image from "next/image";
 
 const MAIN_NAV = [
-  { name: "Overview", icon: AppWindowIcon, isActive: true, badge: 0 },
-  { name: "Payments", icon: CreditCardIcon, isActive: false, badge: 0 },
-  { name: "Proposal", icon: ScrollIcon, isActive: false, badge: 0 },
-  { name: "Deliverables", icon: CheckCircleIcon, isActive: false, badge: 3 },
-  { name: "Files", icon: FilesIcon, isActive: false, badge: 0 },
-  { name: "Contract", icon: NotebookIcon, isActive: false, badge: 0 },
+  { name: "Scrunity AI", icon: SparkleIcon, isActive: true, badge: 0 },
+  { name: "Projects", icon: FolderIcon, isActive: false, badge: 0 },
+  { name: "Analytics", icon: ChartLineUpIcon, isActive: false, badge: 0 },
+  { name: "Clients", icon: UsersIcon, isActive: false, badge: 3 },
+  { name: "Team", icon: UserListIcon, isActive: false, badge: 0 },
+  { name: "Billing", icon: CreditCardIcon, isActive: false, badge: 0 },
 ];
 
 const SECONDARY_NAV = [

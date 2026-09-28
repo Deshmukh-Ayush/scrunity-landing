@@ -167,7 +167,7 @@ export type EverywhereayushShaderProps = {
 };
 
 export function EverywhereayushShader({
-  theme = "dark",
+  theme = "light",
   background,
   time,
   onError,

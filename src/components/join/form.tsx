@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { CheckmarkCircle02Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 
-import { createClient } from "@/utils/supabase/client";
+import { submitJoinRequest } from "@/actions/join";
 import { Button } from "@/components/utility/button";
 import {
   Field,
@@ -48,25 +48,13 @@ export const Form = () => {
   async function onSubmit(values: JoinFormValues) {
     setSubmitError(null);
     try {
-      const supabase = createClient();
-      const { error } = await supabase.from("waitlist").insert([
-        {
-          first_name: values.firstName,
-          last_name: values.lastName,
-          company_name: values.companyName,
-          work_email: values.workEmail,
-          company_size: values.companySize,
-          role: values.role,
-          anything_else: values.anythingElse || null,
-        },
-      ]);
+      const res = await submitJoinRequest(values);
 
-      if (error) {
-        console.error("Supabase insert error:", error);
+      if (!res.success) {
         setSubmitError(
-          error.message || "Failed to submit request. Please try again.",
+          res.error || "Failed to submit request. Please try again.",
         );
-        toast.error("Failed to submit request. Please try again.");
+        toast.error(res.error || "Failed to submit request. Please try again.");
         return;
       }
 
@@ -96,8 +84,8 @@ export const Form = () => {
           You&apos;re on the list!
         </h3>
         <p className="mt-2 text-sm text-neutral-600">
-          Thank you for submitting your request. We&apos;ll be in touch soon with
-          your early access invitation.
+          We&apos;ve sent a confirmation to your email. Our team will review your
+          submission and get in touch within <strong>24 hours</strong>.
         </p>
         <Button
           type="button"

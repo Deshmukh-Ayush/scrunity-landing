@@ -3,8 +3,14 @@
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { formSchema, type JoinFormValues } from "@/utils/join-form";
-import { resend, RESEND_FROM_EMAIL } from "@/lib/resend";
+import {
+  resend,
+  RESEND_FROM_EMAIL,
+  RESEND_ADMIN_NOTIFICATION_EMAIL,
+  isUsingTestDomain,
+} from "@/lib/resend";
 import { renderJoinConfirmationHtml } from "@/emails/join-confirmation";
+import { renderAdminNotificationHtml } from "@/emails/admin-notification";
 
 export type SubmitJoinResponse = {
   success: boolean;
@@ -49,40 +55,91 @@ export async function submitJoinRequest(
     };
   }
 
-  // 3. Dispatch confirmation email via Resend
-  let emailSent = false;
+  // 3. Dispatch internal admin alert via Resend (always delivered and logged in Resend dashboard)
   try {
-    const emailHtml = renderJoinConfirmationHtml({
+    const adminHtml = renderAdminNotificationHtml({
       firstName: data.firstName,
       lastName: data.lastName,
       companyName: data.companyName,
       workEmail: data.workEmail,
-      role: data.role,
       companySize: data.companySize,
+      role: data.role,
       anythingElse: data.anythingElse,
     });
 
-    const { data: resendData, error: resendError } = await resend.emails.send({
+    const { data: adminData, error: adminError } = await resend.emails.send({
       from: RESEND_FROM_EMAIL,
-      to: [data.workEmail],
-      subject: `We've received your request, ${data.firstName} — Scrunity`,
-      html: emailHtml,
+      to: [RESEND_ADMIN_NOTIFICATION_EMAIL],
+      subject: `[New Waitlist Lead] ${data.firstName} ${data.lastName} (${data.companyName})`,
+      html: adminHtml,
     });
 
-    if (resendError) {
-      console.warn("Resend email delivery notice:", resendError);
+    if (adminError) {
+      console.warn("[Resend] Admin notification error:", adminError);
     } else {
-      emailSent = true;
-      console.log("Confirmation email sent successfully:", resendData?.id);
+      console.log(
+        "[Resend] Admin notification sent successfully:",
+        adminData?.id,
+      );
     }
-  } catch (emailErr) {
-    console.warn("Failed to dispatch Resend confirmation email:", emailErr);
+  } catch (adminErr) {
+    console.warn("[Resend] Failed to send admin notification:", adminErr);
+  }
+
+  // 4. Dispatch confirmation email to the user via Resend
+  let emailSent = false;
+  const isOwnerEmail =
+    data.workEmail.trim().toLowerCase() ===
+    RESEND_ADMIN_NOTIFICATION_EMAIL.trim().toLowerCase();
+
+  // If using unverified test domain (onboarding@resend.dev), Resend strictly blocks external emails with 403
+  if (isUsingTestDomain && !isOwnerEmail) {
+    console.info(
+      `[Resend Notice] User confirmation to <${data.workEmail}> skipped. ` +
+        `RESEND_FROM_EMAIL is currently set to test domain "${RESEND_FROM_EMAIL}". ` +
+        `To send confirmation emails to all users, verify a custom domain at https://resend.com/domains ` +
+        `and set RESEND_FROM_EMAIL in your environment variables.`,
+    );
+  } else {
+    try {
+      const emailHtml = renderJoinConfirmationHtml({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        companyName: data.companyName,
+        workEmail: data.workEmail,
+        role: data.role,
+        companySize: data.companySize,
+        anythingElse: data.anythingElse,
+      });
+
+      const { data: resendData, error: resendError } = await resend.emails.send(
+        {
+          from: RESEND_FROM_EMAIL,
+          to: [data.workEmail],
+          subject: `We've received your request, ${data.firstName} — Scrunity`,
+          html: emailHtml,
+        },
+      );
+
+      if (resendError) {
+        console.warn("[Resend] User email delivery notice:", resendError);
+      } else {
+        emailSent = true;
+        console.log(
+          "[Resend] Confirmation email sent successfully:",
+          resendData?.id,
+        );
+      }
+    } catch (emailErr) {
+      console.warn("[Resend] Failed to dispatch confirmation email:", emailErr);
+    }
   }
 
   return {
     success: true,
     emailSent,
-    message:
-      "Your request has been successfully submitted! A confirmation has been sent to your email.",
+    message: emailSent
+      ? "Your request has been successfully submitted! A confirmation has been sent to your email."
+      : "Your request has been successfully submitted! Our team will review your submission and get in touch within 24 hours.",
   };
 }

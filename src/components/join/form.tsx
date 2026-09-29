@@ -30,6 +30,7 @@ import { formSchema, type JoinFormValues } from "@/utils/join-form";
 
 export const Form = () => {
   const [isSuccess, setIsSuccess] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<JoinFormValues>({
@@ -58,8 +59,9 @@ export const Form = () => {
         return;
       }
 
+      setEmailSent(Boolean(res.emailSent));
       setIsSuccess(true);
-      toast.success("Request submitted successfully!");
+      toast.success(res.message || "Request submitted successfully!");
       form.reset();
     } catch (err: unknown) {
       const message =
@@ -84,13 +86,25 @@ export const Form = () => {
           You&apos;re on the list!
         </h3>
         <p className="mt-2 text-sm text-neutral-600">
-          We&apos;ve sent a confirmation to your email. Our team will review your
-          submission and get in touch within <strong>24 hours</strong>.
+          {emailSent ? (
+            <>
+              We&apos;ve sent a confirmation to your email. Our team will review your
+              submission and get in touch within <strong>24 hours</strong>.
+            </>
+          ) : (
+            <>
+              Thank you for signing up! Our team will review your submission and
+              get in touch within <strong>24 hours</strong>.
+            </>
+          )}
         </p>
         <Button
           type="button"
           className="mt-6 border-neutral-300 bg-neutral-100 text-neutral-800 hover:bg-neutral-200"
-          onClick={() => setIsSuccess(false)}
+          onClick={() => {
+            setIsSuccess(false);
+            setEmailSent(false);
+          }}
         >
           Submit another response
         </Button>

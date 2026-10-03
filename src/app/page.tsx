@@ -11,6 +11,7 @@ import { HowItWorks } from "@/components/how-it-works";
 import { Pricing } from "@/components/pricing";
 import { Footer } from "@/components/footer";
 import Link from "next/link";
+import { NewHero } from "@/components/new-hero";
 
 export const metadata: Metadata = {
   title: "Save Time and Think Less | Scrunity",
@@ -33,11 +34,11 @@ export default function Home() {
       <Container className="overflow-hidden">
         <div className="flex flex-col items-start justify-between gap-4 px-10 pt-20 pb-10 md:flex-row md:items-end md:gap-6 md:pt-40">
           <Heading className="leading-none md:leading-16">
-            Every client <br /> one workspace{" "}
+            3 Agents <br /> one workspace{" "}
           </Heading>
           <div className="flex flex-col items-start justify-between gap-6 py-1">
             <Para className="text-start">
-              Contracts, Deliverables, E-Signatures, Payment Tracking,{" "}
+              GTM, Contracts, Deliverables, E-Signatures, Proposals,{" "}
               <br className="hidden md:inline" /> Timelines and more. Join the
               waitlist to get early access.
             </Para>
@@ -53,9 +54,13 @@ export default function Home() {
         </div>
       </Container>
 
-      <div className="w-full overflow-hidden rounded-[10px] border border-gray-200 p-1.5 sm:p-2 md:ml-35 md:w-auto">
+      {/* <div className="w-full overflow-hidden rounded-[10px] border border-gray-200 p-1.5 sm:p-2 md:ml-35 md:w-auto">
         <Hero />
-      </div>
+      </div> */}
+
+      <Container className="max-w-7xl overflow-hidden pt-10 pb-20">
+        <NewHero />
+      </Container>
 
       {/* new container */}
       <Container className="mt-10 min-h-screen border-x border-gray-200 px-10.5 py-20 pb-10">

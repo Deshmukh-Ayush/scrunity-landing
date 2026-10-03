@@ -69,15 +69,15 @@ export const Navbar = () => {
       <div className="h-full w-full md:px-20">
         <div className="flex h-full w-full items-center justify-between">
           {/* Logo Section */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-4">
             <Image
-              src="/logo/scrunity_svg.svg"
+              src="/new-logo/scrunity-icon.svg"
               alt="Scrunity Logo"
               width={100}
               height={100}
-              className="h-auto w-3"
+              className="h-auto w-8"
             />
-            <span className="text-xl font-semibold">Scrunity</span>
+            <span className="text-xl font-semibold">Scrunity AI</span>
           </Link>
 
           <div className="flex items-center gap-4">

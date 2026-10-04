@@ -122,17 +122,17 @@ export const Card2 = () => {
                 />
               </svg>
               <span className="truncate font-mono text-[11px] text-gray-700">
-                Design_System_v2.fig
+                Synthetix_Leads.csv
               </span>
             </div>
 
-            <span className="flex shrink-0 items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-medium whitespace-nowrap text-amber-700">
+            <span className="flex shrink-0 items-center gap-1 rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 text-[10px] font-medium whitespace-nowrap text-blue-700">
               <span
-                className={`size-1 rounded-full bg-amber-500 ${
+                className={`size-1 rounded-full bg-blue-500 ${
                   !isVerified ? "animate-pulse" : ""
                 }`}
               />
-              Revision 1 of 2
+              3 Decision Makers
             </span>
           </div>
 
@@ -183,14 +183,14 @@ export const Card2 = () => {
               transition={{ duration: 0.3, ease: "easeOut" }}
               className={`rounded-full border px-2 py-0.5 text-[10px] font-medium whitespace-nowrap transition-colors duration-300 ${
                 isVerified
-                  ? "border-blue-200 bg-blue-50 text-blue-700"
+                  ? "border-emerald-200 bg-emerald-50 text-emerald-700"
                   : "border-neutral-200 bg-neutral-50 text-neutral-500"
               }`}
             >
               <TextMorph>
                 {isVerified
-                  ? "Scope: within agreement"
-                  : "Checking agreement..."}
+                  ? "Verified: Valid MX Handshake"
+                  : "Scanning MX records..."}
               </TextMorph>
             </motion.span>
           </div>
@@ -198,17 +198,17 @@ export const Card2 = () => {
           {/* Feedback Preview Skeleton Section */}
           <div className="relative flex flex-col gap-1.5">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] text-gray-400">
-                Feedback preview
+              <span className="text-[10px] text-gray-400 font-mono">
+                marcus@synthetix.io
               </span>
               {isVerified && (
                 <motion.span
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.25 }}
-                  className="font-mono text-[9px] text-blue-600"
+                  className="font-mono text-[9px] text-emerald-600 font-semibold"
                 >
-                  Verified · 0 creep
+                  Deliverability 99.8% ✓
                 </motion.span>
               )}
             </div>

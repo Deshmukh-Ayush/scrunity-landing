@@ -1,29 +1,30 @@
 import type { Metadata } from "next";
-import { Container } from "@/components/container";
-import { Easy } from "@/components/easy";
-import { Hero } from "@/components/hero/hero";
-import { Features1 } from "@/components/features-one";
-import { SubHeadingAnimation } from "@/components/features-one/subheading";
-import { Button } from "@/components/utility/button";
-import { Heading, Para, SubHeading } from "@/components/utility/texts";
-import { Divider } from "@/components/utility/divider";
-import { HowItWorks } from "@/components/how-it-works";
-import { Pricing } from "@/components/pricing";
-import { Footer } from "@/components/footer";
 import Link from "next/link";
-import { NewHero } from "@/components/new-hero";
+import { Container } from "@/components/container";
+import { HeroSection } from "@/components/hero/hero-section";
+import { BentoGrid } from "@/components/bento/bento-grid";
+import { ComparisonSection } from "@/components/comparison/comparison-section";
+import { PipelineSimulator } from "@/components/simulator/pipeline-simulator";
+import { Easy } from "@/components/easy";
+import { Pricing } from "@/components/pricing";
+import { FaqSection } from "@/components/faq/faq-section";
+import { Footer } from "@/components/footer";
+import { Divider } from "@/components/utility/divider";
+import { Button } from "@/components/utility/button";
+import { SubHeading, Para } from "@/components/utility/texts";
+import { EverywhereayushShader } from "@/components/join/shader";
 
 export const metadata: Metadata = {
-  title: "Save Time and Think Less | Scrunity",
+  title: "Scrunity AI — Autonomous Outbound Sales Engine",
   description:
-    "Contracts, Deliverables, E-Signatures, Payment Tracking, Timelines and more. The client collaboration & revenue protection workspace for modern agencies and freelancers.",
+    "Autonomous B2B lead generation, waterfall decision-maker discovery, personalized 1-to-1 cold outreach, and booked calendar meetings.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Scrunity — Save Time and Think Less in Client Work",
+    title: "Scrunity AI — Autonomous Outbound Sales Engine",
     description:
-      "Contracts, Deliverables, E-Signatures, Payment Tracking, Timelines and more. Join the waitlist to get early access.",
+      "Autonomous domain research, competitor mapping, verified decision-maker discovery, personalized outreach, and booked meetings.",
     url: "/",
   },
 };
@@ -31,82 +32,114 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="min-h-screen overflow-x-clip bg-gray-50">
-      <Container className="overflow-hidden">
-        <div className="flex flex-col items-start justify-between gap-4 px-10 pt-20 pb-10 md:flex-row md:items-end md:gap-6 md:pt-40">
-          <Heading className="leading-none md:leading-16">
-            3 Agents <br /> one workspace{" "}
-          </Heading>
-          <div className="flex flex-col items-start justify-between gap-6 py-1">
-            <Para className="text-start">
-              GTM, Contracts, Deliverables, E-Signatures, Proposals,{" "}
-              <br className="hidden md:inline" /> Timelines and more. Join the
-              waitlist to get early access.
-            </Para>
-            <div className="flex flex-wrap items-center justify-start gap-4">
-              <button className="cursor-pointer rounded-full px-6 py-2 text-[15px] text-neutral-800">
-                <Link href="mailto:ayushdeshmukh301@gmail.com">
-                  Contact Founder
-                </Link>
-              </button>
-              <Button href="/join">Get Early Access</Button>
-            </div>
-          </div>
-        </div>
-      </Container>
+      {/* ── 1. Hero Section (Contains the ONLY <Heading> on the page) ── */}
+      <HeroSection />
 
-      {/* <div className="w-full overflow-hidden rounded-[10px] border border-gray-200 p-1.5 sm:p-2 md:ml-35 md:w-auto">
-        <Hero />
-      </div> */}
-
-      <Container className="max-w-7xl overflow-hidden pt-10 pb-20">
-        <NewHero />
-      </Container>
-
-      {/* new container */}
-      <Container className="mt-10 min-h-screen border-x border-gray-200 px-10.5 py-20 pb-10">
-        <div className="w-full">
-          <SubHeadingAnimation />
-        </div>
-        <div className="w-full py-10">
-          <Features1 />
-        </div>
-        <Divider />
-        {/* How it works */}
-        <div className="w-full overflow-hidden py-10">
-          <SubHeading>How it works</SubHeading>
-          <Para>
-            Starts with creating project and then sending onboarding link to
-            client
-          </Para>
-          <HowItWorks />
-        </div>
+      {/* ── 2. Main Content Container with Vertical Borders ──────────── */}
+      <Container className="border-x border-gray-200 px-6 sm:px-10 py-16">
+        {/* Section 1: Bento Grid (Visualizing product, not reading) */}
+        <section className="w-full py-8">
+          <BentoGrid />
+        </section>
 
         <Divider />
-        {/* pricing */}
-        <div className="w-full py-10">
-          <SubHeading>Pricing</SubHeading>
-          <Para>Start for free and works for scale too.</Para>
-          <Pricing />
-        </div>
+
+        {/* Section 2: Visual Comparison Canvas */}
+        <section className="w-full py-12">
+          <ComparisonSection />
+        </section>
+
         <Divider />
-        {/* Makes it easy */}
-        <div className="w-full py-10">
-          <div className="flex w-full flex-col items-start gap-5 md:flex-row md:items-end md:justify-between md:gap-0">
-            <div className="w-full">
-              <SubHeading>Scrunity makes it easy.</SubHeading>
-              <Para className="my-2 w-full md:w-150">
-                It streamlines the entire contract management process, saving
-                you time and reducing the complexity of handling multiple
-                documents and communications.
+
+        {/* Section 3: Interactive Pipeline Simulator */}
+        <section className="w-full py-12">
+          <PipelineSimulator />
+        </section>
+
+        <Divider />
+
+        {/* Section 4: Physical Transition Pipeline (Easy) */}
+        <section className="w-full py-12">
+          <div className="mb-8 flex w-full flex-col items-start gap-5 md:flex-row md:items-end md:justify-between">
+            <div className="w-full max-w-2xl">
+              <SubHeading className="text-[28px] md:text-[36px]">
+                Effortless by design.
+              </SubHeading>
+              <Para className="mt-2 text-base md:text-lg">
+                Zero manual CSV uploads, zero fragile web scrapers. Scrunity AI takes your domain URL and
+                executes end-to-end outbound autonomously.
               </Para>
             </div>
-            <Button className="my-1 shrink-0">Start free trial</Button>
+            <Button
+              className="shrink-0 border-none bg-[#00b0fa] font-semibold text-neutral-950 hover:bg-[#009de0]"
+              href="/join"
+            >
+              Get Started
+            </Button>
           </div>
           <Easy />
-        </div>
+        </section>
+
         <Divider />
 
-        {/* footer */}
+        {/* Section 5: Pricing */}
+        <section className="w-full py-12">
+          <div className="mb-2">
+            <SubHeading className="text-[28px] md:text-[36px]">
+              Predictable, capacity-based pricing.
+            </SubHeading>
+            <Para className="mt-2 max-w-2xl text-base md:text-lg">
+              Two tailored tiers with dedicated mailbox infrastructure and autonomous SDR execution.
+            </Para>
+          </div>
+          <Pricing />
+        </section>
+
+        <Divider />
+
+        {/* Section 6: Interactive FAQ */}
+        <section className="w-full py-12">
+          <FaqSection />
+        </section>
+
+        <Divider />
+
+        {/* Section 7: Final High-Impact CTA */}
+        <section className="w-full py-12">
+          <div className="relative overflow-hidden rounded-[22px] border border-gray-200 bg-neutral-900 p-8 text-center shadow-lg md:p-12">
+            <div className="pointer-events-none absolute inset-0 z-0 opacity-20 mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,#000_60%,transparent_100%)]">
+              <EverywhereayushShader theme="dark" />
+            </div>
+
+            <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center">
+              <SubHeading className="text-[28px] tracking-tight text-white md:text-[40px]">
+                Ready to scale your outbound pipeline with Scrunity AI?
+              </SubHeading>
+              <Para className="mt-4 text-base text-neutral-300 md:text-lg">
+                Join high-growth revenue teams replacing manual prospecting with autonomous intelligence.
+                Start generating qualified calendar meetings in under 48 hours.
+              </Para>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                <Button
+                  href="/join"
+                  className="border-none bg-[#00b0fa] px-8 py-3 text-sm font-semibold text-neutral-950 shadow-[0_2px_12px_rgba(0,176,250,0.3)] hover:bg-[#009de0]"
+                >
+                  Get Started
+                </Button>
+                <Link
+                  href="/join"
+                  className="rounded-full border border-neutral-700 bg-neutral-800/80 px-6 py-2.5 text-sm font-medium text-neutral-200 transition-colors hover:bg-neutral-800"
+                >
+                  Contact Sales
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* ── Footer ────────────────────────────────────────── */}
         <Footer />
       </Container>
     </div>

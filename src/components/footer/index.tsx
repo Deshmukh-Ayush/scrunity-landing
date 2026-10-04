@@ -30,14 +30,14 @@ export const Footer = () => {
                 className="h-auto w-3.5"
               />
               <span className="text-xl font-semibold tracking-tight text-neutral-900">
-                Scrunity
+                Scrunity AI
               </span>
             </Link>
 
             <p className="max-w-sm text-sm leading-relaxed text-pretty text-neutral-500">
-              The client collaboration and revenue protection workspace for
-              modern agencies and freelancers. Contracts, deliverables, and
-              milestone payouts without scope creep.
+              The autonomous outbound sales engine. Domain research,
+              verified decision-maker discovery, contextual cold outreach, and
+              calendar meeting conversion.
             </p>
           </div>
 

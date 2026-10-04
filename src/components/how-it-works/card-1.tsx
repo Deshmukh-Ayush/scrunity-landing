@@ -150,7 +150,7 @@ export const Card1 = () => {
               </div>
 
               <p className="truncate text-[10px] leading-4 font-medium tracking-[-0.01em] text-[#171717]">
-                Proposal & Scope
+                Campaign & ICP
               </p>
             </div>
 
@@ -161,7 +161,7 @@ export const Card1 = () => {
                   : "border-[#dbeafe] bg-[#eff6ff] text-[#2563eb]"
               }`}
             >
-              <TextMorph>{isSigned ? "Signed" : "Invite Sent"}</TextMorph>
+              <TextMorph>{isSigned ? "Verified ICP" : "Scanning"}</TextMorph>
             </span>
           </div>
 
@@ -207,7 +207,7 @@ export const Card1 = () => {
                   item1Checked ? "text-[#4d4d4d]" : "text-neutral-400"
                 }`}
               >
-                Discovery & UX
+                Domain & Competitors
               </span>
             </div>
 
@@ -251,7 +251,7 @@ export const Card1 = () => {
                   item2Checked ? "text-[#4d4d4d]" : "text-neutral-400"
                 }`}
               >
-                Brand Kit
+                Target ICP: RevOps
               </span>
             </div>
           </div>
@@ -305,7 +305,7 @@ export const Card1 = () => {
 
                 <div className="flex items-center gap-1">
                   <p className="text-[7px] font-medium text-[#8f8f8f]">
-                    e-signature
+                    agent inking
                   </p>
                   {isSigned && (
                     <motion.span
@@ -333,7 +333,7 @@ export const Card1 = () => {
                 }`}
               >
                 <TextMorph>
-                  {isSigned ? "Signed · $4,500" : "Awaiting · $4,500"}
+                  {isSigned ? "Mapped · 48 Accounts" : "Finding · 48 Accounts"}
                 </TextMorph>
               </motion.span>
             </div>

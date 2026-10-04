@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
-import { FilePdfIcon, CursorIcon } from "@phosphor-icons/react";
+import { GlobeIcon, CursorIcon } from "@phosphor-icons/react";
 
 const Skeleton = ({ className }: { className: string }) => {
   return <div className={`animate-pulse bg-gray-200 ${className}`}></div>;
@@ -55,16 +55,19 @@ export default function Illustration1() {
         <div className="relative flex h-full w-full items-center justify-center overflow-hidden p-4">
           {!isDashboard && (
             <>
-              {/* drop pdf zone — morphs into the dashboard's outer border */}
+              {/* URL Ingestion dropzone — morphs into dashboard outer frame */}
               <motion.div
                 layoutId={lid("scr-outer")}
                 transition={{ duration: MORPH_S, ease: "easeInOut" }}
-                className="flex h-24 w-40 items-center justify-center rounded-lg border border-dashed border-neutral-200 bg-white"
+                className="flex h-24 w-44 items-center justify-center rounded-lg border border-dashed border-neutral-200 bg-white"
               >
                 <div className="flex flex-col items-center justify-center">
-                  <FilePdfIcon className="text-2xl text-neutral-400" />
-                  <p className="text-[11px] text-neutral-400">
-                    Drop your contract here
+                  <GlobeIcon className="text-2xl text-blue-500" />
+                  <p className="mt-1 font-mono text-[10px] font-medium text-neutral-600">
+                    https://cal.com
+                  </p>
+                  <p className="text-[9px] text-neutral-400">
+                    Crawl & analyze domain
                   </p>
                 </div>
               </motion.div>
@@ -91,7 +94,7 @@ export default function Illustration1() {
                   transition={{ duration: MORPH_S, ease: "easeInOut" }}
                   className="relative h-28 w-20 rounded-[6px] border border-dashed border-neutral-200 bg-white px-2 py-2"
                 >
-                  <CursorIcon className="absolute z-9 translate-4 text-xs text-neutral-400" />
+                  <CursorIcon className="absolute z-9 translate-4 text-xs text-neutral-800" />
                   <MotionSkeleton
                     layoutId={lid("skel-a")}
                     className="h-1 w-4 rounded-md"
@@ -123,23 +126,23 @@ export default function Illustration1() {
               initial={{ opacity: 0, filter: "blur(14px)" }}
               animate={{ opacity: 1, filter: "blur(0px)" }}
               transition={{ duration: MORPH_S, ease: "easeInOut" }}
-              className="mt-10 flex h-full w-70 rounded-lg border border-gray-200"
+              className="mt-10 flex h-full w-72 rounded-lg border border-gray-200"
             >
               <motion.div
                 layoutId="scr-card"
                 transition={{ duration: MORPH_S, ease: "easeInOut" }}
-                className="flex h-full w-15 flex-col rounded-tl-lg border-r border-gray-100 bg-white px-1 py-2"
+                className="flex h-full w-16 flex-col rounded-tl-lg border-r border-gray-100 bg-white px-1 py-2"
               >
-                <motion.div {...reveal} className="flex items-center">
+                <motion.div {...reveal} className="flex items-center gap-1">
                   <Image
-                    src="/logo/scrunity_logo_dark.png"
+                    src="/new-logo/scrunity-icon.svg"
                     alt="Scrunity Logo"
                     width={40}
                     height={40}
                     className="h-2.5 w-2.5"
                   />
-                  <p className="mt-[1px] ml-[2px] text-[7px] font-medium text-gray-700">
-                    Scrunity AI
+                  <p className="text-[7px] font-medium text-gray-700">
+                    Outbound
                   </p>
                 </motion.div>
 
@@ -148,15 +151,6 @@ export default function Illustration1() {
                   <Skeleton className="h-1 w-8 rounded-sm" />
                   <Skeleton className="h-1 w-9 rounded-sm" />
                   <Skeleton className="h-1 w-7 rounded-sm" />
-                </motion.div>
-
-                <motion.div {...reveal} className="mt-5">
-                  <Skeleton className="h-1 w-6 rounded-sm" />
-                  <div className="mt-2 flex flex-col gap-1">
-                    <Skeleton className="h-1 w-9 rounded-sm" />
-                    <Skeleton className="h-1 w-7 rounded-sm" />
-                    <Skeleton className="h-1 w-10 rounded-sm" />
-                  </div>
                 </motion.div>
 
                 <motion.div {...reveal} className="mt-auto flex flex-col gap-1">
@@ -168,89 +162,64 @@ export default function Illustration1() {
               <motion.div
                 layoutId="scr-inner"
                 transition={{ duration: MORPH_S, ease: "easeInOut" }}
-                className="h-full w-55 rounded-tr-lg bg-white px-4 py-3"
+                className="h-full w-56 rounded-tr-lg bg-white px-3 py-2.5"
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <MotionSkeleton
-                      layoutId="skel-a"
-                      className="h-2 w-18 rounded-sm"
-                    />
+                    <span className="font-mono text-[9px] font-semibold text-neutral-900">
+                      cal.com · 48 Accounts
+                    </span>
                     <MotionSkeleton
                       layoutId="skel-b"
-                      className="mt-1.5 h-1 w-24 rounded-sm"
+                      className="mt-1 h-1 w-20 rounded-sm"
                     />
                   </div>
-                  <MotionSkeleton
-                    layoutId="skel-d"
-                    className="h-4 w-4 rounded-full"
-                  />
+                  <span className="rounded bg-blue-50 px-1 py-0.5 font-mono text-[7px] font-semibold text-blue-600">
+                    ICP Mapped
+                  </span>
                 </div>
 
-                <motion.div {...reveal} className="mt-5 grid grid-cols-3 gap-1">
-                  <div className="rounded-md border border-gray-100 p-2">
-                    <Skeleton className="h-1 w-8 rounded-sm" />
-                    <Skeleton className="mt-2 h-2 w-6 rounded-sm" />
+                <motion.div {...reveal} className="mt-3 grid grid-cols-3 gap-1">
+                  <div className="rounded border border-gray-100 p-1">
+                    <span className="text-[6px] text-neutral-400">ACCOUNTS</span>
+                    <p className="font-mono text-[9px] font-semibold text-neutral-800">48</p>
                   </div>
-                  <div className="rounded-md border border-gray-100 p-2">
-                    <Skeleton className="h-1 w-9 rounded-sm" />
-                    <Skeleton className="mt-2 h-2 w-7 rounded-sm" />
+                  <div className="rounded border border-gray-100 p-1">
+                    <span className="text-[6px] text-neutral-400">LEADS</span>
+                    <p className="font-mono text-[9px] font-semibold text-neutral-800">142</p>
                   </div>
-                  <div className="rounded-md border border-gray-100 p-2">
-                    <Skeleton className="h-1 w-7 rounded-sm" />
-                    <Skeleton className="mt-2 h-2 w-5 rounded-sm" />
+                  <div className="rounded border border-gray-100 p-1">
+                    <span className="text-[6px] text-neutral-400">FIT</span>
+                    <p className="font-mono text-[9px] font-semibold text-emerald-600">99%</p>
                   </div>
                 </motion.div>
 
                 <motion.div
                   layoutId="skel-c"
                   transition={{ duration: MORPH_S, ease: "easeInOut" }}
-                  className="mt-4 rounded-md border border-gray-100 p-2.5"
+                  className="mt-2.5 rounded border border-gray-100 p-2"
                 >
                   <motion.div
                     {...reveal}
                     className="flex items-center justify-between"
                   >
-                    <Skeleton className="h-1.5 w-16 rounded-sm" />
-                    <Skeleton className="h-1 w-7 rounded-sm" />
+                    <span className="text-[8px] font-semibold text-neutral-800">
+                      Synthetix Labs (Series B)
+                    </span>
+                    <span className="text-[7px] text-emerald-600 font-mono">
+                      VP RevOps ✓
+                    </span>
                   </motion.div>
                   <motion.div
                     {...reveal}
-                    className="mt-3 flex h-16 items-end gap-1"
+                    className="mt-2 flex h-8 items-end gap-1"
                   >
-                    <Skeleton className="h-7 w-full rounded-t-sm" />
-                    <Skeleton className="h-10 w-full rounded-t-sm" />
-                    <Skeleton className="h-5 w-full rounded-t-sm" />
-                    <Skeleton className="h-12 w-full rounded-t-sm" />
-                    <Skeleton className="h-8 w-full rounded-t-sm" />
-                    <Skeleton className="h-14 w-full rounded-t-sm" />
-                    <Skeleton className="h-9 w-full rounded-t-sm" />
-                    <Skeleton className="h-11 w-full rounded-t-sm" />
-                  </motion.div>
-                </motion.div>
-
-                <motion.div
-                  layoutId="skel-e"
-                  transition={{ duration: MORPH_S, ease: "easeInOut" }}
-                  className="mt-4 grid grid-cols-2 gap-2"
-                >
-                  <motion.div
-                    {...reveal}
-                    className="rounded-md border border-gray-100 p-2"
-                  >
-                    <Skeleton className="h-1 w-12 rounded-sm" />
-                    <Skeleton className="mt-2 h-1 w-16 rounded-sm" />
-                    <Skeleton className="mt-1 h-1 w-13 rounded-sm" />
-                    <Skeleton className="mt-1 h-1 w-10 rounded-sm" />
-                  </motion.div>
-                  <motion.div
-                    {...reveal}
-                    className="rounded-md border border-gray-100 p-2"
-                  >
-                    <Skeleton className="h-1 w-10 rounded-sm" />
-                    <Skeleton className="mt-2 h-1 w-14 rounded-sm" />
-                    <Skeleton className="mt-1 h-1 w-11 rounded-sm" />
-                    <Skeleton className="mt-1 h-1 w-8 rounded-sm" />
+                    <Skeleton className="h-4 w-full rounded-t-xs" />
+                    <Skeleton className="h-6 w-full rounded-t-xs" />
+                    <Skeleton className="h-3 w-full rounded-t-xs" />
+                    <Skeleton className="h-7 w-full rounded-t-xs" />
+                    <Skeleton className="h-5 w-full rounded-t-xs" />
+                    <Skeleton className="h-8 w-full rounded-t-xs" />
                   </motion.div>
                 </motion.div>
               </motion.div>

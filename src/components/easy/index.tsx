@@ -3,16 +3,17 @@
 import { cn } from "@/lib/utils";
 import { motion, useAnimationFrame, useInView } from "framer-motion";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { EverywhereayushShader } from "@/components/join/shader";
 
 const ICON_BOX_CLASS =
   "flex items-center justify-center rounded-full border border-[oklch(0.309_0.031_157.2)] bg-[oklch(0.214_0.035_155.483)]";
 
 const PATH_ORDER = [
-  "user",
-  "proposal",
-  "contract",
-  "deliverables",
-  "client",
+  "domain",
+  "research",
+  "leads",
+  "email",
+  "meeting",
 ] as const;
 const LEAD_IN_OUT = 100;
 const DRAW_DURATION = 3000;
@@ -44,29 +45,29 @@ type Point = { x: number; y: number };
 type Stage = "pending" | "flickering" | "settled";
 
 const ALIGN_ORDER: Record<IconKey, number> = {
-  user: 1,
-  proposal: 2,
-  contract: 3,
-  deliverables: 4,
-  client: 5,
+  domain: 1,
+  research: 2,
+  leads: 3,
+  email: 4,
+  meeting: 5,
 };
 
 const ICON_PT_INDEX: Record<IconKey, number> = {
-  user: 0,
-  proposal: 2,
-  contract: 3,
-  deliverables: 4,
-  client: 6,
+  domain: 0,
+  research: 2,
+  leads: 3,
+  email: 4,
+  meeting: 6,
 };
 
 const SPRING = { type: "spring" as const, stiffness: 260, damping: 28 };
 
 const INITIAL_STAGES: Record<IconKey, Stage> = {
-  user: "pending",
-  contract: "pending",
-  proposal: "pending",
-  deliverables: "pending",
-  client: "pending",
+  domain: "pending",
+  leads: "pending",
+  research: "pending",
+  email: "pending",
+  meeting: "pending",
 };
 
 export const Easy = ({ active }: { active?: boolean } = {}) => {
@@ -81,11 +82,11 @@ export const Easy = ({ active }: { active?: boolean } = {}) => {
   const [stages, setStages] = useState<Record<IconKey, Stage>>(INITIAL_STAGES);
 
   const nodeRefs = useRef<Record<IconKey, HTMLDivElement | null>>({
-    user: null,
-    contract: null,
-    proposal: null,
-    deliverables: null,
-    client: null,
+    domain: null,
+    leads: null,
+    research: null,
+    email: null,
+    meeting: null,
   });
   const pathRef = useRef<SVGPathElement>(null);
 
@@ -124,17 +125,17 @@ export const Easy = ({ active }: { active?: boolean } = {}) => {
       {} as Record<IconKey, Point>,
     );
 
-    const start = centers.user;
-    const end = centers.client;
+    const start = centers.domain;
+    const end = centers.meeting;
     const leadIn: Point = { x: start.x + LEAD_IN_OUT, y: start.y };
     const leadOut: Point = { x: end.x - LEAD_IN_OUT, y: end.y };
 
     const pts: Point[] = [
       start,
       leadIn,
-      centers.proposal,
-      centers.contract,
-      centers.deliverables,
+      centers.research,
+      centers.leads,
+      centers.email,
       leadOut,
       end,
     ];
@@ -265,8 +266,13 @@ export const Easy = ({ active }: { active?: boolean } = {}) => {
   return (
     <div
       ref={containerRef}
-      className="relative flex h-121.5 w-full flex-wrap items-center justify-center gap-2 rounded-lg border border-gray-200 bg-[oklch(0.15_0_0)] p-4 md:flex-nowrap md:justify-between md:gap-10 md:p-10 md:px-10"
+      className="relative flex h-121.5 w-full flex-wrap items-center justify-center gap-2 overflow-hidden rounded-lg border border-gray-200 bg-[oklch(0.15_0_0)] p-4 md:flex-nowrap md:justify-between md:gap-10 md:p-10 md:px-10"
     >
+      {/* Creative Shader Ambient Field */}
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-20 mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_60%,transparent_100%)]">
+        <EverywhereayushShader theme="dark" />
+      </div>
+
       <motion.p
         initial={{ opacity: 0 }}
         animate={
@@ -284,7 +290,7 @@ export const Easy = ({ active }: { active?: boolean } = {}) => {
         }}
         className="pointer-events-none absolute top-5 right-5 z-20 font-mono text-[10px] font-medium tracking-widest text-neutral-200 uppercase select-none md:top-8 md:right-8 md:text-xs"
       >
-        With Scrunity
+        With Scrunity AI
       </motion.p>
 
       <svg className="pointer-events-none absolute inset-0 z-0 h-full w-full">
@@ -297,37 +303,35 @@ export const Easy = ({ active }: { active?: boolean } = {}) => {
         />
       </svg>
 
-      <User
-        innerRef={setRef("user")}
+      <DomainNode
+        innerRef={setRef("domain")}
         aligned={aligned}
-        stage={stages.user}
-        seconds={windowsRef.current?.user.seconds ?? MIN_FLICKER_SECONDS}
+        stage={stages.domain}
+        seconds={windowsRef.current?.domain.seconds ?? MIN_FLICKER_SECONDS}
       />
-      <Contract
-        innerRef={setRef("contract")}
+      <LeadsNode
+        innerRef={setRef("leads")}
         aligned={aligned}
-        stage={stages.contract}
-        seconds={windowsRef.current?.contract.seconds ?? MIN_FLICKER_SECONDS}
+        stage={stages.leads}
+        seconds={windowsRef.current?.leads.seconds ?? MIN_FLICKER_SECONDS}
       />
-      <Proposal
-        innerRef={setRef("proposal")}
+      <ResearchNode
+        innerRef={setRef("research")}
         aligned={aligned}
-        stage={stages.proposal}
-        seconds={windowsRef.current?.proposal.seconds ?? MIN_FLICKER_SECONDS}
+        stage={stages.research}
+        seconds={windowsRef.current?.research.seconds ?? MIN_FLICKER_SECONDS}
       />
-      <Deliverables
-        innerRef={setRef("deliverables")}
+      <EmailNode
+        innerRef={setRef("email")}
         aligned={aligned}
-        stage={stages.deliverables}
-        seconds={
-          windowsRef.current?.deliverables.seconds ?? MIN_FLICKER_SECONDS
-        }
+        stage={stages.email}
+        seconds={windowsRef.current?.email.seconds ?? MIN_FLICKER_SECONDS}
       />
-      <Client
-        innerRef={setRef("client")}
+      <MeetingNode
+        innerRef={setRef("meeting")}
         aligned={aligned}
-        stage={stages.client}
-        seconds={windowsRef.current?.client.seconds ?? MIN_FLICKER_SECONDS}
+        stage={stages.meeting}
+        seconds={windowsRef.current?.meeting.seconds ?? MIN_FLICKER_SECONDS}
       />
     </div>
   );
@@ -411,7 +415,7 @@ const IconBox = ({
   );
 };
 
-const User = ({
+const DomainNode = ({
   innerRef,
   aligned,
   stage,
@@ -423,13 +427,13 @@ const User = ({
   seconds: number;
 }) => (
   <IconBox
-    text="You"
+    text="Your Domain"
     innerRef={innerRef}
-    layoutId="user"
+    layoutId="domain"
     aligned={aligned}
     stage={stage}
     seconds={seconds}
-    order={ALIGN_ORDER.user}
+    order={ALIGN_ORDER.domain}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -438,22 +442,22 @@ const User = ({
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1}
+      strokeWidth={1.5}
       strokeLinecap="round"
       strokeLinejoin="round"
       className={cn(
-        "rounded-full bg-[oklch(0.791_0.209_151.662)] text-[oklch(0.214_0.035_155.483)]",
+        "rounded-full bg-[oklch(0.791_0.209_151.662)] text-[oklch(0.214_0.035_155.483)] p-2",
         aligned ? "h-12 w-12" : "h-16 w-16",
       )}
     >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M9 10a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-      <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+      <circle cx="12" cy="12" r="10" />
+      <line x1="2" y1="12" x2="22" y2="12" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
     </svg>
   </IconBox>
 );
 
-const Client = ({
+const MeetingNode = ({
   innerRef,
   aligned,
   stage,
@@ -465,13 +469,13 @@ const Client = ({
   seconds: number;
 }) => (
   <IconBox
-    text="Client"
+    text="Booked Meeting"
     innerRef={innerRef}
-    layoutId="client"
+    layoutId="meeting"
     aligned={aligned}
     stage={stage}
     seconds={seconds}
-    order={ALIGN_ORDER.client}
+    order={ALIGN_ORDER.meeting}
     className="border-[oklch(0.364_0.078_269.8)] bg-[oklch(0.283_0.091_267.5)]"
   >
     <svg
@@ -481,22 +485,24 @@ const Client = ({
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1}
+      strokeWidth={1.5}
       strokeLinecap="round"
       strokeLinejoin="round"
       className={cn(
-        "rounded-full bg-[oklch(0.704_0.159_253.4)] text-[oklch(0.283_0.091_267.5)]",
+        "rounded-full bg-[oklch(0.704_0.159_253.4)] text-[oklch(0.283_0.091_267.5)] p-2",
         aligned ? "h-12 w-12" : "h-16 w-16",
       )}
     >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M9 10a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-      <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+      <path d="M9 16l2 2 4-4" />
     </svg>
   </IconBox>
 );
 
-const Contract = ({
+const LeadsNode = ({
   innerRef,
   aligned,
   stage,
@@ -508,13 +514,13 @@ const Contract = ({
   seconds: number;
 }) => (
   <IconBox
-    text="Contract"
+    text="Decision Makers"
     innerRef={innerRef}
-    layoutId="contract"
+    layoutId="leads"
     aligned={aligned}
     stage={stage}
     seconds={seconds}
-    order={ALIGN_ORDER.contract}
+    order={ALIGN_ORDER.leads}
     wrapperClassName="absolute top-18 left-6 md:top-10 md:left-70"
     className="border-[oklch(0.364_0.078_269.8)] bg-[oklch(0.283_0.091_267.5)]"
   >
@@ -525,18 +531,18 @@ const Contract = ({
       viewBox="0 0 24 24"
       fill="currentColor"
       className={cn(
-        "bg-[oklch(0.283_0.091_267.5)] text-[oklch(0.704_0.159_253.4)]",
+        "bg-[oklch(0.283_0.091_267.5)] text-[oklch(0.704_0.159_253.4)] p-1",
         aligned ? "h-12 w-12" : "h-16 w-16",
       )}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M12 2l.117 .007a1 1 0 0 1 .876 .876l.007 .117v4l.005 .15a2 2 0 0 0 1.838 1.844l.157 .006h4l.117 .007a1 1 0 0 1 .876 .876l.007 .117v9a3 3 0 0 1 -2.824 2.995l-.176 .005h-10a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-14a3 3 0 0 1 2.824 -2.995l.176 -.005zm3 14h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2m0 -4h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2" />
-      <path d="M19 7h-4l-.001 -4.001z" />
+      <path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
+      <path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
     </svg>
   </IconBox>
 );
 
-const Proposal = ({
+const ResearchNode = ({
   innerRef,
   aligned,
   stage,
@@ -548,13 +554,13 @@ const Proposal = ({
   seconds: number;
 }) => (
   <IconBox
-    text="Proposal"
+    text="Research & ICP"
     innerRef={innerRef}
-    layoutId="proposal"
+    layoutId="research"
     aligned={aligned}
     stage={stage}
     seconds={seconds}
-    order={ALIGN_ORDER.proposal}
+    order={ALIGN_ORDER.research}
     wrapperClassName="absolute bottom-18 left-6 md:right-110 md:bottom-10 md:left-auto"
     className="border-[oklch(0.306_0.026_54.2)] bg-[oklch(0.21_0.032_52.2)]"
   >
@@ -565,18 +571,17 @@ const Proposal = ({
       viewBox="0 0 24 24"
       fill="currentColor"
       className={cn(
-        "text-[oklch(0.746_0.18_56.7)]",
+        "text-[oklch(0.746_0.18_56.7)] p-1",
         aligned ? "h-12 w-12" : "h-16 w-16",
       )}
     >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M12 2l.117 .007a1 1 0 0 1 .876 .876l.007 .117v4l.005 .15a2 2 0 0 0 1.838 1.844l.157 .006h4l.117 .007a1 1 0 0 1 .876 .876l.007 .117v9a3 3 0 0 1 -2.824 2.995l-.176 .005h-10a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-14a3 3 0 0 1 2.824 -2.995l.176 -.005zm3 14h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2m0 -4h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2" />
-      <path d="M19 7h-4l-.001 -4.001z" />
+      <circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" strokeWidth="2" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" strokeWidth="2" />
     </svg>
   </IconBox>
 );
 
-const Deliverables = ({
+const EmailNode = ({
   innerRef,
   aligned,
   stage,
@@ -588,13 +593,13 @@ const Deliverables = ({
   seconds: number;
 }) => (
   <IconBox
-    text="Deliverables"
+    text="1-to-1 Outreach"
     innerRef={innerRef}
-    layoutId="deliverables"
+    layoutId="email"
     aligned={aligned}
     stage={stage}
     seconds={seconds}
-    order={ALIGN_ORDER.deliverables}
+    order={ALIGN_ORDER.email}
     wrapperClassName="absolute top-18 right-6 md:top-10 md:right-100"
     className="border-[oklch(0.232_0.095_28.753)] bg-[oklch(0.232_0.095_28.709)]"
   >
@@ -605,12 +610,13 @@ const Deliverables = ({
       viewBox="0 0 24 24"
       fill="currentColor"
       className={cn(
-        "text-[oklch(0.632_0.254_28.753)]",
+        "text-[oklch(0.632_0.254_28.753)] p-1",
         aligned ? "h-12 w-12" : "h-16 w-16",
       )}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M21.864 3.549l-6.454 17.868a1.55 1.55 0 0 1 -1.41 .903a1.54 1.54 0 0 1 -1.394 -.874l-2.88 -5.759zm-1.414 -1.414l-12.139 12.138l-5.728 -2.864a1.55 1.55 0 0 1 -.903 -1.409c0 -.606 .353 -1.157 .981 -1.44z" />
+      <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
+      <polyline points="3 7 12 13 21 7" fill="none" stroke="currentColor" strokeWidth="2" />
     </svg>
   </IconBox>
 );

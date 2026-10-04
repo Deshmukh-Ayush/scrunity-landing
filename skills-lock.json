@@ -91,6 +91,12 @@
       "skillPath": "skills/find-animation-opportunities/SKILL.md",
       "computedHash": "c6b1d0f6d03a11f8772b1cef4ca5cc88301ae8641ac2697c85ffa87eb458e40a"
     },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "computedHash": "2ad3631de3d9af6ab30a2154644d450c258624742d8c83d928b22e3b94f37e59"
+    },
     "improve-animations": {
       "source": "emilkowalski/skill",
       "sourceType": "github",

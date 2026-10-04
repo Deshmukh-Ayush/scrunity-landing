@@ -2,32 +2,32 @@
 
 import React from "react";
 import {
-  ChatCircleTextIcon,
-  PulseIcon,
+  SparkleIcon,
+  BuildingsIcon,
+  UserCheckIcon,
+  EnvelopeSimpleIcon,
+  CalendarCheckIcon,
+  ChartLineUpIcon,
   GearSixIcon,
   CaretUpDownIcon,
   DotsThreeIcon,
-  SparkleIcon,
-  FolderIcon,
-  ChartLineUpIcon,
-  UsersIcon,
-  UserListIcon,
-  CreditCardIcon,
+  PulseIcon,
+  PaperPlaneTiltIcon,
 } from "@phosphor-icons/react";
 import Image from "next/image";
 
 const MAIN_NAV = [
-  { name: "Scrunity AI", icon: SparkleIcon, isActive: true, badge: 0 },
-  { name: "Projects", icon: FolderIcon, isActive: false, badge: 0 },
-  { name: "Analytics", icon: ChartLineUpIcon, isActive: false, badge: 0 },
-  { name: "Clients", icon: UsersIcon, isActive: false, badge: 3 },
-  { name: "Team", icon: UserListIcon, isActive: false, badge: 0 },
-  { name: "Billing", icon: CreditCardIcon, isActive: false, badge: 0 },
+  { name: "Outbound Agent", icon: SparkleIcon, isActive: true, badge: 0 },
+  { name: "Target Accounts", icon: BuildingsIcon, isActive: false, badge: 48 },
+  { name: "Decision Makers", icon: UserCheckIcon, isActive: false, badge: 142 },
+  { name: "Cold Campaigns", icon: EnvelopeSimpleIcon, isActive: false, badge: 0 },
+  { name: "Warmup Mailboxes", icon: PaperPlaneTiltIcon, isActive: false, badge: 4 },
+  { name: "Booked Meetings", icon: CalendarCheckIcon, isActive: false, badge: 19 },
 ];
 
 const SECONDARY_NAV = [
-  { name: "Discussions", icon: ChatCircleTextIcon, badge: 0 },
-  { name: "Activity", icon: PulseIcon, badge: 1 },
+  { name: "Pipeline Health", icon: PulseIcon, badge: 0 },
+  { name: "Learning Signals", icon: ChartLineUpIcon, badge: 3 },
   { name: "Settings", icon: GearSixIcon, badge: 0 },
 ];
 
@@ -42,18 +42,18 @@ export const HeroSidebar = () => {
         <div className="mx-1 my-1 flex h-14 shrink-0 items-center justify-between gap-2 rounded-md px-4 transition-colors hover:bg-neutral-100/60">
           <div className="flex min-w-0 flex-1 items-center gap-2.5">
             <Image
-              src="/logo/scrunity_logo_dark.png"
+              src="/new-logo/scrunity-icon.svg"
               alt="logo"
               height={100}
               width={100}
-              className="h-9 w-9 rounded-md"
+              className="h-8 w-8 rounded-md"
             />
             <div className="flex min-w-0 flex-col gap-0.5">
               <span className="truncate text-[13px] leading-tight font-semibold text-neutral-900">
                 Scrunity AI
               </span>
               <span className="truncate text-[10px] leading-tight font-medium text-neutral-400">
-                Workspace
+                Outbound Autopilot
               </span>
             </div>
           </div>
@@ -61,11 +61,11 @@ export const HeroSidebar = () => {
         </div>
 
         {/* Navigation Sections */}
-        <nav className="[ScrollIconbar-width:none] flex flex-1 flex-col overflow-y-auto px-3 py-4 [-ms-overflow-style:none] [&::-webkit-ScrollIconbar]:hidden">
+        <nav className="[scrollbar-width:none] flex flex-1 flex-col overflow-y-auto px-3 py-4 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {/* Main Workspace Group */}
           <div>
             <h3 className="mb-1.5 px-2.5 text-[10px] font-semibold tracking-tight text-neutral-400 uppercase">
-              Workspace
+              Sales Pipeline
             </h3>
             <ul className="space-y-0.5">
               {MAIN_NAV.map((item) => {
@@ -96,7 +96,7 @@ export const HeroSidebar = () => {
           {/* Secondary Group */}
           <div className="mt-6">
             <h3 className="mb-1.5 px-2.5 text-[10px] font-semibold tracking-tight text-neutral-400 uppercase">
-              More
+              Optimization
             </h3>
             <ul className="space-y-0.5">
               {SECONDARY_NAV.map((item) => {
@@ -118,7 +118,7 @@ export const HeroSidebar = () => {
             </ul>
           </div>
 
-          {/* Static Profile Card at Bottom */}
+          {/* Profile Card at Bottom */}
           <div className="mt-auto pt-4">
             <div className="flex w-full items-center gap-3 rounded-lg border border-neutral-200/60 bg-neutral-50/50 p-2 text-left">
               <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-md border border-neutral-200 bg-neutral-200 text-xs font-semibold text-neutral-700">
@@ -129,7 +129,7 @@ export const HeroSidebar = () => {
                   Ayush Deshmukh
                 </span>
                 <span className="truncate text-[10px] text-neutral-400">
-                  ayush@cloff.studio
+                  Autonomous SDR Active
                 </span>
               </div>
               <DotsThreeIcon

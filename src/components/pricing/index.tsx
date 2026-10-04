@@ -36,13 +36,13 @@ export const Pricing = () => {
 
   return (
     <div className="w-full">
-      {/* Pricing Cards Grid */}
+      {/* 2-Tier Pricing Cards Grid */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
-        className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3"
+        className="mt-10 mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2"
       >
         {PRICING_DATA.map((plan) => (
           <motion.div key={plan.id} variants={cardVariants} className="h-full">

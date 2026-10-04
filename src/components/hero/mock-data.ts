@@ -9,16 +9,28 @@ export type AgentStep = {
 
 export type GenerativeWidget =
   | {
-      type: "latency-metrics";
-      title: string;
-      latencyMs: number;
-      p99Ms: number;
+      type: "icp-discovery";
+      company: string;
+      industry: string;
+      employees: string;
+      targetBuyer: string;
+      fitScore: number;
     }
   | {
-      type: "revenue-audit";
-      totalPipeline: string;
-      atRisk: string;
-      wonRate: string;
+      type: "email-draft";
+      recipient: string;
+      title: string;
+      subject: string;
+      snippet: string;
+      deliverabilityScore: string;
+    }
+  | {
+      type: "meeting-booked";
+      attendee: string;
+      company: string;
+      time: string;
+      winningAngle: string;
+      reallocatedVolume: string;
     };
 
 export type Message = {
@@ -40,72 +52,101 @@ export type DemoTurn = {
 export const CONVERSATION_SCRIPT: DemoTurn[] = [
   {
     prompt:
-      "Research Acme Studio, draft a client proposal, and prepare the milestone contract",
+      "Launch outbound campaign for https://cal.com. Target high-growth tech companies hiring sales teams.",
     steps: [
       {
         id: "s-1",
-        label: "Searching web & analyzing Acme Studio company profile",
+        label: "Extracting cal.com metadata, value proposition & scheduling API",
         status: "completed",
       },
       {
         id: "s-2",
-        label: "Extracting deliverable scope & milestone timelines",
+        label: "Analyzing competitor landscape (Calendly, Chili Piper) for wedge angles",
         status: "completed",
       },
       {
         id: "s-3",
-        label: "Generating binding contract with scope boundary guards",
+        label: "Synthesizing ICP: Series A-C SaaS, VP RevOps, Heads of Sales",
         status: "completed",
       },
-    ],
-    content:
-      "I've completed the background research on Acme Studio and drafted a 3-phase proposal ($42,000 total). The contract includes defined deliverable milestones, payment terms, and automated scope protection ready for client e-signature.",
-  },
-  {
-    prompt:
-      "Check deliverable status for Horizon Corp and generate the milestone invoice",
-    steps: [
       {
         id: "s-4",
-        label: "Auditing active deliverables against contract SOW",
-        status: "completed",
-      },
-      {
-        id: "s-5",
-        label: "Verifying milestone sign-offs & detecting scope changes",
-        status: "completed",
-      },
-      {
-        id: "s-6",
-        label: "Generating itemized milestone invoice for client review",
+        label: "Discovering target accounts & waterfall-verifying decision makers",
         status: "completed",
       },
     ],
     content:
-      "All 4 deliverables for Milestone 2 are complete and verified within contract scope. Invoice #INV-1082 ($16,500) has been generated and queued for client approval.",
+      "I've analyzed cal.com and mapped your competitive advantages vs. Calendly. Identified 48 high-fit B2B SaaS accounts currently scaling AE teams. Target buyer persona: VP Revenue Operations and Heads of Growth.",
     widget: {
-      type: "revenue-audit",
-      totalPipeline: "$148,000",
-      atRisk: "$0 (Scope Safe)",
-      wonRate: "98.4%",
+      type: "icp-discovery",
+      company: "Synthetix Labs",
+      industry: "Enterprise AI Infrastructure",
+      employees: "120 employees · Series B",
+      targetBuyer: "Marcus Vance — VP of Revenue Operations",
+      fitScore: 99,
     },
   },
   {
     prompt:
-      "Draft a client collaboration update with the invoice and sign-off link",
+      "Draft personalized 1-to-1 cold outreach for Marcus Vance referencing their team growth",
     steps: [
       {
-        id: "s-7",
-        label: "Aggregating deliverable sign-offs and invoice summary",
+        id: "s-5",
+        label: "Verifying direct work email: marcus@synthetix.io (valid MX 99.8%)",
         status: "completed",
       },
       {
-        id: "s-8",
-        label: "Formatting client portal message with secure payment link",
+        id: "s-6",
+        label: "Drafting contextual 1-to-1 email citing recent AE hiring surge",
+        status: "completed",
+      },
+      {
+        id: "s-7",
+        label: "Applying deliverability guardrails: secondary mailbox rotation",
         status: "completed",
       },
     ],
     content:
-      "Here is your client collaboration update for Horizon Corp:\n\n• Deliverables: Milestone 2 (Design System & Prototype) approved\n• Contract Status: On track, zero scope creep flagged\n• Invoice: #INV-1082 ($16,500) ready for one-click payment\n• Next Step: Milestone 3 kickoff scheduled for Monday\n\nReady to send through the client portal whenever you are.",
+      "Drafted a hyper-personalized email for Marcus Vance. The draft highlights their recent hiring of 8 AEs and pitches cal.com's automated scheduling to stop demo dropoffs. Ready for your review and editing before dispatch.",
+    widget: {
+      type: "email-draft",
+      recipient: "marcus@synthetix.io",
+      title: "VP of Revenue Operations @ Synthetix Labs",
+      subject: "Synthetix's demo-to-close routing vs. AE growth",
+      snippet:
+        "Saw Synthetix just scaled to 24 AEs. Most teams at your velocity lose ~28% of qualified pipeline in manual scheduling handoffs. Built an automated pipeline that routes qualified demos instantly without redirects.",
+      deliverabilityScore: "99.8% (Warmup Mailbox #2)",
+    },
+  },
+  {
+    prompt:
+      "Approve outreach and sync meeting conversions into our sales calendar",
+    steps: [
+      {
+        id: "s-8",
+        label: "Dispatching outreach with randomized send cadence",
+        status: "completed",
+      },
+      {
+        id: "s-9",
+        label: "Parsing positive prospect reply & scheduling availability",
+        status: "completed",
+      },
+      {
+        id: "s-10",
+        label: "Analyzing campaign signals & doubling down on winning ICP",
+        status: "completed",
+      },
+    ],
+    content:
+      "Outreach dispatched. Marcus Vance replied in 38 minutes: 'Good timing, our demo dropoff is real. Let's do Thursday 2 PM'. Demo confirmed and synced to Google Calendar. The agent has reallocated 65% of outbound capacity to Series B SaaS RevOps leaders.",
+    widget: {
+      type: "meeting-booked",
+      attendee: "Marcus Vance",
+      company: "Synthetix Labs",
+      time: "Thursday, 2:00 PM EST (30 mins)",
+      winningAngle: "AE Handoff Latency (+18.4% positive reply)",
+      reallocatedVolume: "+65% send volume",
+    },
   },
 ];

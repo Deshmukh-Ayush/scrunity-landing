@@ -3,27 +3,30 @@ import { SubHeading } from "../utility/texts";
 
 export const SubHeadingAnimation = () => {
   return (
-    <SubHeading className="flex flex-col items-start justify-center">
+    <SubHeading className="flex flex-col items-start justify-center gap-1.5">
       <p>
-        Turns{" "}
-        <span className="rounded-lg bg-blue-200/50 p-0.5 text-cyan-500">
-          contracts
+        Finds{" "}
+        <span className="rounded-lg bg-blue-100/70 px-1.5 py-0.5 text-blue-600 font-semibold">
+          verified decision makers
         </span>{" "}
-        into living workspaces
+        without scrapers
       </p>
       <p>
-        Executes{" "}
-        <span className="rounded-lg bg-gray-200/50 p-0.5 text-neutral-500">
-          tasks
+        Drafts{" "}
+        <span className="rounded-lg bg-purple-100/70 px-1.5 py-0.5 text-purple-700 font-semibold">
+          contextual 1-to-1 emails
         </span>{" "}
-        using smart agents
+        with full user review
       </p>
       <p>
-        Protects{" "}
-        <span className="rounded-lg bg-gray-200/50 p-0.5 text-neutral-500">
-          revenue
+        Books{" "}
+        <span className="rounded-lg bg-emerald-100/70 px-1.5 py-0.5 text-emerald-700 font-semibold">
+          qualified sales meetings
         </span>{" "}
-        with linked invoicing
+        into your calendar
+      </p>
+      <p className="text-neutral-400 text-lg md:text-xl font-normal">
+        Learns from every reply and doubles down on winning ICP campaigns.
       </p>
     </SubHeading>
   );

@@ -1,8 +1,8 @@
 /**
- * Pricing plan tier definition conforming to Scrunity's scope & collaboration model.
+ * Pricing plan tier definition conforming to Scrunity's autonomous outbound sales model.
  */
 export interface PricingPlan {
-  id: "freelancer" | "agency" | "enterprise";
+  id: "growth" | "enterprise";
   name: string;
   description: string;
   price: string;
@@ -13,58 +13,48 @@ export interface PricingPlan {
 }
 
 /**
- * Verified pricing tier configurations for independent pros, teams, and enterprise clients.
+ * Verified pricing tier configurations for growth teams and enterprise organizations.
+ * Exactly two tiers, both featuring "Contact sales".
  */
 export const PRICING_DATA: PricingPlan[] = [
   {
-    id: "freelancer",
-    name: "Freelancer",
-    description: "For solo freelancers managing end-to-end client work",
-    price: "$14.99",
-    period: "/month",
-    seats: "1 seat",
-    cta: "Start free trial",
+    id: "growth",
+    name: "Growth Engine",
+    description:
+      "For scaling B2B companies ready to automate prospect discovery, personalized outreach, and booked meetings.",
+    price: "Custom",
+    period: "tailored volume",
+    seats: "Autonomous SDR Agent",
+    cta: "Contact Sales",
     features: [
-      "Unlimited projects & clients",
-      "Proposals & e-signed contracts",
-      "Deliverables & file management",
-      "Invoicing & payment tracking",
-      "AI Scope Guardian",
-      "Torch AI co-pilot",
-    ],
-  },
-  {
-    id: "agency",
-    name: "Agency",
-    description: "For growing teams collaborating across multiple clients",
-    price: "$29.99",
-    period: "/month",
-    seats: "Up to 5 seats",
-    cta: "Start free trial",
-    features: [
-      "Everything in Freelancer",
-      "Team collaboration",
-      "Full Torch AI",
-      "AI drafting & web search",
-      "White-label client experience",
-      "Priority support",
+      "Autonomous domain & competitor research",
+      "Dynamic ICP mapping & campaign generation",
+      "Target company & verified decision-maker discovery",
+      "Contextual 1-to-1 email drafting with user review",
+      "Automated deliverability guardrails & mailbox rotation",
+      "Autonomous calendar meeting booking",
+      "Self-learning campaign optimization loop",
+      "Live analytics HUD & CRM webhooks",
     ],
   },
   {
     id: "enterprise",
     name: "Enterprise",
-    description: "For larger organizations needing tailored terms and scale",
+    description:
+      "For high-volume revenue organizations requiring multi-agent orchestration, custom TAM enrichment, and dedicated mailbox infrastructure.",
     price: "Custom",
-    period: "",
-    seats: "Custom seats",
-    cta: "Contact sales",
+    period: "annual engagement",
+    seats: "Multi-Agent Fleet",
+    cta: "Contact Sales",
     features: [
-      "Everything in Agency",
-      "Custom seat count",
-      "Dedicated onboarding",
-      "Custom workflows",
-      "Custom terms",
-      "Dedicated support",
+      "Everything in Growth, built for high volume",
+      "Multi-agent parallel campaign orchestration",
+      "Dedicated domain & mailbox warmup infrastructure",
+      "Native bi-directional CRM sync (Salesforce, HubSpot, Attio)",
+      "Custom waterfall enrichment & phone verification",
+      "Custom brand voice training & compliance guardrails",
+      "Dedicated growth engineer & strategy reviews",
+      "99.9% uptime SLA & enterprise security terms",
     ],
   },
 ];

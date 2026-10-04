@@ -1,40 +1,42 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { SpinnerIcon } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import { TextMorph } from "torph/react";
 
-const TASKS = [
-  { id: 1, title: "Extracting deliverables from Scrunity AI" },
-  { id: 2, title: "Bug in SVG illustration animation." },
-  { id: 3, title: "Feature section takes too long to load." },
-  { id: 4, title: "Create a new chat feature i" },
+const LEADS = [
+  { id: 1, title: "Marcus Vance · VP RevOps @ Synthetix", email: "marcus@synthetix.io" },
+  { id: 2, title: "Elena Rostova · Head of Eng @ Kitebase", email: "elena@kitebase.dev" },
+  { id: 3, title: "Devon Chen · CTO @ Orbit", email: "devon@orbitpay.com" },
+  { id: 4, title: "General Inquiries (info@)", email: "info@genericcorp.com" },
 ];
 
 export const Illustration2 = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [taskState, setTaskState] = useState("loading");
+  const [leadState, setLeadState] = useState("loading");
 
   useEffect(() => {
     let timer1: ReturnType<typeof setTimeout> | undefined;
     let timer2: ReturnType<typeof setTimeout> | undefined;
 
     const scheduleNormalFlow = () => {
-      setTaskState("loading");
+      setLeadState("loading");
 
       timer1 = setTimeout(() => {
-        setTaskState("success");
+        setLeadState("success");
 
         timer2 = setTimeout(() => {
           setActiveIndex((prev) => prev + 1);
-        }, 1000);
+        }, 1200);
       }, 1500);
     };
 
     const scheduleErrorFlow = () => {
-      setTaskState("loading");
+      setLeadState("loading");
 
       timer1 = setTimeout(() => {
-        setTaskState("error");
+        setLeadState("error");
 
         timer2 = setTimeout(() => {
           setActiveIndex(0);
@@ -42,9 +44,9 @@ export const Illustration2 = () => {
       }, 1500);
     };
 
-    if (activeIndex < TASKS.length - 1) {
+    if (activeIndex < LEADS.length - 1) {
       timer1 = setTimeout(scheduleNormalFlow, 0);
-    } else if (activeIndex === TASKS.length - 1) {
+    } else if (activeIndex === LEADS.length - 1) {
       timer1 = setTimeout(scheduleErrorFlow, 0);
     }
 
@@ -55,7 +57,7 @@ export const Illustration2 = () => {
   }, [activeIndex]);
 
   const isGlobalError =
-    activeIndex === TASKS.length - 1 && taskState === "error";
+    activeIndex === LEADS.length - 1 && leadState === "error";
 
   return (
     <div className="flex h-full w-full items-center justify-center rounded-[10px] border border-gray-200 bg-gray-50 p-[2px]">
@@ -64,22 +66,22 @@ export const Illustration2 = () => {
         transition={{ duration: 0.5 }}
         className={`relative flex h-[200px] w-full items-center justify-center overflow-hidden rounded-lg border transition-colors duration-500 md:w-[373px] ${
           isGlobalError
-            ? "border-red-300 bg-red-50"
+            ? "border-red-300 bg-red-50/50"
             : "border-gray-200 bg-gray-50/30"
         }`}
       >
-        {TASKS.map((task, index) => {
+        {LEADS.map((lead, index) => {
           const offset = index - activeIndex;
           const isCompleted = offset < 0;
           const isActive = offset === 0;
 
           let currentStatus = "loading";
           if (isCompleted) currentStatus = "success";
-          if (isActive) currentStatus = taskState;
+          if (isActive) currentStatus = leadState;
 
-          let subtitle = "Checking";
-          if (currentStatus === "success") subtitle = "Within ";
-          if (currentStatus === "error") subtitle = "Out of";
+          let subtitle = "Validating MX";
+          if (currentStatus === "success") subtitle = "Verified · Deliverable";
+          if (currentStatus === "error") subtitle = "Non-decision maker · Filtered";
 
           let bgColor = "bg-white";
           let borderColor = "border-gray-200";
@@ -87,8 +89,8 @@ export const Illustration2 = () => {
           let subColor = "text-neutral-400";
 
           if (currentStatus === "error") {
-            bgColor = "bg-red-100";
-            borderColor = "border-red-400";
+            bgColor = "bg-red-50";
+            borderColor = "border-red-300";
             titleColor = "text-red-900";
             subColor = "text-red-600";
           }
@@ -109,12 +111,12 @@ export const Illustration2 = () => {
 
           return (
             <motion.div
-              key={task.id}
+              key={lead.id}
               initial={false}
               animate={{ y, scale, opacity }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
               style={{ zIndex }}
-              className={`absolute flex h-10 w-64 items-center rounded-lg border px-2 shadow-sm transition-colors duration-300 ${bgColor} ${borderColor}`}
+              className={`absolute flex h-11 w-68 items-center rounded-lg border px-2.5 shadow-xs transition-colors duration-300 ${bgColor} ${borderColor}`}
             >
               {/* Icon Container */}
               <div className="flex h-5 w-5 shrink-0 items-center justify-center">
@@ -126,14 +128,14 @@ export const Illustration2 = () => {
               </div>
 
               {/* Text Container */}
-              <div className="ml-3 flex flex-col items-start justify-center text-[9px] leading-tight">
+              <div className="ml-2.5 flex flex-col items-start justify-center text-[9px] leading-tight truncate">
                 <p
-                  className={`font-medium transition-colors duration-300 ${titleColor}`}
+                  className={`font-semibold truncate w-full transition-colors duration-300 ${titleColor}`}
                 >
-                  {task.title}
+                  {lead.title}
                 </p>
-                <p className={`transition-colors duration-300 ${subColor}`}>
-                  <TextMorph>{subtitle}</TextMorph> scope
+                <p className={`font-mono text-[8px] transition-colors duration-300 ${subColor}`}>
+                  <TextMorph>{subtitle}</TextMorph>
                 </p>
               </div>
             </motion.div>
@@ -144,19 +146,18 @@ export const Illustration2 = () => {
   );
 };
 
-// Success Icon Component
 const Tick = () => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.6, filter: "blur(12px)" }}
       animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="flex h-5 w-5 items-center justify-center rounded-full bg-green-500 text-white"
+      className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-white"
     >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
-        width={14}
-        height={14}
+        width={13}
+        height={13}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -175,7 +176,6 @@ const Tick = () => {
   );
 };
 
-// Error Icon Component
 const Cross = () => {
   return (
     <motion.div
@@ -186,8 +186,8 @@ const Cross = () => {
     >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
-        width={14}
-        height={14}
+        width={13}
+        height={13}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"

@@ -101,27 +101,27 @@ export const Card3 = () => {
           }}
         />
 
-        {/* Invoice Header */}
+        {/* Meeting Header */}
         <div className="flex items-center gap-1.5 font-mono text-[10px] tracking-tight text-gray-400">
-          <span>Invoice #1042</span>
+          <span>Demo #1042</span>
           <span>·</span>
-          <span>Milestone 2</span>
+          <span>Synthetix Labs</span>
         </div>
 
-        {/* Milestone Amount */}
+        {/* Confirmed Demo Time */}
         <motion.div
           animate={isVerified ? { scale: [1, 1.04, 1] } : { scale: 1 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="text-[28px] leading-none font-bold tracking-tight text-gray-900"
+          className="text-[20px] leading-none font-bold tracking-tight text-gray-900"
           style={{ fontVariantNumeric: "tabular-nums" }}
         >
-          $3,500.00
+          Thu, 2:00 PM
         </motion.div>
 
         {/* Dashed Perforation Divider */}
         <div className="h-px w-full border-t border-dashed border-gray-200" />
 
-        {/* Payment Verification Status */}
+        {/* Meeting Confirmation Status */}
         <div className="flex flex-col items-center gap-1.5">
           <motion.span
             animate={isVerified ? { scale: [0.95, 1.03, 1] } : { scale: 1 }}
@@ -155,12 +155,12 @@ export const Card3 = () => {
             </svg>
             <TextMorph>
               {isVerified
-                ? "Payment proof verified"
-                : "Verifying payment proof..."}
+                ? "Demo confirmed on calendar"
+                : "Awaiting prospect reply..."}
             </TextMorph>
           </motion.span>
 
-          {/* Animated Lock & Escrow Release Status */}
+          {/* Animated Lock & Learning Optimization Status */}
           <span className="inline-flex items-center gap-1 text-[10px] text-gray-400">
             <svg
               width="10"
@@ -196,7 +196,7 @@ export const Card3 = () => {
               />
             </svg>
             <TextMorph>
-              {isVerified ? "Milestone released" : "Funds held in escrow"}
+              {isVerified ? "Doubled down on RevOps (+65%)" : "Learning campaign signals"}
             </TextMorph>
           </span>
         </div>

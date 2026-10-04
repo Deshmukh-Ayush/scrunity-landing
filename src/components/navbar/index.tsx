@@ -57,7 +57,7 @@ export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { label: "Product", href: "/product" },
+    { label: "Product", href: "/" },
     { label: "Resources", href: "/resources" },
     { label: "Pricing", href: "/pricing" },
     { label: "Blogs", href: "/blog" },

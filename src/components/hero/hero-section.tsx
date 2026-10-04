@@ -207,26 +207,6 @@ export const HeroSection = () => {
             Contact Sales
           </Link>
         </div>
-
-        {/* Live Interactive Preset Chips using <Para> */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-          <Para className="text-xs text-neutral-400">Interactive live preview:</Para>
-          {Object.keys(PRESETS).map((key) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => handleSelectDomain(key)}
-              className={cn(
-                "cursor-pointer rounded-full border px-3 py-1 font-mono text-xs transition-colors select-none",
-                selectedDomain === key
-                  ? "border-[#00b0fa] bg-[#00b0fa]/15 font-semibold text-neutral-900 shadow-xs"
-                  : "border-gray-200 bg-white text-neutral-600 hover:border-gray-300 hover:text-neutral-900",
-              )}
-            >
-              {key}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* ── 2. Hero Interactive Product Canvas Stage ──────────── */}

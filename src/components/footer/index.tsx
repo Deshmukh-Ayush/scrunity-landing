@@ -39,6 +39,13 @@ export const Footer = () => {
               verified decision-maker discovery, contextual cold outreach, and
               calendar meeting conversion.
             </p>
+
+            <div className="flex items-center gap-2 pt-1">
+              <span className="inline-flex items-center gap-1.5 rounded-md border border-gray-200 bg-gray-50 px-2.5 py-1 font-mono text-[11px] text-neutral-600">
+                <span className="font-sans text-[10px] text-neutral-400 font-medium">Udyam Registration:</span>
+                UDYAM-MP-10-0184513
+              </span>
+            </div>
           </div>
 
           <div className="flex items-center">
@@ -62,9 +69,15 @@ export const Footer = () => {
       </div>
 
       <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-gray-200/80 pt-8 sm:flex-row sm:items-center">
-        <p className="text-xs text-neutral-500">
-          &copy; {new Date().getFullYear()} Scrunity Inc. All rights reserved.
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-xs text-neutral-500">
+          <p>
+            &copy; {new Date().getFullYear()} Scrunity AI Inc. All rights reserved.
+          </p>
+          <span className="hidden sm:inline text-neutral-300">·</span>
+          <span className="font-mono text-[11px] text-neutral-500">
+            Udyam: <span className="text-neutral-700 font-medium">UDYAM-MP-10-0184513</span>
+          </span>
+        </div>
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           {LEGAL_LINKS.map((link) => (

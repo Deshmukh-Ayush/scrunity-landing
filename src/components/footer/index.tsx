@@ -20,16 +20,16 @@ export const Footer = () => {
           <div className="space-y-4">
             <Link
               href="/"
-              className="inline-flex items-center gap-2.5 transition-opacity hover:opacity-80"
+              className="inline-flex items-center gap-3 transition-opacity hover:opacity-85"
             >
               <Image
-                src="/logo/scrunity_svg.svg"
+                src="/new-logo/scrunity-icon.svg"
                 alt="Scrunity Logo"
-                width={113}
-                height={188}
-                className="h-auto w-3.5"
+                width={38}
+                height={38}
+                className="h-auto w-9.5"
               />
-              <span className="text-xl font-semibold tracking-tight text-neutral-900">
+              <span className="text-[19px] font-bold tracking-tight text-neutral-900">
                 Scrunity AI
               </span>
             </Link>

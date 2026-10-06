@@ -53,19 +53,23 @@ export const FaqSection = () => {
 
   return (
     <div className="w-full">
-      {/* ── Section Header ────────────────────────────────────── */}
+      {/* ── Section Header (Gumloop-Style Clean Eyebrow + Headline) ── */}
       <div className="mb-12">
-        <SubHeading className="text-[28px] md:text-[36px]">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1 font-mono text-[11px] font-semibold text-neutral-700 shadow-xs">
+          <span className="size-1.5 rounded-full bg-neutral-900" />
+          Clear Answers
+        </span>
+        <h2 className="mt-4 text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl">
           Frequently asked questions
-        </SubHeading>
-        <Para className="mt-2 max-w-2xl text-base md:text-lg">
+        </h2>
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-neutral-500 md:text-lg">
           Everything you need to know about deliverability guarantees, waterfall data enrichment, and
           calendar synchronization with Scrunity AI.
-        </Para>
+        </p>
       </div>
 
-      {/* ── Accordion List ────────────────────────────────────── */}
-      <div className="divide-y divide-gray-100 rounded-[18px] border border-gray-200 bg-white p-4 shadow-xs md:p-6">
+      {/* ── Accordion List (Gumloop-Style Clean White Container) ── */}
+      <div className="divide-y divide-gray-100 rounded-xl border border-gray-200/90 bg-white p-5 shadow-xs md:p-7">
         {FAQS.map((faq, index) => {
           const isOpen = openIndex === index;
           return (

@@ -178,70 +178,92 @@ export const HeroSection = () => {
   };
 
   return (
-    <section className="relative w-full pt-16 pb-12 md:pt-24 md:pb-20">
-      {/* ── 1. Hero Centered Content ──────────────────────────── */}
-      <div className="mx-auto flex max-w-4xl flex-col items-center px-6 text-center">
-        {/* THE ONLY <Heading> TAG ON THE ENTIRE LANDING PAGE - SINGLE SOLID COLOR */}
-        <Heading className="text-center font-medium tracking-tight text-neutral-900 leading-[1.08]">
-          Turn target company domains into confirmed meetings.
-        </Heading>
+    <section className="relative w-full">
+      {/* ── 1. Hero Copy — Split Layout (Generous top whitespace, tight to card) ── */}
+      <div className="mx-auto max-w-7xl px-6 pt-20 pb-6 sm:px-10 md:pt-28 md:pb-8">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-12">
+          {/* Left: Heading — large, left-aligned, authoritative */}
+          <div className="w-full md:max-w-[56%]">
+            <Heading className="text-left font-semibold leading-[1.04] tracking-tight text-neutral-900 md:text-[58px]">
+              Your outbound sales team, on autopilot.
+            </Heading>
+          </div>
 
-        {/* Narrative Description using <Para> */}
-        <Para className="mt-5 max-w-2xl text-center text-base md:text-lg text-neutral-500">
-          Scrunity AI discovers high-intent accounts, identifies verified decision makers, and drafts
-          personalized 1-to-1 outreach that books qualified sales demos directly into your calendar.
-        </Para>
+          {/* Right: Subheading + CTAs — right-aligned column closer to bottom line */}
+          <div className="flex w-full flex-col items-start gap-5 md:max-w-[40%] md:items-end">
+            <Para className="text-base leading-relaxed text-neutral-500 md:text-right md:text-[17px]">
+              Paste your URL. Scrunity AI finds your ideal buyers, writes
+              personalized emails you approve, and books qualified meetings
+              straight into your calendar.
+            </Para>
 
-        {/* Centered CTAs with brand color #00b0fa */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <Button
-            href="/join"
-            className="border-none bg-[#00b0fa] px-7 py-2.5 text-sm font-semibold text-neutral-950 shadow-[0_2px_12px_rgba(0,176,250,0.3)] hover:bg-[#009de0]"
-          >
-            Get Started
-          </Button>
-          <Link
-            href="/join"
-            className="cursor-pointer rounded-full border border-gray-200 bg-white px-6 py-2.5 text-sm font-semibold text-neutral-700 shadow-xs transition-colors hover:bg-gray-100"
-          >
-            Contact Sales
-          </Link>
+            {/* CTAs */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <Link
+                href="/join"
+                className="inline-flex items-center justify-center rounded-lg bg-[#00b0fa] px-5 py-2.5 text-sm font-semibold text-neutral-950 shadow-xs transition-colors duration-150 hover:bg-[#009de0]"
+              >
+                Get Started
+              </Link>
+              <Link
+                href="/join"
+                className="inline-flex items-center justify-center rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-neutral-800 shadow-xs transition-colors duration-150 hover:bg-gray-50 hover:border-gray-300"
+              >
+                Book a demo
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* ── 2. Hero Interactive Product Canvas Stage ──────────── */}
-      <div className="mt-12 px-2 sm:px-6 md:px-10">
-        {/* Concentric Frame: Outer rounded-[22px] with p-2 */}
-        <div className="relative rounded-[22px] border border-gray-200 bg-gray-100/70 p-2 shadow-xs">
-          {/* Inner Stage: rounded-[16px] bg-white */}
-          <div className="relative min-h-[580px] overflow-hidden rounded-[16px] border border-gray-200/90 bg-white shadow-xs">
-            {/* Ambient Shader in Backdrop */}
-            <div className="pointer-events-none absolute inset-0 z-0 opacity-15 mask-[radial-gradient(ellipse_75%_65%_at_50%_40%,#000_40%,transparent_100%)]">
-              <EverywhereayushShader theme="light" />
-            </div>
+      {/* ── 2. Product Canvas ────────────────────────────────── */}
+      <div className="mx-auto max-w-7xl px-6 sm:px-10">
+        {/* Outer Canvas Frame: Ultra-clean white background with crisp border and subtle ambient shadow */}
+        <div className="relative overflow-hidden rounded-2xl border border-gray-200/80 bg-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.08)]">
+          {/* Subtle top light gradient */}
+          <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-gray-50/50 to-white" />
 
-            {/* Stage Top Navigation Bar */}
-            <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 bg-white/90 px-4 py-3 backdrop-blur-md sm:px-6">
-              {/* Window Controls & Current Domain */}
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1.5">
-                  <span className="size-2.5 rounded-full bg-neutral-300" />
-                  <span className="size-2.5 rounded-full bg-neutral-300" />
-                  <span className="size-2.5 rounded-full bg-neutral-300" />
-                </div>
-                <div className="hidden h-3.5 w-px bg-gray-200 sm:block" />
-                <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-medium text-neutral-900">
-                    {currentPreset.domain}
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full border border-emerald-100 bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-600">
-                    <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Scrunity AI Active
-                  </span>
-                </div>
+          {/* Top Window Navigation Bar */}
+          <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 bg-white/80 px-5 py-3 backdrop-blur-sm sm:px-6">
+            {/* macOS Window Controls + Active Target Domain */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
+                <span className="size-3 rounded-full bg-[#ff5f57] border border-[#e0443e]/40" />
+                <span className="size-3 rounded-full bg-[#febc2e] border border-[#d89e24]/40" />
+                <span className="size-3 rounded-full bg-[#28c840] border border-[#1aab29]/40" />
+              </div>
+              <div className="hidden h-3.5 w-px bg-gray-200 sm:block" />
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs font-semibold text-neutral-900">
+                  {currentPreset.domain}
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200/80 bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">
+                  <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Live Agent
+                </span>
               </div>
 
-              {/* Stage Selector Tabs */}
+              {/* Domain Switcher Chips */}
+              <div className="hidden items-center gap-1 sm:flex pl-1">
+                {Object.keys(PRESETS).map((key) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => handleSelectDomain(key)}
+                    className={cn(
+                      "cursor-pointer rounded-md px-2.5 py-1 text-xs font-medium transition-colors select-none",
+                      selectedDomain === key
+                        ? "bg-neutral-900 text-white shadow-xs"
+                        : "text-neutral-500 hover:bg-gray-100 hover:text-neutral-900"
+                    )}
+                  >
+                    {key}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+              {/* Stage Tabs */}
               <div className="flex items-center gap-1 rounded-full border border-gray-200 bg-gray-50/90 p-1">
                 {STAGES.map((stage) => {
                   const Icon = stage.icon;
@@ -252,75 +274,75 @@ export const HeroSection = () => {
                       type="button"
                       onClick={() => setActiveStage(stage.id)}
                       className={cn(
-                        "flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors select-none",
+                        "flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors select-none",
                         isActive
                           ? "border border-gray-200 bg-white font-semibold text-neutral-900 shadow-xs"
-                          : "text-neutral-500 hover:text-neutral-900",
+                          : "text-neutral-500 hover:text-neutral-800",
                       )}
                     >
-                      <Icon weight="bold" className="size-3" />
+                      <Icon weight="bold" className="size-3.5" />
                       <span className="hidden sm:inline">{stage.label}</span>
                     </button>
                   );
                 })}
               </div>
 
-              {/* Live Metric Pill */}
-              <div className="hidden items-center gap-2 rounded-full border border-gray-200 bg-white px-2.5 py-1 text-xs text-neutral-600 shadow-xs lg:flex">
+              {/* Live Metric */}
+              <div className="hidden items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-neutral-600 shadow-xs lg:flex">
                 <LightningIcon weight="fill" className="size-3.5 text-[#00b0fa]" />
                 <span className="font-mono tabular-nums font-semibold text-neutral-900">
                   {currentPreset.metrics.meetingsBooked}
                 </span>
-                <Para className="text-[11px] text-neutral-400">meetings booked</Para>
+                <Para className="text-xs text-neutral-500">meetings booked</Para>
               </div>
             </div>
 
             {/* Stage Body */}
             <div className="relative z-10 p-4 sm:p-6 lg:p-8">
               <AnimatePresence mode="wait">
-                {/* 01 DOMAIN RADAR STAGE */}
+                {/* 01 DOMAIN RADAR */}
                 {activeStage === "research" && (
                   <motion.div
                     key="research"
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.22 }}
-                    className="grid grid-cols-1 gap-6 lg:grid-cols-3"
+                    transition={{ duration: 0.2 }}
+                    className="grid grid-cols-1 gap-4 lg:grid-cols-3"
                   >
-                    {/* Left: Extracted Profile */}
+                    {/* Extracted Profile */}
                     <div className="rounded-[14px] border border-gray-200 bg-white p-5 shadow-xs">
                       <div className="flex items-center justify-between">
-                        <Para className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
+                        <Para className="font-mono text-xs font-semibold tracking-wider text-neutral-500 uppercase">
                           Stage 01 · Ingestion
                         </Para>
-                        <span className="rounded-full border border-blue-100 bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-[#00b0fa]">
+                        <span className="rounded-full border border-blue-100 bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-[#00b0fa]">
                           Complete
                         </span>
                       </div>
                       <div className="mt-4 flex items-center gap-3">
-                        <div className="flex size-11 items-center justify-center rounded-xl border border-gray-200 bg-gray-50 text-neutral-900 shadow-xs font-semibold text-lg">
+                        <div className="flex size-10 items-center justify-center rounded-xl border border-gray-200 bg-gray-50 text-sm font-semibold text-neutral-900 shadow-xs">
                           {currentPreset.name.slice(0, 2).toUpperCase()}
                         </div>
                         <div>
                           <Para className="text-base font-semibold text-neutral-900">
                             {currentPreset.name}
                           </Para>
-                          <Para className="text-xs text-neutral-400">{currentPreset.industry}</Para>
+                          <Para className="text-xs text-neutral-500">{currentPreset.industry}</Para>
                         </div>
                       </div>
-                      <Para className="mt-4 text-xs leading-relaxed text-neutral-600">
+                      <Para className="mt-3 text-sm leading-relaxed text-neutral-600">
                         &ldquo;{currentPreset.tagline}&rdquo;
                       </Para>
                       <div className="mt-4 border-t border-gray-100 pt-4">
-                        <Para className="font-mono text-[10px] font-medium text-neutral-400 uppercase tracking-wider">
-                          Extracted Value Keywords
+                        <Para className="font-mono text-xs font-medium text-neutral-500 uppercase tracking-wider">
+                          Value Keywords
                         </Para>
                         <div className="mt-2 flex flex-wrap gap-1.5">
                           {currentPreset.keywords.map((kw) => (
                             <span
                               key={kw}
-                              className="rounded-md border border-gray-200 bg-gray-50 px-2 py-0.5 font-mono text-[11px] text-neutral-700"
+                              className="rounded-md border border-gray-200 bg-gray-50 px-2.5 py-1 font-mono text-xs text-neutral-700"
                             >
                               {kw}
                             </span>
@@ -329,17 +351,14 @@ export const HeroSection = () => {
                       </div>
                     </div>
 
-                    {/* Center: Competitor & Wedge Radar */}
+                    {/* Competitor Wedges */}
                     <div className="rounded-[14px] border border-gray-200 bg-white p-5 shadow-xs">
                       <div className="flex items-center justify-between">
-                        <Para className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
+                        <Para className="font-mono text-xs font-semibold tracking-wider text-neutral-500 uppercase">
                           Competitor Wedges
                         </Para>
                         <MagnifyingGlassIcon weight="bold" className="size-4 text-neutral-400" />
                       </div>
-                      <Para className="mt-2 text-xs text-neutral-500">
-                        Scrunity AI extracted market alternatives to formulate high-converting outreach angles:
-                      </Para>
                       <div className="mt-3 space-y-2">
                         {currentPreset.competitors.map((comp) => (
                           <div
@@ -347,71 +366,67 @@ export const HeroSection = () => {
                             className="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50/70 p-2.5 text-xs"
                           >
                             <span className="font-medium text-neutral-900">{comp}</span>
-                            <span className="font-mono text-[10px] text-emerald-600">
+                            <span className="font-mono text-xs text-emerald-600 font-medium">
                               Wedge identified ✓
                             </span>
                           </div>
                         ))}
                       </div>
                       <div className="mt-4 border-t border-gray-100 pt-3">
-                        <div className="rounded-lg border border-blue-100 bg-blue-50/70 p-2.5 text-xs text-blue-900 leading-relaxed">
-                          <span className="font-semibold">AI Pitch Wedge:</span> Emphasize speed, developer
-                          control, and transparent pricing vs legacy incumbent complexity.
+                        <div className="rounded-lg border border-blue-100 bg-blue-50/70 p-3 text-xs text-blue-900 leading-relaxed">
+                          <span className="font-semibold">AI Pitch Wedge:</span> Emphasize speed,
+                          developer control, and transparent pricing vs legacy incumbent complexity.
                         </div>
                       </div>
                     </div>
 
-                    {/* Right: ICP Blueprint */}
+                    {/* ICP Blueprint */}
                     <div className="rounded-[14px] border border-gray-200 bg-white p-5 shadow-xs">
                       <div className="flex items-center justify-between">
-                        <Para className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
-                          Target ICP Blueprint
+                        <Para className="font-mono text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+                          Target ICP
                         </Para>
                         <TargetIcon weight="bold" className="size-4 text-[#00b0fa]" />
                       </div>
-                      <Para className="mt-3 text-xs leading-relaxed text-neutral-600">
+                      <Para className="mt-3 text-sm leading-relaxed text-neutral-700">
                         <span className="font-semibold text-neutral-900">Target Buyer:</span>{" "}
                         {currentPreset.targetIcp}
                       </Para>
                       <div className="mt-4 space-y-2 border-t border-gray-100 pt-3 text-xs">
-                        <div className="flex justify-between text-neutral-600">
-                          <Para className="text-xs text-neutral-500">Target Headcount:</Para>
-                          <span className="font-mono font-medium text-neutral-900">
-                            25 - 500 employees
-                          </span>
-                        </div>
-                        <div className="flex justify-between text-neutral-600">
-                          <Para className="text-xs text-neutral-500">Verified Accounts Found:</Para>
+                        <div className="flex justify-between">
+                          <Para className="text-xs text-neutral-500">Verified Accounts:</Para>
                           <span className="font-mono font-semibold text-neutral-900">
-                            {currentPreset.metrics.leadsFound} accounts
+                            {currentPreset.metrics.leadsFound}
                           </span>
                         </div>
-                        <div className="flex justify-between text-neutral-600">
-                          <Para className="text-xs text-neutral-500">Deliverability Check:</Para>
-                          <span className="font-medium text-emerald-600">Waterfall 99.4%</span>
+                        <div className="flex justify-between">
+                          <Para className="text-xs text-neutral-500">Deliverability:</Para>
+                          <span className="font-semibold text-emerald-600">
+                            {currentPreset.metrics.deliverability}
+                          </span>
                         </div>
                       </div>
                       <button
                         type="button"
                         onClick={() => setActiveStage("leads")}
-                        className="mt-6 flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-full border border-neutral-900 bg-neutral-900 py-2 text-xs font-semibold text-white shadow-xs hover:bg-neutral-800"
+                        className="mt-5 flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-neutral-900 bg-neutral-900 py-2.5 text-xs font-semibold text-white shadow-xs hover:bg-neutral-800"
                       >
-                        <span>Inspect Discovered Leads</span>
+                        <span>Inspect Leads</span>
                         <ArrowRightIcon weight="bold" className="size-3" />
                       </button>
                     </div>
                   </motion.div>
                 )}
 
-                {/* 02 DECISION MAKERS STAGE */}
+                {/* 02 DECISION MAKERS */}
                 {activeStage === "leads" && (
                   <motion.div
                     key="leads"
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.22 }}
-                    className="grid grid-cols-1 gap-6 lg:grid-cols-3"
+                    transition={{ duration: 0.2 }}
+                    className="grid grid-cols-1 gap-4 lg:grid-cols-3"
                   >
                     <div className="rounded-[14px] border border-gray-200 bg-white p-6 shadow-xs lg:col-span-2">
                       <div className="flex items-center justify-between">
@@ -420,65 +435,61 @@ export const HeroSection = () => {
                             Discovered Decision Maker
                           </Para>
                           <Para className="text-xs text-neutral-400">
-                            Multi-provider waterfall verification with live SMTP check
+                            Multi-provider waterfall with live SMTP check
                           </Para>
                         </div>
                         <span className="inline-flex items-center gap-1 rounded-full border border-emerald-100 bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">
                           <CheckCircleIcon weight="fill" className="size-3.5 text-emerald-500" />
-                          Fit Score: {currentPreset.sampleLead.fitScore}%
+                          {currentPreset.sampleLead.fitScore}% fit
                         </span>
                       </div>
 
-                      <div className="mt-6 flex flex-col justify-between gap-4 rounded-xl border border-gray-200 bg-gray-50/70 p-4 sm:flex-row sm:items-center">
+                      <div className="mt-5 flex flex-col justify-between gap-4 rounded-xl border border-gray-200 bg-gray-50/70 p-4 sm:flex-row sm:items-center">
                         <div className="flex items-center gap-3">
-                          <div className="flex size-12 items-center justify-center rounded-full bg-neutral-900 text-sm font-semibold text-white">
-                            {currentPreset.sampleLead.name
-                              .split(" ")
-                              .map((n) => n[0])
-                              .join("")}
+                          <div className="flex size-11 items-center justify-center rounded-full bg-neutral-900 text-sm font-semibold text-white">
+                            {currentPreset.sampleLead.name.split(" ").map((n) => n[0]).join("")}
                           </div>
                           <div>
                             <Para className="text-sm font-semibold text-neutral-900">
                               {currentPreset.sampleLead.name}
                             </Para>
-                            <Para className="text-xs font-medium text-neutral-500">
+                            <Para className="text-xs text-neutral-500">
                               {currentPreset.sampleLead.role} · {currentPreset.sampleLead.company}
                             </Para>
-                            <Para className="mt-1 font-mono text-[11px] text-[#00b0fa]">
+                            <Para className="mt-0.5 font-mono text-xs text-[#00b0fa]">
                               {currentPreset.sampleLead.email}
                             </Para>
                           </div>
                         </div>
-
                         <div className="flex items-center gap-2">
-                          <span className="rounded-md border border-gray-200 bg-white px-2 py-1 font-mono text-[11px] text-neutral-600">
-                            LinkedIn Verified ✓
+                          <span className="rounded-md border border-gray-200 bg-white px-2.5 py-1 font-mono text-xs text-neutral-600">
+                            LinkedIn ✓
                           </span>
-                          <span className="rounded-md border border-emerald-200 bg-emerald-50 px-2 py-1 font-mono text-[11px] font-medium text-emerald-700">
-                            Deliverability: 99.8%
+                          <span className="rounded-md border border-emerald-200 bg-emerald-50 px-2.5 py-1 font-mono text-xs font-medium text-emerald-700">
+                            99.8% deliverable
                           </span>
                         </div>
                       </div>
 
-                      <div className="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
-                        <Para className="text-xs text-neutral-400">
-                          {currentPreset.metrics.leadsFound} other decision makers queued in this campaign
+                      <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-4">
+                        <Para className="text-xs text-neutral-500">
+                          {currentPreset.metrics.leadsFound} others queued
                         </Para>
                         <button
                           type="button"
                           onClick={() => setActiveStage("email")}
                           className="flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-neutral-900 hover:text-[#00b0fa]"
                         >
-                          <span>Review Drafted Email</span>
+                          <span>Review Email Draft</span>
                           <ArrowRightIcon weight="bold" className="size-3" />
                         </button>
                       </div>
                     </div>
 
-                    {/* Matched Companies Stream */}
+                    {/* Matched Accounts */}
                     <div className="rounded-[14px] border border-gray-200 bg-white p-5 shadow-xs">
-                      <Para className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
-                        Matched Target Accounts
+                      <Para className="font-mono text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+                        Matched Accounts
                       </Para>
                       <div className="mt-3 space-y-2.5">
                         {["Synthetix Labs", "Kitebase AI", "Orbit Payments", "Voxel Engine"].map(
@@ -491,7 +502,7 @@ export const HeroSection = () => {
                                 <BuildingsIcon weight="bold" className="size-4 text-neutral-400" />
                                 <span className="font-medium text-neutral-900">{company}</span>
                               </div>
-                              <span className="font-mono text-[10px] text-neutral-400">
+                              <span className="font-mono text-xs text-neutral-500 font-medium">
                                 {idx === 0 ? "In Outreach" : "Queued"}
                               </span>
                             </div>
@@ -502,55 +513,53 @@ export const HeroSection = () => {
                   </motion.div>
                 )}
 
-                {/* 03 1-TO-1 OUTREACH STAGE */}
+                {/* 03 1-TO-1 OUTREACH */}
                 {activeStage === "email" && (
                   <motion.div
                     key="email"
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.22 }}
+                    transition={{ duration: 0.2 }}
                     className="rounded-[14px] border border-gray-200 bg-white p-6 shadow-xs"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 pb-4">
                       <div>
                         <div className="flex items-center gap-2">
-                          <Para className="text-xs font-medium text-neutral-400">To:</Para>
+                          <Para className="text-xs font-medium text-neutral-500">To:</Para>
                           <span className="font-mono text-xs font-medium text-neutral-800">
                             {currentPreset.sampleLead.email}
                           </span>
                         </div>
                         <div className="mt-1 flex items-center gap-2">
-                          <Para className="text-xs font-medium text-neutral-400">Subject:</Para>
+                          <Para className="text-xs font-medium text-neutral-500">Subject:</Para>
                           <span className="text-xs font-semibold text-neutral-900">
                             <TextMorph>{currentPreset.sampleLead.emailSubject}</TextMorph>
                           </span>
                         </div>
                       </div>
-
                       <div className="flex items-center gap-2">
                         <button
                           type="button"
                           onClick={() => {
-                            if (!isEditingDraft) {
-                              setEditedBody(currentPreset.sampleLead.emailSnippet);
-                            }
+                            if (!isEditingDraft) setEditedBody(currentPreset.sampleLead.emailSnippet);
                             setIsEditingDraft(!isEditingDraft);
                           }}
                           className="flex cursor-pointer items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-medium text-neutral-700 hover:bg-gray-100"
                         >
                           <PencilSimpleIcon weight="bold" className="size-3 text-neutral-500" />
-                          <span>{isEditingDraft ? "Save Edit" : "Edit Draft"}</span>
+                          <span>{isEditingDraft ? "Save" : "Edit Draft"}</span>
                         </button>
-                        <span className="rounded-full border border-blue-100 bg-blue-50 px-2.5 py-1 text-[11px] font-semibold text-[#00b0fa]">
-                          Human Review Supported
+                        <span className="rounded-full border border-blue-100 bg-blue-50 px-2.5 py-1 text-xs font-semibold text-[#00b0fa]">
+                          Human Review
                         </span>
                       </div>
                     </div>
 
-                    {/* Email Content Box */}
                     <div className="mt-5 rounded-xl border border-gray-100 bg-gray-50/60 p-5 font-sans text-sm leading-relaxed text-neutral-700">
-                      <Para className="mb-3 text-neutral-800">Hi {currentPreset.sampleLead.name.split(" ")[0]},</Para>
+                      <Para className="mb-3 text-neutral-800">
+                        Hi {currentPreset.sampleLead.name.split(" ")[0]},
+                      </Para>
                       {isEditingDraft ? (
                         <textarea
                           rows={4}
@@ -559,7 +568,9 @@ export const HeroSection = () => {
                           className="w-full rounded-lg border border-[#00b0fa] bg-white p-3 text-sm text-neutral-800 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
                       ) : (
-                        <Para className="text-neutral-700">{editedBody || currentPreset.sampleLead.emailSnippet}</Para>
+                        <Para className="text-neutral-700">
+                          {editedBody || currentPreset.sampleLead.emailSnippet}
+                        </Para>
                       )}
                       <Para className="mt-4 text-neutral-700">
                         Do you have 15 minutes this Thursday or Friday to inspect our live pipeline?
@@ -576,7 +587,9 @@ export const HeroSection = () => {
                     <div className="mt-5 flex flex-wrap items-center justify-between gap-3 text-xs text-neutral-500">
                       <div className="flex items-center gap-2">
                         <ShieldCheckIcon weight="fill" className="size-4 text-emerald-500" />
-                        <Para className="text-xs text-neutral-500">Domain Protection: 3 rotating secondary mailboxes active</Para>
+                        <Para className="text-xs text-neutral-500">
+                          3 rotating secondary mailboxes active
+                        </Para>
                       </div>
                       <button
                         type="button"
@@ -590,20 +603,20 @@ export const HeroSection = () => {
                   </motion.div>
                 )}
 
-                {/* 04 BOOKED DEMOS STAGE */}
+                {/* 04 BOOKED DEMOS */}
                 {activeStage === "meetings" && (
                   <motion.div
                     key="meetings"
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.22 }}
-                    className="grid grid-cols-1 gap-6 lg:grid-cols-3"
+                    transition={{ duration: 0.2 }}
+                    className="grid grid-cols-1 gap-4 lg:grid-cols-3"
                   >
                     <div className="rounded-[14px] border border-gray-200 bg-white p-6 shadow-xs">
                       <div className="flex items-center justify-between">
-                        <Para className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
-                          Calendar Integration
+                        <Para className="font-mono text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+                          Calendar
                         </Para>
                         <CalendarCheckIcon weight="fill" className="size-4 text-[#00b0fa]" />
                       </div>
@@ -611,15 +624,15 @@ export const HeroSection = () => {
                         <span className="font-mono text-3xl font-semibold tracking-tight text-neutral-900 tabular-nums">
                           {currentPreset.metrics.meetingsBooked}
                         </span>
-                        <Para className="text-xs text-neutral-400">qualified demos this month</Para>
+                        <Para className="text-xs text-neutral-500">demos this month</Para>
                       </div>
                       <div className="mt-4 space-y-2 rounded-xl border border-gray-100 bg-gray-50/70 p-3 text-xs">
                         <div className="flex items-center justify-between font-medium text-neutral-800">
-                          <span>Demo with Marcus Vance (VP Ops)</span>
+                          <span>Marcus Vance (VP Ops)</span>
                           <span className="font-mono text-emerald-600">Tomorrow 2:00 PM</span>
                         </div>
                         <div className="flex items-center justify-between text-neutral-500">
-                          <span>Demo with Elena Rostova (Head Eng)</span>
+                          <span>Elena Rostova (Head Eng)</span>
                           <span className="font-mono">Friday 11:30 AM</span>
                         </div>
                       </div>
@@ -627,52 +640,49 @@ export const HeroSection = () => {
 
                     <div className="rounded-[14px] border border-gray-200 bg-white p-6 shadow-xs">
                       <div className="flex items-center justify-between">
-                        <Para className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
-                          Continuous Optimization
+                        <Para className="font-mono text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+                          Optimization
                         </Para>
                         <ChartLineUpIcon weight="bold" className="size-4 text-emerald-500" />
                       </div>
-                      <Para className="mt-3 text-xs leading-relaxed text-neutral-600">
-                        Scrunity AI analyzes replies, filters objections, and reallocates send volume to winning
-                        segments automatically:
+                      <Para className="mt-3 text-sm leading-relaxed text-neutral-600">
+                        Scrunity AI analyzes replies and reallocates send volume to winning segments:
                       </Para>
-                      <div className="mt-3 rounded-lg border border-emerald-100 bg-emerald-50/60 p-2.5 text-xs text-emerald-900">
-                        <span className="font-semibold">Top Performing Angle:</span> &ldquo;Speed vs.
-                        incumbent latency&rdquo; produced a{" "}
-                        <span className="font-bold">{currentPreset.metrics.replyRate}</span> positive
-                        reply rate. Reallocating +60% daily send volume.
+                      <div className="mt-3 rounded-lg border border-emerald-100 bg-emerald-50/60 p-3 text-xs text-emerald-900">
+                        <span className="font-semibold">Top Angle:</span> &ldquo;Speed vs.
+                        incumbent latency&rdquo; →{" "}
+                        <span className="font-bold">{currentPreset.metrics.replyRate}</span> reply rate.
                       </div>
                     </div>
 
                     <div className="flex flex-col justify-between rounded-[14px] border border-gray-200 bg-white p-6 shadow-xs">
                       <div>
-                        <Para className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
-                          Pipeline Telemetry
+                        <Para className="font-mono text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+                          Telemetry
                         </Para>
                         <div className="mt-4 space-y-2 text-xs">
                           <div className="flex justify-between">
-                            <Para className="text-xs text-neutral-400">Inbox Placement:</Para>
+                            <Para className="text-xs text-neutral-500">Inbox Placement:</Para>
                             <span className="font-mono font-semibold text-neutral-900">
                               {currentPreset.metrics.deliverability}
                             </span>
                           </div>
                           <div className="flex justify-between">
-                            <Para className="text-xs text-neutral-400">Positive Reply Rate:</Para>
+                            <Para className="text-xs text-neutral-500">Reply Rate:</Para>
                             <span className="font-mono font-semibold text-emerald-600">
                               {currentPreset.metrics.replyRate}
                             </span>
                           </div>
                           <div className="flex justify-between">
-                            <Para className="text-xs text-neutral-400">Average CAC Reduction:</Para>
+                            <Para className="text-xs text-neutral-500">CAC Reduction:</Para>
                             <span className="font-mono font-semibold text-[#00b0fa]">-64%</span>
                           </div>
                         </div>
                       </div>
-
                       <Link href="/join" className="mt-4 block w-full">
                         <button
                           type="button"
-                          className="w-full rounded-full bg-neutral-900 py-2 text-xs font-semibold text-white shadow-xs hover:bg-neutral-800"
+                          className="w-full rounded-lg bg-neutral-900 py-2.5 text-xs font-semibold text-white shadow-xs hover:bg-neutral-800"
                         >
                           Get Started with Scrunity AI
                         </button>
@@ -683,23 +693,22 @@ export const HeroSection = () => {
               </AnimatePresence>
             </div>
 
-            {/* Bottom Status Ticker */}
-            <div className="relative z-10 border-t border-gray-100 bg-gray-50/80 px-4 py-2.5 text-[11px] text-neutral-500 sm:px-6">
+            {/* Bottom Status Bar */}
+            <div className="relative z-10 border-t border-gray-100 bg-gray-50/80 px-4 py-3 text-xs text-neutral-600 sm:px-6">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="font-medium text-neutral-700">Scrunity AI Status:</span>
-                  <span className="font-mono text-neutral-600">
-                    Scanning {currentPreset.domain} pipeline · 14 data sources active
+                  <span className="font-medium text-neutral-800">Scrunity AI:</span>
+                  <span className="font-mono text-neutral-500">
+                    Scanning {currentPreset.domain} · 14 data sources active
                   </span>
                 </div>
-                <div className="flex items-center gap-4 font-mono text-[10px]">
-                  <span>SMTP Handshake: 250 OK</span>
+                <div className="flex items-center gap-4 font-mono text-xs text-neutral-500">
+                  <span>SMTP: 250 OK</span>
                   <span>Zero Bounce Guarantee</span>
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </section>

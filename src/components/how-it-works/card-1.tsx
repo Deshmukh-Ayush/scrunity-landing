@@ -16,6 +16,7 @@ export const Card1 = () => {
   const cursorControls = useAnimationControls();
   const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   const isMountedRef = useRef(true);
+  const runSequenceRef = useRef<() => void>(() => {});
 
   const clearAllTimeouts = useCallback(() => {
     timeoutsRef.current.forEach(clearTimeout);
@@ -96,13 +97,19 @@ export const Card1 = () => {
       setIsResetting(true);
       // Soft transition before loop restart
       schedule(() => {
-        runSequence();
+        runSequenceRef.current();
       }, 350);
     }, 6800);
   }, [clearAllTimeouts, cursorControls, schedule, shouldReduceMotion]);
 
   useEffect(() => {
+    runSequenceRef.current = runSequence;
+  }, [runSequence]);
+
+  useEffect(() => {
     isMountedRef.current = true;
+    // The sequence initializes the animation state when the card mounts.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     runSequence();
 
     return () => {

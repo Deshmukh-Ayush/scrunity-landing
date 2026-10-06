@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import { TextMorph } from "torph/react";
 import {
   UserCheckIcon,
   MagnifyingGlassIcon,
@@ -11,24 +11,20 @@ import {
   CalendarCheckIcon,
   CheckCircleIcon,
   ArrowRightIcon,
-  BuildingsIcon,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { SubHeading, Para } from "@/components/utility/texts";
 
-// ── BENTO CARD 1: WATERFALL DECISION MAKERS DATA ──────────────
+// ── DATA ──────────────────────────────────────────────────────
 const PROSPECTS = [
   {
     id: "lead-1",
     name: "Marcus Vance",
-    role: "VP of Revenue Operations",
+    role: "VP Revenue Operations",
     company: "Synthetix Labs",
     email: "marcus.vance@synthetix.io",
     confidence: "99.8%",
-    mxValid: true,
-    smtpCode: "250 2.1.5 Recipient OK",
-    provider: "Waterfall (Primary)",
-    status: "Verified & Inbox Ready",
+    smtpCode: "250 OK",
   },
   {
     id: "lead-2",
@@ -37,10 +33,7 @@ const PROSPECTS = [
     company: "Kitebase AI",
     email: "elena@kitebase.dev",
     confidence: "99.6%",
-    mxValid: true,
-    smtpCode: "250 2.1.5 Recipient OK",
-    provider: "Waterfall (Secondary)",
-    status: "Verified & Inbox Ready",
+    smtpCode: "250 OK",
   },
   {
     id: "lead-3",
@@ -49,440 +42,384 @@ const PROSPECTS = [
     company: "Orbit Payments",
     email: "devon@orbitpay.com",
     confidence: "99.9%",
-    mxValid: true,
-    smtpCode: "250 2.1.5 Recipient OK",
-    provider: "Waterfall (Primary)",
-    status: "Verified & Inbox Ready",
+    smtpCode: "250 OK",
   },
 ];
 
-// ── BENTO CARD 2: COMPETITOR RADAR DATA ────────────────────────
-const COMPETITOR_WEDGES = [
+const STEPS = [
   {
-    id: "calendly",
-    competitor: "Calendly",
-    short: "vs Calendly",
-    headline: "Speed & API Control",
-    pitch: "Direct embed with zero redirects and round-robin AE assignment directly in form flow.",
-    winMetric: "+32% form-to-demo conversion",
+    id: "01",
+    icon: MagnifyingGlassIcon,
+    label: "Domain Research",
+    detail: "Paste your URL. AI extracts ICP, competitors, and market positioning in under 60 seconds.",
+    color: "text-[#00b0fa]",
+    bg: "bg-[#00b0fa]/10",
   },
   {
-    id: "chilipiper",
-    competitor: "Chili Piper",
-    short: "vs Chili Piper",
-    headline: "Zero Implementation Friction",
-    pitch: "No 6-week onboarding or complex routing matrices. Autonomous setup in under 10 minutes.",
-    winMetric: "10x faster deployment",
+    id: "02",
+    icon: UserCheckIcon,
+    label: "Decision-Maker Discovery",
+    detail: "14-provider waterfall with live SMTP verification. 99.8% inbox placement guaranteed.",
+    color: "text-emerald-600",
+    bg: "bg-emerald-50",
   },
   {
-    id: "zoominfo",
-    competitor: "ZoomInfo",
-    short: "vs ZoomInfo",
-    headline: "Live Waterfall vs Stale DB",
-    pitch: "Real-time SMTP ping rather than outdated 6-month-old databases with 15% bounce rates.",
-    winMetric: "Zero bounce guarantee",
+    id: "03",
+    icon: EnvelopeSimpleIcon,
+    label: "Personalized Outreach",
+    detail: "1-to-1 emails referencing real company signals — not mail-merge templates.",
+    color: "text-violet-600",
+    bg: "bg-violet-50",
   },
-];
-
-// ── BENTO CARD 3: MAILBOX DATA ────────────────────────────────
-const MAILBOXES = [
-  { address: "sarah@scrunity-hq.io", dailySent: 42, maxDaily: 50, health: "100%", status: "Warmed" },
-  { address: "team@getscrunity.co", dailySent: 38, maxDaily: 50, health: "99%", status: "Warmed" },
-  { address: "outreach@scrunitymail.net", dailySent: 40, maxDaily: 50, health: "98%", status: "Warmed" },
+  {
+    id: "04",
+    icon: CalendarCheckIcon,
+    label: "Meetings Booked",
+    detail: "Confirmed calendar invites land directly on your AEs' calendars. No manual follow-up.",
+    color: "text-amber-600",
+    bg: "bg-amber-50",
+  },
 ];
 
 export const BentoGrid = () => {
   const [selectedProspect, setSelectedProspect] = useState(PROSPECTS[0]);
-  const [selectedWedge, setSelectedWedge] = useState(COMPETITOR_WEDGES[0]);
-  const [reviewMode, setReviewMode] = useState<"auto" | "approval">("auto");
   const [isSigned, setIsSigned] = useState(false);
 
   return (
     <div className="w-full">
-      {/* ── Section Header ────────────────────────────────────── */}
+      {/* ── Section Header (Gumloop-Style Clean Eyebrow + Headline) ── */}
       <div className="mb-12">
-        <SubHeading className="text-[28px] md:text-[36px]">
-          Engineered for pipeline, not reading.
-        </SubHeading>
-        <Para className="mt-2 max-w-2xl text-base md:text-lg">
-          Top revenue teams visualize every stage of outbound execution. From instant domain intelligence
-          to verified decision makers and booked calendar demos with Scrunity AI.
-        </Para>
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200/60 bg-blue-50/50 px-3 py-1 font-mono text-[11px] font-semibold text-blue-700">
+          <span className="size-1.5 rounded-full bg-[#00b0fa]" />
+          Autonomous Pipeline
+        </span>
+        <h2 className="mt-4 text-3xl font-semibold tracking-tight text-neutral-900 md:text-4xl">
+          Build, dispatch & close meetings with sales agents
+        </h2>
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-neutral-500 md:text-lg">
+          Let autonomous SDR agents research target accounts, discover decision-makers, and write hyper-personalized outreach while your revenue leaders stay in control.
+        </p>
       </div>
 
-      {/* ── Bento Grid ────────────────────────────────────────── */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        {/* ── CARD 1: WATERFALL DECISION MAKERS (7 cols) ──────── */}
-        <div className="flex flex-col justify-between rounded-[18px] border border-gray-200 bg-white p-6 shadow-xs lg:col-span-7">
-          <div>
-            <div className="flex items-center justify-between">
-              <Para className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
-                Waterfall Verification Engine
-              </Para>
-              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-100 bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
-                <CheckCircleIcon weight="fill" className="size-3 text-emerald-500" />
-                Zero Bounce Guarantee
+      {/* ── 4-Stage Agent Mechanics (Gumloop style clean white cards with crisp borders) ── */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {STEPS.map((step) => {
+          const Icon = step.icon;
+          return (
+            <div
+              key={step.id}
+              className="group relative flex flex-col justify-between rounded-xl border border-gray-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:border-gray-300 hover:shadow-sm"
+            >
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className={cn("flex size-9 items-center justify-center rounded-lg border border-gray-100", step.bg)}>
+                    <Icon weight="bold" className={cn("size-4.5", step.color)} />
+                  </div>
+                  <span className="font-mono text-xs font-semibold text-neutral-400">
+                    {step.id}
+                  </span>
+                </div>
+                <h3 className="mt-4 text-sm font-semibold tracking-tight text-neutral-900">
+                  {step.label}
+                </h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-neutral-500">
+                  {step.detail}
+                </p>
+              </div>
+
+              <div className="mt-4 border-t border-gray-100 pt-3">
+                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-neutral-400 group-hover:text-neutral-700 transition-colors">
+                  Autonomous step
+                  <ArrowRightIcon weight="bold" className="size-2.5 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ── Two-Column Detail Cards ──────────────────────────── */}
+      <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-12">
+        {/* CARD A: Waterfall Verification (7 cols) */}
+        <div className="flex flex-col gap-5 rounded-xl border border-gray-200/90 bg-white p-6 shadow-xs lg:col-span-7">
+          <div className="flex items-start justify-between">
+            <div>
+              <span className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
+                Waterfall Verification
               </span>
+              <h3 className="mt-1 text-base font-semibold tracking-tight text-neutral-900">
+                Verified Decision Makers
+              </h3>
+              <p className="mt-0.5 text-xs text-neutral-500">
+                14-provider cascade · live SMTP handshake · zero bounce guarantee
+              </p>
             </div>
+            <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200/80 bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700">
+              <CheckCircleIcon weight="fill" className="size-3 text-emerald-500" />
+              Zero Bounce
+            </span>
+          </div>
 
-            <div className="mt-3">
-              <SubHeading className="text-[20px] md:text-[22px]">
-                Waterfall Decision-Maker Discovery
-              </SubHeading>
-              <Para className="mt-1 text-sm text-neutral-500">
-                Cascades across 14 data providers with live SMTP verification. Filters out generic info@
-                inboxes and pinpoints direct budget holders.
-              </Para>
-            </div>
+          {/* Lead selector chips */}
+          <div className="flex flex-wrap gap-2">
+            {PROSPECTS.map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => setSelectedProspect(p)}
+                className={cn(
+                  "cursor-pointer rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors select-none",
+                  selectedProspect.id === p.id
+                    ? "border-neutral-900 bg-neutral-900 text-white shadow-xs"
+                    : "border-gray-200 bg-gray-50/80 text-neutral-600 hover:bg-gray-100 hover:text-neutral-900",
+                )}
+              >
+                {p.name.split(" ")[0]} ({p.company})
+              </button>
+            ))}
+          </div>
 
-            {/* Interactive Lead Switcher */}
-            <div className="mt-5 flex flex-wrap gap-2">
-              {PROSPECTS.map((p) => (
-                <button
-                  key={p.id}
-                  type="button"
-                  onClick={() => setSelectedProspect(p)}
-                  className={cn(
-                    "cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-colors select-none",
-                    selectedProspect.id === p.id
-                      ? "border-neutral-900 bg-neutral-900 text-white font-semibold"
-                      : "border-gray-200 bg-gray-50 text-neutral-600 hover:bg-gray-100",
-                  )}
-                >
-                  {p.name} ({p.role.split(" ")[0]})
-                </button>
-              ))}
-            </div>
-
-            {/* Living Prospect Inspector Card */}
-            <div className="mt-4 rounded-xl border border-gray-100 bg-gray-50/80 p-4">
-              <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+          {/* Live lead card */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedProspect.id}
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.18 }}
+              className="rounded-lg border border-gray-100 bg-gray-50/70 p-4"
+            >
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="flex size-10 items-center justify-center rounded-full bg-neutral-900 text-xs font-semibold text-white">
+                  <div className="flex size-10 items-center justify-center rounded-lg bg-neutral-900 text-xs font-semibold text-white shadow-xs">
                     {selectedProspect.name.split(" ").map((n) => n[0]).join("")}
                   </div>
                   <div>
-                    <Para className="text-sm font-semibold text-neutral-900">
+                    <p className="text-sm font-semibold text-neutral-900">
                       {selectedProspect.name}
-                    </Para>
-                    <Para className="text-xs text-neutral-400">
+                    </p>
+                    <p className="text-xs text-neutral-500">
                       {selectedProspect.role} · {selectedProspect.company}
-                    </Para>
+                    </p>
+                    <p className="mt-0.5 font-mono text-[11px] text-[#00b0fa]">
+                      {selectedProspect.email}
+                    </p>
                   </div>
                 </div>
-
-                <div className="flex items-center gap-2">
+                <div className="text-right">
                   <span className="rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 font-mono text-[11px] font-semibold text-emerald-700">
-                    {selectedProspect.confidence} Fit
+                    {selectedProspect.confidence} fit
                   </span>
-                  <span className="rounded-md border border-[#00b0fa]/30 bg-[#00b0fa]/10 px-2 py-0.5 font-mono text-[11px] font-semibold text-neutral-900">
-                    LinkedIn ✓
-                  </span>
+                  <p className="mt-1.5 font-mono text-[10px] text-neutral-400">
+                    SMTP: {selectedProspect.smtpCode}
+                  </p>
                 </div>
               </div>
+            </motion.div>
+          </AnimatePresence>
 
-              {/* Real-time Verification Telemetry */}
-              <div className="mt-3 grid grid-cols-2 gap-2 border-t border-gray-200/60 pt-3 text-[11px] sm:grid-cols-3">
-                <div>
-                  <Para className="text-[10px] text-neutral-400">Target Email:</Para>
-                  <span className="truncate font-mono font-medium text-neutral-800 text-xs">
-                    {selectedProspect.email}
-                  </span>
-                </div>
-                <div>
-                  <Para className="text-[10px] text-neutral-400">SMTP Handshake:</Para>
-                  <span className="font-mono font-medium text-emerald-600 text-xs">
-                    {selectedProspect.smtpCode}
-                  </span>
-                </div>
-                <div>
-                  <Para className="text-[10px] text-neutral-400">Provider Source:</Para>
-                  <span className="font-mono text-neutral-700 text-xs">{selectedProspect.provider}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-2 text-xs">
-            <Para className="text-xs text-neutral-400">Continuously enriches 500+ ICP accounts monthly</Para>
-            <span className="font-mono text-[11px] font-medium text-emerald-600">
-              Live Validation Active
-            </span>
+          <div className="flex items-center justify-between border-t border-gray-100 pt-3 text-xs">
+            <p className="text-neutral-400">Enriches 500+ ICP accounts monthly</p>
+            <span className="font-mono text-[11px] font-medium text-emerald-600">Live · Active</span>
           </div>
         </div>
 
-        {/* ── CARD 2: COMPETITOR RADAR (5 cols) ───────────────── */}
-        <div className="flex flex-col justify-between rounded-[18px] border border-gray-200 bg-white p-6 shadow-xs lg:col-span-5">
+        {/* CARD B: 1-to-1 Outreach + Approve (5 cols) */}
+        <div className="flex flex-col gap-5 rounded-xl border border-gray-200/90 bg-white p-6 shadow-xs lg:col-span-5">
           <div>
-            <div className="flex items-center justify-between">
-              <Para className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
-                Positioning Intelligence
-              </Para>
-              <MagnifyingGlassIcon weight="bold" className="size-4 text-neutral-400" />
-            </div>
-
-            <div className="mt-3">
-              <SubHeading className="text-[20px] md:text-[22px]">
-                Autonomous Competitor Radar
-              </SubHeading>
-              <Para className="mt-1 text-sm text-neutral-500">
-                Discovers market alternatives and formulates precision pitch angles tailored to each buyer.
-              </Para>
-            </div>
-
-            {/* Competitor Chips Selector */}
-            <div className="mt-5 flex flex-wrap gap-2">
-              {COMPETITOR_WEDGES.map((w) => (
-                <button
-                  key={w.id}
-                  type="button"
-                  onClick={() => setSelectedWedge(w)}
-                  className={cn(
-                    "cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition-colors select-none",
-                    selectedWedge.id === w.id
-                      ? "border-[#00b0fa] bg-[#00b0fa]/15 font-semibold text-neutral-900"
-                      : "border-gray-200 bg-gray-50 text-neutral-600 hover:bg-gray-100",
-                  )}
-                >
-                  {w.short}
-                </button>
-              ))}
-            </div>
-
-            {/* Dynamic Pitch Angle Card */}
-            <div className="mt-4 rounded-xl border border-blue-100 bg-blue-50/50 p-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-blue-900">
-                  <TextMorph>{selectedWedge.headline}</TextMorph>
-                </span>
-                <span className="rounded-full border border-blue-200 bg-white px-2 py-0.5 font-mono text-[10px] font-semibold text-blue-700">
-                  {selectedWedge.winMetric}
-                </span>
-              </div>
-              <Para className="mt-2 text-xs leading-relaxed text-blue-900/80">
-                <TextMorph>{selectedWedge.pitch}</TextMorph>
-              </Para>
-            </div>
-          </div>
-
-          <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-2 text-xs">
-            <Para className="text-xs text-neutral-400">Automated wedge injection</Para>
-            <span className="font-mono text-[11px] font-medium text-neutral-800">
-              100% Contextual
+            <span className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
+              Hyper-Personalized Outreach
             </span>
-          </div>
-        </div>
-
-        {/* ── CARD 3: DELIVERABILITY SHIELD (5 cols) ──────────── */}
-        <div className="flex flex-col justify-between rounded-[18px] border border-gray-200 bg-white p-6 shadow-xs lg:col-span-5">
-          <div>
-            <div className="flex items-center justify-between">
-              <Para className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
-                Deliverability Infrastructure
-              </Para>
-              <ShieldCheckIcon weight="fill" className="size-4 text-emerald-500" />
-            </div>
-
-            <div className="mt-3">
-              <SubHeading className="text-[20px] md:text-[22px]">
-                Multi-Mailbox Deliverability Shield
-              </SubHeading>
-              <Para className="mt-1 text-sm text-neutral-500">
-                Protects your root domain with dedicated secondary domains, automated warmup, and SPF/DKIM/DMARC records.
-              </Para>
-            </div>
-
-            {/* Mailbox Health Matrix */}
-            <div className="mt-5 space-y-2.5">
-              {MAILBOXES.map((mb) => (
-                <div
-                  key={mb.address}
-                  className="rounded-lg border border-gray-100 bg-gray-50/70 p-2.5 text-xs"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono font-medium text-neutral-800">{mb.address}</span>
-                    <span className="inline-flex items-center gap-1 rounded-full border border-emerald-100 bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
-                      <span className="size-1 rounded-full bg-emerald-500" />
-                      {mb.health} Warm
-                    </span>
-                  </div>
-                  <div className="mt-2 flex items-center justify-between text-[11px]">
-                    <Para className="text-[11px] text-neutral-400">Sent today: {mb.dailySent}/{mb.maxDaily}</Para>
-                    <span className="font-mono text-[10px] text-neutral-400">SPF · DKIM · DMARC ✓</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <h3 className="mt-1 text-base font-semibold tracking-tight text-neutral-900">
+              Emails Your Team Approves
+            </h3>
+            <p className="mt-0.5 text-xs text-neutral-500">
+              Contextual, not templated. 1-click approve or edit before send.
+            </p>
           </div>
 
-          <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-2 text-xs">
-            <Para className="text-xs text-neutral-400">Primary domain reputation: Protected</Para>
-            <span className="font-mono text-[11px] font-medium text-emerald-600">0 Spam Flags</span>
-          </div>
-        </div>
-
-        {/* ── CARD 4: 1-TO-1 COLD OUTREACH & INKING (7 cols) ──── */}
-        <div className="flex flex-col justify-between rounded-[18px] border border-gray-200 bg-white p-6 shadow-xs lg:col-span-7">
-          <div>
-            <div className="flex items-center justify-between">
-              <Para className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
-                Hyper-Personalized Outreach
-              </Para>
-              <div className="flex items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 p-1">
-                <button
-                  type="button"
-                  onClick={() => setReviewMode("auto")}
-                  className={cn(
-                    "cursor-pointer rounded-full px-2.5 py-0.5 text-[11px] font-medium transition-colors select-none",
-                    reviewMode === "auto"
-                      ? "border border-gray-200 bg-white text-neutral-900 shadow-xs"
-                      : "text-neutral-500 hover:text-neutral-800",
-                  )}
-                >
-                  Autonomous
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setReviewMode("approval")}
-                  className={cn(
-                    "cursor-pointer rounded-full px-2.5 py-0.5 text-[11px] font-medium transition-colors select-none",
-                    reviewMode === "approval"
-                      ? "border border-gray-200 bg-white text-neutral-900 shadow-xs"
-                      : "text-neutral-500 hover:text-neutral-800",
-                  )}
-                >
-                  Human Review
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-3">
-              <SubHeading className="text-[20px] md:text-[22px]">
-                1-to-1 Contextual Cold Outreach
-              </SubHeading>
-              <Para className="mt-1 text-sm text-neutral-500">
-                Every email references authentic prospect milestones and pain points. Never generic mail merge templates.
-              </Para>
-            </div>
-
-            {/* Email Canvas Preview with SVG Signature Inking */}
-            <div className="mt-4 rounded-xl border border-gray-100 bg-gray-50/70 p-4">
-              <div className="flex items-center justify-between border-b border-gray-200/60 pb-2 text-xs">
-                <div className="flex items-center gap-2">
-                  <Para className="text-xs text-neutral-400">Subject:</Para>
-                  <span className="font-semibold text-neutral-900">
-                    Quick question on Synthetix&apos;s lead-to-calendar routing
-                  </span>
-                </div>
-                <span className="rounded-md bg-blue-50 px-2 py-0.5 font-mono text-[10px] text-[#00b0fa]">
-                  Dynamic Tokens Active
-                </span>
-              </div>
-
-              <div className="mt-3 space-y-2 text-xs leading-relaxed text-neutral-700">
-                <Para className="text-xs text-neutral-800">Hi Marcus,</Para>
-                <Para className="text-xs text-neutral-700">
-                  Saw Synthetix just scaled the AE team to 24 reps. Teams at your stage usually lose{" "}
-                  <span className="rounded bg-amber-100 px-1 py-0.5 font-medium text-amber-800">
-                    ~28% of demo inbound
-                  </span>{" "}
-                  during calendar redirects.
-                </Para>
-                <Para className="text-xs text-neutral-700">
-                  Scrunity AI embeds instant qualified booking directly without redirects.
-                </Para>
-              </div>
-
-              {/* Bottom Inking and Approval State */}
-              <div className="mt-4 flex items-center justify-between border-t border-gray-200/60 pt-3">
-                <div className="flex items-center gap-2">
-                  <div className="relative h-6 w-20">
-                    <svg viewBox="0 0 48 18" className="h-full w-full">
-                      <motion.path
-                        d="M2 13C7 6 8 15 12 9C16 3 18 14 22 8C27 0 27 15 32 9C36 4 38 13 46 5"
-                        fill="none"
-                        stroke="#171717"
-                        strokeWidth="1.2"
-                        strokeLinecap="round"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: isSigned ? 1 : 0.7 }}
-                        transition={{ duration: 1.2, ease: [0.32, 0.72, 0, 1] }}
-                      />
-                    </svg>
-                  </div>
-                  <Para className="font-mono text-[10px] text-neutral-400">Agent Signoff</Para>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setIsSigned(!isSigned)}
-                  className="cursor-pointer rounded-full border border-neutral-900 bg-neutral-900 px-3 py-1 text-xs font-semibold text-white shadow-xs hover:bg-neutral-800"
-                >
-                  {isSigned ? "Approved & Queued ✓" : "1-Click Approve"}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-2 text-xs">
-            <Para className="text-xs text-neutral-400">Average positive reply rate: 16.4%</Para>
-            <span className="font-mono text-[11px] font-medium text-neutral-900">
-              4.2x Industry Standard
-            </span>
-          </div>
-        </div>
-
-        {/* ── CARD 5: AUTONOMOUS CALENDAR CLOSER (12 cols) ────── */}
-        <div className="rounded-[18px] border border-gray-200 bg-white p-6 shadow-xs lg:col-span-12">
-          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-center">
-            <div className="max-w-xl">
+          {/* Email preview */}
+          <div className="flex-1 rounded-lg border border-gray-100 bg-gray-50/60 p-4 text-xs leading-relaxed text-neutral-700">
+            <div className="mb-3 border-b border-gray-200/60 pb-2.5">
               <div className="flex items-center gap-2">
-                <Para className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
-                  Direct Pipeline Output
-                </Para>
-                <span className="rounded-full border border-emerald-100 bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
-                  Calendar Sync
+                <span className="text-neutral-400">To:</span>
+                <span className="font-mono text-neutral-700">marcus.vance@synthetix.io</span>
+              </div>
+              <div className="mt-1 flex items-center gap-2">
+                <span className="text-neutral-400">Re:</span>
+                <span className="font-semibold text-neutral-900">
+                  Synthetix&apos;s lead-to-calendar routing
                 </span>
               </div>
-              <SubHeading className="mt-2 text-[20px] md:text-[22px]">
-                Autonomous Calendar Closer
-              </SubHeading>
-              <Para className="mt-1 text-sm text-neutral-500">
-                When a prospect replies with interest, Scrunity AI handles scheduling, time-zone conversion, and
-                drops confirmed invites directly onto your account executives&apos; calendars.
-              </Para>
+            </div>
+            <p className="text-neutral-700">Hi Marcus,</p>
+            <p className="mt-2 text-neutral-600">
+              Saw Synthetix scaled the AE team to 24 reps. Teams at your stage
+              typically lose{" "}
+              <span className="rounded bg-amber-100 px-1 font-medium text-amber-800">
+                ~28% of demos
+              </span>{" "}
+              in calendar redirects.
+            </p>
+            <p className="mt-2 text-neutral-600">
+              Scrunity AI embeds instant booking directly — no redirects.
+            </p>
+          </div>
+
+          {/* Approve strip */}
+          <div className="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50/60 px-4 py-3">
+            <div className="flex items-center gap-2">
+              {/* SVG signature */}
+              <div className="relative h-5 w-16">
+                <svg viewBox="0 0 48 18" className="h-full w-full">
+                  <motion.path
+                    d="M2 13C7 6 8 15 12 9C16 3 18 14 22 8C27 0 27 15 32 9C36 4 38 13 46 5"
+                    fill="none"
+                    stroke="#171717"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: isSigned ? 1 : 0.65 }}
+                    transition={{ duration: 1.4, ease: [0.32, 0.72, 0, 1] }}
+                  />
+                </svg>
+              </div>
+              <p className="font-mono text-[10px] text-neutral-400">Agent signoff</p>
             </div>
 
-            {/* Confirmed Ticket Preview */}
-            <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-              {/* Confirmed Demo Ticket 1 */}
-              <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50/80 p-3.5 shadow-xs">
-                <div className="flex size-9 items-center justify-center rounded-lg bg-[#00b0fa] text-neutral-950 font-semibold text-xs">
-                  <CalendarCheckIcon weight="bold" className="size-5" />
+            <button
+              type="button"
+              onClick={() => setIsSigned(!isSigned)}
+              className={cn(
+                "cursor-pointer rounded-lg border px-3 py-1.5 text-xs font-semibold shadow-xs transition-colors select-none",
+                isSigned
+                  ? "border-emerald-300 bg-emerald-50 text-emerald-800"
+                  : "border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-800"
+              )}
+            >
+              {isSigned ? "Approved ✓" : "1-Click Approve"}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* CARD C: Full-width deliverability + calendar output */}
+      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {/* Mailbox health */}
+        <div className="rounded-xl border border-gray-200/90 bg-white p-6 shadow-xs">
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
+              Deliverability Shield
+            </span>
+            <ShieldCheckIcon weight="fill" className="size-4 text-emerald-500" />
+          </div>
+          <h3 className="mt-2 text-sm font-semibold tracking-tight text-neutral-900">
+            Domain Protection
+          </h3>
+          <div className="mt-4 space-y-2">
+            {[
+              { addr: "sarah@scrunity-hq.io", pct: "100%" },
+              { addr: "team@getscrunity.co", pct: "99%" },
+              { addr: "outreach@scrunitymail.net", pct: "98%" },
+            ].map((mb) => (
+              <div
+                key={mb.addr}
+                className="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50/70 px-3 py-2 text-xs"
+              >
+                <span className="truncate font-mono text-[11px] text-neutral-700 max-w-[160px]">
+                  {mb.addr}
+                </span>
+                <span className="shrink-0 font-mono text-[10px] font-semibold text-emerald-600">
+                  {mb.pct} warm
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-3 text-xs">
+            <p className="text-neutral-400">SPF · DKIM · DMARC</p>
+            <span className="font-mono font-medium text-emerald-600">0 Spam Flags</span>
+          </div>
+        </div>
+
+        {/* Calendar output — 2 col span */}
+        <div className="rounded-xl border border-gray-200/90 bg-white p-6 shadow-xs sm:col-span-2">
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
+              Pipeline Output
+            </span>
+            <CalendarCheckIcon weight="fill" className="size-4 text-[#00b0fa]" />
+          </div>
+          <h3 className="mt-2 text-sm font-semibold tracking-tight text-neutral-900">
+            Qualified Meetings, Straight to Calendar
+          </h3>
+          <p className="mt-1 text-xs text-neutral-500">
+            When a lead replies with interest, Scrunity AI schedules, converts time zones, and drops confirmed invites directly on your AEs&apos; calendars.
+          </p>
+
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {[
+              {
+                initials: "MV",
+                name: "Marcus Vance",
+                role: "VP RevOps · Synthetix",
+                time: "Tomorrow @ 2:00 PM",
+                tool: "Google Meet",
+                accent: "bg-[#00b0fa]",
+              },
+              {
+                initials: "ER",
+                name: "Elena Rostova",
+                role: "Head Eng · Kitebase AI",
+                time: "Friday @ 11:30 AM",
+                tool: "HubSpot deal created",
+                accent: "bg-neutral-900",
+              },
+            ].map((demo) => (
+              <div
+                key={demo.initials}
+                className="flex items-center gap-3 rounded-lg border border-gray-100 bg-gray-50/70 p-3"
+              >
+                <div
+                  className={cn(
+                    "flex size-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white shadow-xs",
+                    demo.accent
+                  )}
+                >
+                  {demo.initials}
                 </div>
-                <div>
-                  <Para className="text-xs font-semibold text-neutral-900">
-                    Marcus Vance (VP RevOps)
-                  </Para>
-                  <span className="font-mono text-[11px] text-emerald-600 font-medium">Tomorrow @ 2:00 PM EST</span>
-                  <Para className="text-[10px] text-neutral-400">Google Meet invite sent</Para>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold text-neutral-900">{demo.name}</p>
+                  <p className="truncate text-[11px] text-neutral-400">{demo.role}</p>
+                  <p className="mt-0.5 font-mono text-[11px] font-medium text-emerald-600">
+                    {demo.time}
+                  </p>
                 </div>
               </div>
+            ))}
+          </div>
 
-              {/* Confirmed Demo Ticket 2 */}
-              <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50/80 p-3.5 shadow-xs">
-                <div className="flex size-9 items-center justify-center rounded-lg bg-neutral-900 text-white font-semibold text-xs">
-                  <CalendarCheckIcon weight="bold" className="size-5" />
-                </div>
-                <div>
-                  <Para className="text-xs font-semibold text-neutral-900">
-                    Elena Rostova (Head Eng)
-                  </Para>
-                  <span className="font-mono text-[11px] text-emerald-600 font-medium">Friday @ 11:30 AM PST</span>
-                  <Para className="text-[10px] text-neutral-400">HubSpot deal created</Para>
-                </div>
+          <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-3 text-xs">
+            <div className="flex items-center gap-4">
+              <div>
+                <p className="font-mono font-semibold text-neutral-900">16.4%</p>
+                <p className="text-neutral-400">reply rate</p>
+              </div>
+              <div>
+                <p className="font-mono font-semibold text-neutral-900">99.8%</p>
+                <p className="text-neutral-400">deliverability</p>
+              </div>
+              <div>
+                <p className="font-mono font-semibold text-[#00b0fa]">-64%</p>
+                <p className="text-neutral-400">CAC reduction</p>
               </div>
             </div>
+            <Link
+              href="/join"
+              className="inline-flex items-center gap-1 font-semibold text-neutral-900 hover:text-[#00b0fa] transition-colors"
+            >
+              <span>Activate SDR Fleet</span>
+              <ArrowRightIcon weight="bold" className="size-3" />
+            </Link>
           </div>
         </div>
       </div>

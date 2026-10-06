@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable react-hooks/refs -- DOM refs are intentionally read during layout measurement. */
+
 import { cn } from "@/lib/utils";
 import { motion, useAnimationFrame, useInView } from "framer-motion";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";

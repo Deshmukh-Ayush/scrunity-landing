@@ -35,8 +35,33 @@ export async function submitJoinRequest(
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
 
-  const { error: dbError } = await supabase.from("waitlist").insert([
-    {
+  const payload: Record<string, unknown> = {
+    first_name: data.firstName,
+    last_name: data.lastName,
+    company_name: data.companyName,
+    work_email: data.workEmail,
+    company_size: data.companySize,
+    role: data.role,
+    anything_else: data.anythingElse || null,
+    phone_number: data.phoneNumber || null,
+    country: data.country || null,
+  };
+
+  let { error: dbError } = await supabase.from("waitlist").insert([payload]);
+
+  // Graceful fallback if the Supabase table does not yet have phone_number or country columns
+  if (
+    dbError &&
+    dbError.message &&
+    (dbError.message.toLowerCase().includes("phone_number") ||
+      dbError.message.toLowerCase().includes("country") ||
+      dbError.code === "PGRST204")
+  ) {
+    console.warn(
+      "[Supabase] Table schema missing phone_number or country columns. Retrying standard insert:",
+      dbError.message,
+    );
+    const fallbackPayload = {
       first_name: data.firstName,
       last_name: data.lastName,
       company_name: data.companyName,
@@ -44,8 +69,10 @@ export async function submitJoinRequest(
       company_size: data.companySize,
       role: data.role,
       anything_else: data.anythingElse || null,
-    },
-  ]);
+    };
+    const retry = await supabase.from("waitlist").insert([fallbackPayload]);
+    dbError = retry.error;
+  }
 
   if (dbError) {
     console.error("Supabase insert error:", dbError);
@@ -62,6 +89,8 @@ export async function submitJoinRequest(
       lastName: data.lastName,
       companyName: data.companyName,
       workEmail: data.workEmail,
+      phoneNumber: data.phoneNumber,
+      country: data.country,
       companySize: data.companySize,
       role: data.role,
       anythingElse: data.anythingElse,
@@ -107,6 +136,8 @@ export async function submitJoinRequest(
         lastName: data.lastName,
         companyName: data.companyName,
         workEmail: data.workEmail,
+        phoneNumber: data.phoneNumber,
+        country: data.country,
         role: data.role,
         companySize: data.companySize,
         anythingElse: data.anythingElse,

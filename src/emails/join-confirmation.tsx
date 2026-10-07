@@ -6,6 +6,8 @@ export interface JoinConfirmationEmailProps {
   lastName: string;
   companyName: string;
   workEmail: string;
+  phoneNumber?: string;
+  country?: string;
   companySize: string;
   role: string;
   anythingElse?: string | null;
@@ -16,6 +18,8 @@ export function renderJoinConfirmationHtml({
   lastName,
   companyName,
   workEmail,
+  phoneNumber,
+  country,
   companySize,
   role,
   anythingElse,
@@ -159,6 +163,30 @@ export function renderJoinConfirmationHtml({
                       ${workEmail}
                     </td>
                   </tr>
+                  ${
+                    phoneNumber
+                      ? `<tr>
+                    <td style="padding: 12px 16px; border-bottom: 1px solid #EEEEEE; font-size: 13px; color: #71717A;">
+                      Phone
+                    </td>
+                    <td style="padding: 12px 16px; border-bottom: 1px solid #EEEEEE; font-size: 13px; font-weight: 500; color: #18181B;">
+                      ${phoneNumber}
+                    </td>
+                  </tr>`
+                      : ""
+                  }
+                  ${
+                    country
+                      ? `<tr>
+                    <td style="padding: 12px 16px; border-bottom: 1px solid #EEEEEE; font-size: 13px; color: #71717A;">
+                      Country
+                    </td>
+                    <td style="padding: 12px 16px; border-bottom: 1px solid #EEEEEE; font-size: 13px; font-weight: 500; color: #18181B;">
+                      ${country}
+                    </td>
+                  </tr>`
+                      : ""
+                  }
                   <tr>
                     <td style="padding: 12px 16px; border-bottom: 1px solid #EEEEEE; font-size: 13px; color: #71717A;">
                       Company

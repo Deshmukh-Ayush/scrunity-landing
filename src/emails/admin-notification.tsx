@@ -6,6 +6,8 @@ export interface AdminNotificationEmailProps {
   lastName: string;
   companyName: string;
   workEmail: string;
+  phoneNumber?: string;
+  country?: string;
   companySize: string;
   role: string;
   anythingElse?: string | null;
@@ -17,6 +19,8 @@ export function renderAdminNotificationHtml({
   lastName,
   companyName,
   workEmail,
+  phoneNumber,
+  country,
   companySize,
   role,
   anythingElse,
@@ -106,6 +110,22 @@ export function renderAdminNotificationHtml({
                     <a href="mailto:${workEmail}" style="color: #38BDF8;">${workEmail}</a>
                   </td>
                 </tr>
+                ${
+                  phoneNumber
+                    ? `<tr>
+                  <td style="padding: 12px 16px; border-bottom: 1px solid #374151; font-size: 13px; color: #9CA3AF; font-weight: 500;">Phone</td>
+                  <td style="padding: 12px 16px; border-bottom: 1px solid #374151; font-size: 14px; color: #F3F4F6;">${phoneNumber}</td>
+                </tr>`
+                    : ""
+                }
+                ${
+                  country
+                    ? `<tr>
+                  <td style="padding: 12px 16px; border-bottom: 1px solid #374151; font-size: 13px; color: #9CA3AF; font-weight: 500;">Country</td>
+                  <td style="padding: 12px 16px; border-bottom: 1px solid #374151; font-size: 14px; color: #F3F4F6;">${country}</td>
+                </tr>`
+                    : ""
+                }
                 <tr>
                   <td style="padding: 12px 16px; border-bottom: 1px solid #374151; font-size: 13px; color: #9CA3AF; font-weight: 500;">Company</td>
                   <td style="padding: 12px 16px; border-bottom: 1px solid #374151; font-size: 14px; color: #F3F4F6; font-weight: 500;">${companyName}</td>

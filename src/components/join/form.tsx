@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { COUNTRIES } from "@/utils/countries";
 import { formSchema, type JoinFormValues } from "@/utils/join-form";
 
 export const Form = () => {
@@ -40,6 +41,8 @@ export const Form = () => {
       lastName: "",
       companyName: "",
       workEmail: "",
+      phoneNumber: "",
+      country: undefined,
       companySize: undefined,
       role: undefined,
       anythingElse: "",
@@ -169,6 +172,56 @@ export const Form = () => {
             <FieldError errors={[form.formState.errors.workEmail]} />
           </FieldContent>
         </Field>
+
+        <div className="grid gap-5 sm:grid-cols-2">
+          <Field data-invalid={!!form.formState.errors.phoneNumber}>
+            <FieldLabel htmlFor="phoneNumber">Phone number</FieldLabel>
+            <FieldContent>
+              <Input
+                id="phoneNumber"
+                type="tel"
+                placeholder="+1 (555) 000-0000"
+                aria-invalid={!!form.formState.errors.phoneNumber}
+                {...form.register("phoneNumber")}
+              />
+              <FieldError errors={[form.formState.errors.phoneNumber]} />
+            </FieldContent>
+          </Field>
+
+          <Controller
+            control={form.control}
+            name="country"
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor="country">Country</FieldLabel>
+                <FieldContent>
+                  <Select
+                    value={field.value ?? null}
+                    onValueChange={(value) =>
+                      field.onChange(value ?? undefined)
+                    }
+                  >
+                    <SelectTrigger
+                      id="country"
+                      aria-invalid={fieldState.invalid}
+                      className="w-full"
+                    >
+                      <SelectValue placeholder="Select country" />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-60 overflow-y-auto">
+                      {COUNTRIES.map((c) => (
+                        <SelectItem key={c} value={c}>
+                          {c}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FieldError errors={[fieldState.error]} />
+                </FieldContent>
+              </Field>
+            )}
+          />
+        </div>
 
         <div className="grid gap-5 sm:grid-cols-2">
           <Controller

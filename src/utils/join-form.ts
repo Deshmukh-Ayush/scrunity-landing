@@ -14,6 +14,13 @@ export const formSchema = z.object({
     .min(1, "Company name is required.")
     .max(120, "Company name must be at most 120 characters."),
   workEmail: z.string().email("Enter a valid work email address."),
+  phoneNumber: z
+    .string()
+    .min(1, "Phone number is required.")
+    .max(30, "Phone number must be at most 30 characters."),
+  country: z
+    .string({ error: "Select your country." })
+    .min(1, "Select your country."),
   companySize: z.enum(["1-2", "2-5", "5+"], {
     error: "Select a company size.",
   }),

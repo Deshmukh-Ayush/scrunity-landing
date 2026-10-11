@@ -22,7 +22,7 @@ const MAIN_NAV = [
   { name: "Leads", icon: UserCheckIcon, isActive: false, badge: 142 },
   { name: "Mailbox", icon: EnvelopeSimpleIcon, isActive: false, badge: 0 },
   { name: "Settings", icon: PaperPlaneTiltIcon, isActive: false, badge: 4 },
-  { name: "Mailbox", icon: CalendarCheckIcon, isActive: false, badge: 19 },
+  { name: "Meetings", icon: CalendarCheckIcon, isActive: false, badge: 19 },
 ];
 
 export const HeroSidebar = () => {

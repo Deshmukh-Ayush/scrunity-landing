@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/container";
-import { HeroSection } from "@/components/hero/hero-section";
-import { SplitPipelineSection } from "@/components/pipeline-split/pipeline-split-section";
 import { Easy } from "@/components/easy";
 import { FaqSection } from "@/components/faq/faq-section";
 import { Footer } from "@/components/footer";
 import { Divider } from "@/components/utility/divider";
 import { Button } from "@/components/utility/button";
 import { SubHeading, Para, Heading } from "@/components/utility/texts";
-import { EverywhereayushShader } from "@/components/join/shader";
 import { Hero } from "@/components/hero/hero";
+import { HowItWorks } from "@/components/how-it-works";
 
 export const metadata: Metadata = {
   title: "Scrunity AI — Autonomous Outbound Sales Engine",
@@ -30,8 +28,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="min-h-screen overflow-x-clip bg-gray-50">
-      {/* Hero  */}
-      <div className="mx-auto min-h-screen max-w-7xl overflow-hidden">
+      <Container className="border-x border-gray-200 px-6 py-16 sm:px-10">
+        {/* Hero  */}
         <div className="mt-50 mb-20 flex w-full items-end justify-between">
           <div className="flex flex-col items-start gap-6">
             <Heading className="leading-none">
@@ -46,48 +44,44 @@ export default function Home() {
             <Button>Contact Sales</Button>
           </div>
         </div>
-        {/* Hero Image */}
         <Hero />
-      </div>
-      {/* ── 2. Main Content Container with Vertical Borders ──────────── */}
-      {/* <Container className="border-x border-gray-200 px-6 py-16 sm:px-10">
-        <section className="w-full py-8">
-          <SplitPipelineSection />
+        {/* Marquee */}
+
+        {/* how it works */}
+        <section className="items-between my-20 flex w-full flex-col justify-start gap-2 py-8">
+          <SubHeading>
+            <span className="text-brand rounded-lg bg-sky-100 p-1">
+              Scrunity researches
+            </span>{" "}
+            your company,
+          </SubHeading>
+          <SubHeading>
+            It{" "}
+            <span className="text-brand rounded-lg bg-sky-100 p-1">
+              finds ideal clients
+            </span>{" "}
+            for you,
+          </SubHeading>
+          <SubHeading>
+            <span className="text-brand rounded-lg bg-sky-100 p-1">
+              Book meetings
+            </span>{" "}
+            with them for you.
+          </SubHeading>
+
+          <HowItWorks />
         </section>
 
         <Divider />
 
-        <section className="w-full py-12">
-          <div className="mb-8 flex w-full flex-col items-start gap-5 md:flex-row md:items-end md:justify-between">
-            <div className="w-full max-w-2xl">
-              <SubHeading className="text-[28px] md:text-[36px]">
-                Effortless by design.
-              </SubHeading>
-              <Para className="mt-2 text-base md:text-lg">
-                Zero manual CSV uploads, zero fragile web scrapers. Scrunity AI
-                takes your domain URL and executes end-to-end outbound
-                autonomously.
-              </Para>
-            </div>
-            <Button
-              className="shrink-0 border-none bg-[#00b0fa] font-semibold text-neutral-950 hover:bg-[#009de0]"
-              href="/join"
-            >
-              Get Started
-            </Button>
-          </div>
-          <Easy />
-        </section>
-
-        <Divider />
-
+        {/* FAQs */}
         <section className="w-full py-12">
           <FaqSection />
         </section>
 
         <Divider />
 
-        <section className="w-full py-12">
+        {/* <section className="w-full py-12">
           <div className="relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 p-8 text-center shadow-xl md:p-14">
             <div className="pointer-events-none absolute inset-0 z-0 mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,#000_60%,transparent_100%)] opacity-15">
               <EverywhereayushShader theme="dark" />
@@ -122,12 +116,12 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </section>*/}
 
         <Divider />
 
         <Footer />
-      </Container> */}
+      </Container>
     </div>
   );
 }

@@ -23,6 +23,7 @@ export const Button = ({
       whileTap={{ scale: 0.9 }}
       transition={{ type: "spring", duration: 0.5, bounce: 0 }}
       type={type ?? "button"}
+      style={{ whiteSpace: "nowrap" }}
       className={cn(
         "text-shadow cursor-pointer rounded-full border border-neutral-800 bg-neutral-800 px-6 py-2 text-[15px] text-neutral-50 shadow-[inset_0_2px_0_0_rgba(255,255,255,0.15)]",
         className,

@@ -8,8 +8,9 @@ import { FaqSection } from "@/components/faq/faq-section";
 import { Footer } from "@/components/footer";
 import { Divider } from "@/components/utility/divider";
 import { Button } from "@/components/utility/button";
-import { SubHeading, Para } from "@/components/utility/texts";
+import { SubHeading, Para, Heading } from "@/components/utility/texts";
 import { EverywhereayushShader } from "@/components/join/shader";
+import { Hero } from "@/components/hero/hero";
 
 export const metadata: Metadata = {
   title: "Scrunity AI — Autonomous Outbound Sales Engine",
@@ -29,19 +30,33 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="min-h-screen overflow-x-clip bg-gray-50">
-      {/* ── 1. Hero Section (Contains the ONLY <Heading> on the page) ── */}
-      <HeroSection />
-
+      {/* Hero  */}
+      <div className="mx-auto min-h-screen max-w-7xl overflow-hidden">
+        <div className="mt-50 mb-20 flex w-full items-end justify-between">
+          <div className="flex flex-col items-start gap-6">
+            <Heading className="leading-none">
+              Your outbound sales <br /> team on autopilot.
+            </Heading>
+            <Para>
+              Purpose-built for automated outreach and designed for AI era.
+            </Para>
+          </div>
+          <div className="mb-2 flex gap-1">
+            <Button>Book Demo</Button>
+            <Button>Contact Sales</Button>
+          </div>
+        </div>
+        {/* Hero Image */}
+        <Hero />
+      </div>
       {/* ── 2. Main Content Container with Vertical Borders ──────────── */}
-      <Container className="border-x border-gray-200 px-6 sm:px-10 py-16">
-        {/* Section 1: Split Pipeline Section (Interactive Left Tabs + Right Agent Canvas) */}
+      {/* <Container className="border-x border-gray-200 px-6 py-16 sm:px-10">
         <section className="w-full py-8">
           <SplitPipelineSection />
         </section>
 
         <Divider />
 
-        {/* Section 2: Physical Transition Pipeline (Easy) */}
         <section className="w-full py-12">
           <div className="mb-8 flex w-full flex-col items-start gap-5 md:flex-row md:items-end md:justify-between">
             <div className="w-full max-w-2xl">
@@ -49,8 +64,9 @@ export default function Home() {
                 Effortless by design.
               </SubHeading>
               <Para className="mt-2 text-base md:text-lg">
-                Zero manual CSV uploads, zero fragile web scrapers. Scrunity AI takes your domain URL and
-                executes end-to-end outbound autonomously.
+                Zero manual CSV uploads, zero fragile web scrapers. Scrunity AI
+                takes your domain URL and executes end-to-end outbound
+                autonomously.
               </Para>
             </div>
             <Button
@@ -65,17 +81,15 @@ export default function Home() {
 
         <Divider />
 
-        {/* Section 5: Interactive FAQ */}
         <section className="w-full py-12">
           <FaqSection />
         </section>
 
         <Divider />
 
-        {/* Section 6: Final High-Impact CTA (Gumloop Style) */}
         <section className="w-full py-12">
           <div className="relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 p-8 text-center shadow-xl md:p-14">
-            <div className="pointer-events-none absolute inset-0 z-0 opacity-15 mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,#000_60%,transparent_100%)]">
+            <div className="pointer-events-none absolute inset-0 z-0 mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,#000_60%,transparent_100%)] opacity-15">
               <EverywhereayushShader theme="dark" />
             </div>
 
@@ -88,7 +102,9 @@ export default function Home() {
                 Ready to put your outbound sales on autopilot?
               </h2>
               <p className="mt-3 text-base leading-relaxed text-neutral-400 md:text-lg">
-                Paste your URL. Scrunity AI finds your ideal buyers, writes personalized emails you approve, and books qualified meetings straight into your calendar.
+                Paste your URL. Scrunity AI finds your ideal buyers, writes
+                personalized emails you approve, and books qualified meetings
+                straight into your calendar.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <Link
@@ -99,7 +115,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="/join"
-                  className="inline-flex items-center justify-center rounded-lg border border-neutral-800 bg-neutral-900 px-6 py-2.5 text-sm font-medium text-neutral-200 shadow-xs transition-colors hover:bg-neutral-800 hover:border-neutral-700"
+                  className="inline-flex items-center justify-center rounded-lg border border-neutral-800 bg-neutral-900 px-6 py-2.5 text-sm font-medium text-neutral-200 shadow-xs transition-colors hover:border-neutral-700 hover:bg-neutral-800"
                 >
                   Book a demo
                 </Link>
@@ -110,9 +126,8 @@ export default function Home() {
 
         <Divider />
 
-        {/* ── Footer ────────────────────────────────────────── */}
         <Footer />
-      </Container>
+      </Container> */}
     </div>
   );
 }

@@ -17,18 +17,12 @@ import {
 import Image from "next/image";
 
 const MAIN_NAV = [
-  { name: "Outbound Agent", icon: SparkleIcon, isActive: true, badge: 0 },
-  { name: "Target Accounts", icon: BuildingsIcon, isActive: false, badge: 48 },
-  { name: "Decision Makers", icon: UserCheckIcon, isActive: false, badge: 142 },
-  { name: "Cold Campaigns", icon: EnvelopeSimpleIcon, isActive: false, badge: 0 },
-  { name: "Warmup Mailboxes", icon: PaperPlaneTiltIcon, isActive: false, badge: 4 },
-  { name: "Booked Meetings", icon: CalendarCheckIcon, isActive: false, badge: 19 },
-];
-
-const SECONDARY_NAV = [
-  { name: "Pipeline Health", icon: PulseIcon, badge: 0 },
-  { name: "Learning Signals", icon: ChartLineUpIcon, badge: 3 },
-  { name: "Settings", icon: GearSixIcon, badge: 0 },
+  { name: "Overview", icon: SparkleIcon, isActive: true, badge: 0 },
+  { name: "Campaigns", icon: BuildingsIcon, isActive: false, badge: 48 },
+  { name: "Leads", icon: UserCheckIcon, isActive: false, badge: 142 },
+  { name: "Mailbox", icon: EnvelopeSimpleIcon, isActive: false, badge: 0 },
+  { name: "Settings", icon: PaperPlaneTiltIcon, isActive: false, badge: 4 },
+  { name: "Mailbox", icon: CalendarCheckIcon, isActive: false, badge: 19 },
 ];
 
 export const HeroSidebar = () => {
@@ -61,7 +55,7 @@ export const HeroSidebar = () => {
         </div>
 
         {/* Navigation Sections */}
-        <nav className="[scrollbar-width:none] flex flex-1 flex-col overflow-y-auto px-3 py-4 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <nav className="flex flex-1 [scrollbar-width:none] flex-col overflow-y-auto px-3 py-4 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {/* Main Workspace Group */}
           <div>
             <h3 className="mb-1.5 px-2.5 text-[10px] font-semibold tracking-tight text-neutral-400 uppercase">
@@ -79,31 +73,6 @@ export const HeroSidebar = () => {
                           : "text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900"
                       }`}
                     >
-                      <Icon className="h-5 w-5 shrink-0 text-neutral-500" />
-                      <span className="truncate">{item.name}</span>
-                      {item.badge > 0 && (
-                        <span className="ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-neutral-200 px-1.5 text-[10px] font-medium text-neutral-800 tabular-nums">
-                          {item.badge}
-                        </span>
-                      )}
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          {/* Secondary Group */}
-          <div className="mt-6">
-            <h3 className="mb-1.5 px-2.5 text-[10px] font-semibold tracking-tight text-neutral-400 uppercase">
-              Optimization
-            </h3>
-            <ul className="space-y-0.5">
-              {SECONDARY_NAV.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <li key={item.name}>
-                    <div className="flex h-10 w-full items-center gap-2.5 rounded-md px-2.5 text-[14px] font-medium text-neutral-600 transition-colors hover:bg-neutral-50 hover:text-neutral-900">
                       <Icon className="h-5 w-5 shrink-0 text-neutral-500" />
                       <span className="truncate">{item.name}</span>
                       {item.badge > 0 && (

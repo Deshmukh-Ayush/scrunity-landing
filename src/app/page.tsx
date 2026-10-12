@@ -9,6 +9,7 @@ import { Button } from "@/components/utility/button";
 import { SubHeading, Para, Heading } from "@/components/utility/texts";
 import { Hero } from "@/components/hero/hero";
 import { HowItWorks } from "@/components/how-it-works";
+import { InfiniteSlider } from "@/components/powered-by/marquee";
 
 export const metadata: Metadata = {
   title: "Scrunity AI — Autonomous Outbound Sales Engine",
@@ -46,6 +47,7 @@ export default function Home() {
         </div>
         <Hero />
         {/* Marquee */}
+        {/* <InfiniteSlider></InfiniteSlider> */}
 
         {/* how it works */}
         <section className="items-between my-20 flex w-full flex-col justify-start gap-2 py-8">

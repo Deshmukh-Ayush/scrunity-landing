@@ -40,9 +40,10 @@ export default function Home() {
               Purpose-built for automated outreach and designed for AI era.
             </Para>
           </div>
-          <div className="mb-2 flex gap-1">
-            <Button>Book Demo</Button>
-            <Button>Contact Sales</Button>
+          <div className="mb-2 flex gap-3">
+            
+            <Button className="bg-gray-50 border-none text-neutral-800">Contact Sales</Button>
+            <Button className="bg-brand text-white border border-brand">Book Demo</Button>
           </div>
         </div>
         <Hero />

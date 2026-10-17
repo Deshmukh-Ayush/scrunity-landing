@@ -59,7 +59,6 @@ export const Navbar = () => {
   const navItems = [
     { label: "Product", href: "/" },
     { label: "Resources", href: "/resources" },
-    { label: "Pricing", href: "/pricing" },
     { label: "Blogs", href: "/blog" },
     { label: "Contact", href: "/join" },
   ];
@@ -109,7 +108,7 @@ export const Navbar = () => {
               </Link>
               <Link
                 href="/join"
-                className="flex items-center justify-center rounded-full bg-neutral-800 px-4 py-1.5 text-[13px] font-medium text-neutral-100"
+                className="flex items-center justify-center rounded-full bg-brand px-4 py-1.5 text-[13px] font-medium text-neutral-100"
               >
                 Get Early Access
               </Link>

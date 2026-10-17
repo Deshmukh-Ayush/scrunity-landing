@@ -31,7 +31,7 @@ export default function Home() {
     <div className="min-h-screen overflow-x-clip bg-gray-50">
       <Container className="border-x border-gray-200 px-6 py-16 sm:px-10">
         {/* Hero  */}
-        <div className="mt-50 mb-20 flex w-full items-end justify-between">
+        <div className="mt-30 mb-20 flex w-full items-end justify-between">
           <div className="flex flex-col items-start gap-6">
             <Heading className="leading-none">
               Your outbound sales <br /> team on autopilot.
@@ -41,9 +41,12 @@ export default function Home() {
             </Para>
           </div>
           <div className="mb-2 flex gap-3">
-            
-            <Button className="bg-gray-50 border-none text-neutral-800">Contact Sales</Button>
-            <Button className="bg-brand text-white border border-brand">Book Demo</Button>
+            <Button className="border-none bg-gray-50 text-neutral-800">
+              Contact Sales
+            </Button>
+            <Button className="bg-brand border-brand border text-white">
+              Book Demo
+            </Button>
           </div>
         </div>
         <Hero />

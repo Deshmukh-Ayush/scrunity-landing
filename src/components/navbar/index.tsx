@@ -70,13 +70,12 @@ export const Navbar = () => {
           {/* Logo Section */}
           <Link href="/" className="flex items-center gap-4">
             <Image
-              src="/new-logo/scrunity-icon.svg"
+              src="/logo/wordmark/light/scrunity-wordmark-light.svg"
               alt="Scrunity Logo"
               width={100}
               height={100}
-              className="h-auto w-8"
+              className="h-auto w-34"
             />
-            <span className="text-xl font-semibold">Scrunity AI</span>
           </Link>
 
           <div className="flex items-center gap-4">
@@ -108,7 +107,7 @@ export const Navbar = () => {
               </Link>
               <Link
                 href="/join"
-                className="flex items-center justify-center rounded-full bg-brand px-4 py-1.5 text-[13px] font-medium text-neutral-100"
+                className="bg-brand flex items-center justify-center rounded-full px-4 py-1.5 text-[13px] font-medium text-neutral-100"
               >
                 Get Early Access
               </Link>

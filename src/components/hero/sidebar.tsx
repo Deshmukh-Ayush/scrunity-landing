@@ -29,7 +29,7 @@ export const HeroSidebar = () => {
   return (
     <aside
       aria-label="Project Sidebar"
-      className="sticky top-0 z-10 hidden h-full w-63 shrink-0 flex-col border-r border-neutral-200 bg-white py-2 select-none md:flex"
+      className="sticky top-0 z-10 hidden h-full w-63 shrink-0 flex-col border-r border-neutral-200 bg-white py-2 select-none lg:flex"
     >
       <div className="flex h-full w-full flex-col overflow-hidden">
         {/* Workspace Brand Header */}

@@ -31,7 +31,7 @@ export default function Home() {
     <div className="min-h-screen overflow-x-clip bg-gray-50">
       <Container className="border-x border-gray-200 px-6 py-16 sm:px-10">
         {/* Hero  */}
-        <div className="mt-30 mb-20 flex w-full items-end justify-between">
+        <div className="mt-16 mb-12 flex w-full flex-col items-start gap-8 md:mt-30 md:mb-20 md:flex-row md:items-end md:justify-between">
           <div className="flex flex-col items-start gap-6">
             <Heading className="leading-none">
               Your outbound sales <br /> team on autopilot.

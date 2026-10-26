@@ -23,15 +23,12 @@ export const Footer = () => {
               className="inline-flex items-center gap-3 transition-opacity hover:opacity-85"
             >
               <Image
-                src="/new-logo/scrunity-icon.svg"
+                src="/new-logo/logo/wordmark/light/scrunity-wordmark-light.svg"
                 alt="Scrunity Logo"
-                width={38}
-                height={38}
-                className="h-auto w-9.5"
+                width={100}
+                height={100}
+                className="h-auto w-34"
               />
-              <span className="text-[19px] font-bold tracking-tight text-neutral-900">
-                Scrunity AI
-              </span>
             </Link>
 
             <p className="max-w-sm text-sm leading-relaxed text-pretty text-neutral-500">

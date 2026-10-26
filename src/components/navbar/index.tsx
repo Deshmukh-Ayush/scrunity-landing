@@ -70,7 +70,7 @@ export const Navbar = () => {
           {/* Logo Section */}
           <Link href="/" className="flex items-center gap-4">
             <Image
-              src="/logo/wordmark/light/scrunity-wordmark-light.svg"
+              src="/new-logo/logo/wordmark/light/scrunity-wordmark-light.svg"
               alt="Scrunity Logo"
               width={100}
               height={100}

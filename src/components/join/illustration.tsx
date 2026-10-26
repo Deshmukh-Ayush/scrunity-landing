@@ -46,7 +46,7 @@ export const Illustration = () => {
 
       {/* <div className="shadow-border-sm relative z-10 flex h-20 w-20 items-center justify-center rounded-lg p-1">
         <Image
-          src="/logo/scrunity_svg.svg"
+          src="/new-logo/logo/logomark/light/scrunity-logo-light.svg"
           alt="Scrunity Logo"
           width={100}
           height={100}
@@ -57,7 +57,7 @@ export const Illustration = () => {
       <div className="relative z-20 size-20 overflow-hidden rounded-lg bg-neutral-100 p-px">
         <div className="relative z-20 flex h-full w-full items-center justify-center rounded-md bg-white">
           <Image
-            src="/logo/scrunity_svg.svg"
+            src="/new-logo/logo/logomark/light/scrunity-logo-light.svg"
             alt="Scrunity Logo"
             width={100}
             height={100}

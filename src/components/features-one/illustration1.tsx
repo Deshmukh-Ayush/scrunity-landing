@@ -135,11 +135,11 @@ export default function Illustration1() {
               >
                 <motion.div {...reveal} className="flex items-center gap-1">
                   <Image
-                    src="/new-logo/scrunity-icon.svg"
+                    src="/new-logo/logo/logomark/light/scrunity-logo-light.svg"
                     alt="Scrunity Logo"
                     width={40}
                     height={40}
-                    className="h-2.5 w-2.5"
+                    className="h-2.5 w-2.5 object-contain"
                   />
                   <p className="text-[7px] font-medium text-gray-700">
                     Outbound

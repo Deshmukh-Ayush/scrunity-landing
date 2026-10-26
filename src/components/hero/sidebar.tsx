@@ -36,11 +36,11 @@ export const HeroSidebar = () => {
         <div className="mx-1 my-1 flex h-14 shrink-0 items-center justify-between gap-2 rounded-md px-4 transition-colors hover:bg-neutral-100/60">
           <div className="flex min-w-0 flex-1 items-center gap-2.5">
             <Image
-              src="/new-logo/scrunity-icon.svg"
+              src="/new-logo/logo/logomark/light/scrunity-logo-light.svg"
               alt="logo"
               height={100}
               width={100}
-              className="h-8 w-8 rounded-md"
+              className="h-8 w-8 object-contain"
             />
             <div className="flex min-w-0 flex-col gap-0.5">
               <span className="truncate text-[13px] leading-tight font-semibold text-neutral-900">

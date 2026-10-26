@@ -87,12 +87,8 @@ export function renderJoinConfirmationHtml({
                     <!-- Brand Wordmark -->
                     <table border="0" cellpadding="0" cellspacing="0" role="presentation">
                       <tr>
-                        <td style="width: 20px; vertical-align: middle; padding-right: 8px;">
-                          <!-- Minimal SVG Geometry Icon -->
-                          <div style="width: 16px; height: 22px; background-color: #171717; border-radius: 2px;"></div>
-                        </td>
                         <td style="vertical-align: middle;">
-                          <span style="font-size: 18px; font-weight: 700; letter-spacing: -0.02em; color: #171717;">${brandName}</span>
+                          <img src="${siteUrl}/new-logo/logo/wordmark/light/scrunity-wordmark-light.png" width="110" height="22" alt="${brandName}" style="display: block; border: 0; outline: none; text-decoration: none; width: 110px; height: auto;" />
                         </td>
                       </tr>
                     </table>
